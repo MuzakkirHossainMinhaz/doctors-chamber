@@ -26,7 +26,7 @@ const Blogs = () => {
   return (
     <Container className="blogs-page">
       <div className="blogs-header">
-        <h1 className="display-5 fw-bold">Healthcare Blog</h1>
+        <h1 className="display-5 fw-bold mb-3" style={{ color: 'var(--color-secondary)' }}>Healthcare Blog</h1>
         <p className="lead text-muted">
           Expert insights on health, wellness, and medical care
         </p>

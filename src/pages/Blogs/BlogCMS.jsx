@@ -205,7 +205,7 @@ const BlogCMS = () => {
 
   return (
     <Container fluid className="p-4">
-      <div className="bg-primary text-white rounded-3 p-5 mb-4">
+      <div className="text-white rounded-3 p-5 mb-4" style={{ backgroundColor: 'var(--color-primary)' }}>
         <h1 className="display-5 fw-bold text-center">
           Blog Management System
         </h1>

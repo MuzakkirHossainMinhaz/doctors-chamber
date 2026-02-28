@@ -125,14 +125,14 @@ const BlogDetail = () => {
 
   return (
     <Container className="my-5">
-      <div className="bg-light rounded-3 p-4 mb-4">
+      <div className="rounded-3 p-4 mb-4" style={{ backgroundColor: 'var(--color-gray-50)' }}>
         <div className="d-flex align-items-center gap-3">
-          <Link to="/blogs" className="text-primary text-decoration-none">
+          <Link to="/blogs" className="text-decoration-none" style={{ color: 'var(--color-primary)' }}>
             <i className="bi bi-house-door me-2"></i>
             Blogs
           </Link>
           <span className="text-muted">/</span>
-          <span className="text-primary fw-semibold">{blog.title}</span>
+          <span className="fw-semibold" style={{ color: 'var(--color-primary)' }}>{blog.title}</span>
         </div>
       </div>
 
@@ -150,8 +150,8 @@ const BlogDetail = () => {
         <div className="d-flex align-items-center">
           <div className="text-center">
             <div
-              className="bg-primary text-white rounded-circle"
-              style={{ width: "60px", height: "60px" }}
+              className="text-white rounded-circle"
+              style={{ width: "60px", height: "60px", backgroundColor: 'var(--color-primary)' }}
             >
               <i className="bi bi-person fs-3"></i>
             </div>
@@ -193,8 +193,8 @@ const BlogDetail = () => {
             <Card.Body className="text-center">
               <div className="mb-3">
                 <div
-                  className="bg-primary text-white rounded-circle mx-auto"
-                  style={{ width: "80px", height: "80px" }}
+                  className="text-white rounded-circle mx-auto"
+                  style={{ width: "80px", height: "80px", backgroundColor: 'var(--color-primary)' }}
                 >
                   <i className="bi bi-person fs-1"></i>
                 </div>
@@ -223,7 +223,8 @@ const BlogDetail = () => {
                       <h6 className="mb-2">
                         <Link
                           to={`/blog/${relatedBlog.id}`}
-                          className="text-primary text-decoration-none"
+                          className="text-decoration-none"
+                          style={{ color: 'var(--color-primary)' }}
                         >
                           {relatedBlog.title}
                         </Link>
@@ -255,7 +256,8 @@ const BlogDetail = () => {
                     <Link
                       key={category}
                       to={`/blogs?category=${category}`}
-                      className="d-block text-decoration-none mb-2 text-primary"
+                      className="d-block text-decoration-none mb-2"
+                      style={{ color: 'var(--color-primary)' }}
                     >
                       {category.charAt(0).toUpperCase() +
                         category.slice(1).replace("-", " ")}

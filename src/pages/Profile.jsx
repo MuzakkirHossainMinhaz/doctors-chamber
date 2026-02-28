@@ -239,7 +239,7 @@ const Profile = () => {
             <Col md={3} sm={6}>
               <Card className="h-100 border-0 shadow-sm">
                 <Card.Body className="text-center">
-                  <div className="text-primary mb-3">
+                  <div className="mb-3" style={{ color: 'var(--color-primary)' }}>
                     <i className="bi bi-calendar-check fs-2"></i>
                   </div>
                   <h3 className="h4 mb-2">{bookings.length}</h3>
@@ -382,7 +382,8 @@ const Profile = () => {
                             type="text"
                             value={userProfile?.displayName || "Not provided"}
                             readOnly
-                            className="bg-light"
+                            className="border-0"
+                            style={{ backgroundColor: 'var(--color-gray-50)' }}
                           />
                         </Form.Group>
                       </Col>
@@ -393,7 +394,8 @@ const Profile = () => {
                             type="email"
                             value={user?.email || "Not provided"}
                             readOnly
-                            className="bg-light"
+                            className="border-0"
+                            style={{ backgroundColor: 'var(--color-gray-50)' }}
                           />
                         </Form.Group>
                       </Col>
@@ -407,7 +409,8 @@ const Profile = () => {
                             type="tel"
                             value={userProfile?.phone || "Not provided"}
                             readOnly
-                            className="bg-light"
+                            className="border-0"
+                            style={{ backgroundColor: 'var(--color-gray-50)' }}
                           />
                         </Form.Group>
                       </Col>
@@ -420,7 +423,8 @@ const Profile = () => {
                             type="text"
                             value={userProfile?.dateOfBirth || "Not provided"}
                             readOnly
-                            className="bg-light"
+                            className="border-0"
+                            style={{ backgroundColor: 'var(--color-gray-50)' }}
                           />
                         </Form.Group>
                       </Col>
@@ -436,7 +440,8 @@ const Profile = () => {
                             type="text"
                             value={userProfile?.address || "Not provided"}
                             readOnly
-                            className="bg-light"
+                            className="border-0"
+                            style={{ backgroundColor: 'var(--color-gray-50)' }}
                           />
                         </Form.Group>
                       </Col>
@@ -455,8 +460,11 @@ const Profile = () => {
                               "No medical history provided"
                             }
                             readOnly
-                            className="bg-light"
-                            style={{ minHeight: "100px" }}
+                            className="border-0"
+                            style={{ 
+                              backgroundColor: 'var(--color-gray-50)',
+                              minHeight: "100px" 
+                            }}
                           />
                         </Form.Group>
                       </Col>

@@ -6,13 +6,16 @@ const About = () => {
     <Container className="my-5">
       <Row className="justify-content-center align-items-center mb-5">
         <Col md={4} className="text-center mb-4">
-          <div
-            className="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle mb-3"
-            style={{ width: "120px", height: "120px" }}
-          >
-            <i className="bi bi-hospital fs-2"></i>
+          <div className="mb-3">
+            <img
+              src="/logo.png"
+              alt="Doctor's Chamber Logo"
+              height="120"
+              width="120"
+              className="rounded-3 shadow-sm"
+            />
           </div>
-          <h3 className="h4 fw-bold">Doctor's Chamber</h3>
+          <h3 className="h4 fw-bold" style={{ color: 'var(--color-secondary)' }}>Doctor's Chamber</h3>
           <Badge bg="success" className="rounded-pill">
             Healthcare Platform
           </Badge>
@@ -24,8 +27,8 @@ const About = () => {
           <Card className="h-100 shadow-sm">
             <Card.Body className="text-center p-4">
               <div
-                className="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle mb-3"
-                style={{ width: "60px", height: "60px" }}
+                className="d-inline-flex align-items-center justify-content-center text-white rounded-circle mb-3 transition-smooth"
+                style={{ width: "60px", height: "60px", backgroundColor: 'var(--color-primary)' }}
               >
                 <i className="bi bi-heart-pulse fs-3"></i>
               </div>
@@ -44,8 +47,8 @@ const About = () => {
           <Card className="h-100 shadow-sm">
             <Card.Body className="text-center p-4">
               <div
-                className="d-inline-flex align-items-center justify-content-center bg-info text-white rounded-circle mb-3"
-                style={{ width: "60px", height: "60px" }}
+                className="d-inline-flex align-items-center justify-content-center text-white rounded-circle mb-3 transition-smooth"
+                style={{ width: "60px", height: "60px", backgroundColor: 'var(--color-accent)' }}
               >
                 <i className="bi bi-shield-check fs-3"></i>
               </div>
@@ -63,8 +66,8 @@ const About = () => {
           <Card className="h-100 shadow-sm">
             <Card.Body className="text-center p-4">
               <div
-                className="d-inline-flex align-items-center justify-content-center bg-warning text-white rounded-circle mb-3"
-                style={{ width: "60px", height: "60px" }}
+                className="d-inline-flex align-items-center justify-content-center text-white rounded-circle mb-3 transition-smooth"
+                style={{ width: "60px", height: "60px", backgroundColor: 'var(--color-warning)' }}
               >
                 <i className="bi bi-award fs-3"></i>
               </div>
@@ -81,9 +84,9 @@ const About = () => {
 
       <Row className="mt-5">
         <Col lg={12} className="text-center">
-          <Card className="border-0 bg-light">
+          <Card className="border-0" style={{ backgroundColor: 'var(--color-gray-50)' }}>
             <Card.Body className="p-5">
-              <h2 className="h3 mb-4">About Doctor's Chamber</h2>
+              <h2 className="h3 mb-4" style={{ color: 'var(--color-secondary)' }}>About Doctor's Chamber</h2>
               <p className="lead text-muted mb-4">
                 A comprehensive healthcare service booking platform designed to
                 connect patients with qualified medical professionals, providing
@@ -93,7 +96,7 @@ const About = () => {
 
               <Row className="g-4 text-start">
                 <Col md={6} className="mb-3">
-                  <h5 className="fw-semibold text-primary">
+                  <h5 className="fw-semibold" style={{ color: 'var(--color-primary)' }}>
                     <i className="bi bi-check-circle me-2"></i>
                     Expert Medical Professionals
                   </h5>
@@ -103,7 +106,7 @@ const About = () => {
                   </p>
                 </Col>
                 <Col md={6} className="mb-3">
-                  <h5 className="fw-semibold text-success">
+                  <h5 className="fw-semibold" style={{ color: 'var(--color-success)' }}>
                     <i className="bi bi-calendar-check me-2"></i>
                     Easy Appointment Booking
                   </h5>
@@ -113,7 +116,7 @@ const About = () => {
                   </p>
                 </Col>
                 <Col md={6} className="mb-3">
-                  <h5 className="fw-semibold text-info">
+                  <h5 className="fw-semibold" style={{ color: 'var(--color-accent)' }}>
                     <i className="bi bi-credit-card me-2"></i>
                     Secure Payment Processing
                   </h5>
@@ -123,7 +126,7 @@ const About = () => {
                   </p>
                 </Col>
                 <Col md={6} className="mb-3">
-                  <h5 className="fw-semibold text-warning">
+                  <h5 className="fw-semibold" style={{ color: 'var(--color-warning)' }}>
                     <i className="bi bi-chat-dots me-2"></i>
                     Real-time Communication
                   </h5>
@@ -163,8 +166,8 @@ const About = () => {
 
       <Row className="mt-5">
         <Col lg={12}>
-          <Card className="border-0 bg-primary text-white">
-            <Card.Body className="text-center p-5">
+          <Card className="border-0 transition-smooth" style={{ backgroundColor: 'var(--color-primary)' }}>
+            <Card.Body className="text-center p-5 text-white">
               <h3 className="h3 mb-4">Get Started Today</h3>
               <p className="lead mb-4">
                 Join thousands of satisfied patients who trust Doctor's Chamber

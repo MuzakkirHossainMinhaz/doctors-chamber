@@ -124,8 +124,8 @@ const BlogList = () => {
 
   return (
     <Container className="my-5">
-      <div className="bg-light rounded-3 p-5 mb-4">
-        <h1 className="display-5 fw-bold text-center">Healthcare Blog</h1>
+      <div className="rounded-3 p-5 mb-4" style={{ backgroundColor: 'var(--color-gray-50)' }}>
+        <h1 className="display-5 fw-bold text-center" style={{ color: 'var(--color-secondary)' }}>Healthcare Blog</h1>
         <p className="lead text-muted text-center">
           Expert insights on health, wellness, and medical care
         </p>

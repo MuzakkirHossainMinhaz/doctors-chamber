@@ -93,7 +93,7 @@ const Services = () => {
   return (
     <Container className="my-5">
       <div className="text-center mb-5">
-        <h1 className="display-4 fw-bold text-dark mb-3">Our Services</h1>
+        <h1 className="display-4 fw-bold mb-3" style={{ color: 'var(--color-secondary)' }}>Our Services</h1>
         <p className="lead text-muted">
           Comprehensive healthcare services tailored to your needs
         </p>
@@ -200,15 +200,15 @@ const Services = () => {
 
       {/* Featured Services Section */}
       {services.length > 0 && (
-        <div className="mt-5 p-4 bg-light rounded-3">
+        <div className="mt-5 p-4 rounded-3" style={{ backgroundColor: 'var(--color-gray-50)' }}>
           <h2 className="text-center mb-4">Why Choose Our Services?</h2>
           <Row className="g-4">
             <Col md={4} className="mb-4">
               <Card className="h-100 border-0 bg-transparent">
                 <Card.Body className="text-center">
                   <div
-                    className="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle mb-3"
-                    style={{ width: "60px", height: "60px" }}
+                    className="d-inline-flex align-items-center justify-content-center text-white rounded-circle mb-3 transition-smooth"
+                    style={{ width: "60px", height: "60px", backgroundColor: 'var(--color-primary)' }}
                   >
                     <i className="bi bi-shield-check fs-4"></i>
                   </div>
@@ -223,8 +223,8 @@ const Services = () => {
               <Card className="h-100 border-0 bg-transparent">
                 <Card.Body className="text-center">
                   <div
-                    className="d-inline-flex align-items-center justify-content-center bg-info text-white rounded-circle mb-3"
-                    style={{ width: "60px", height: "60px" }}
+                    className="d-inline-flex align-items-center justify-content-center text-white rounded-circle mb-3 transition-smooth"
+                    style={{ width: "60px", height: "60px", backgroundColor: 'var(--color-accent)' }}
                   >
                     <i className="bi bi-clock-history fs-4"></i>
                   </div>
@@ -240,8 +240,8 @@ const Services = () => {
               <Card className="h-100 border-0 bg-transparent">
                 <Card.Body className="text-center">
                   <div
-                    className="d-inline-flex align-items-center justify-content-center bg-success text-white rounded-circle mb-3"
-                    style={{ width: "60px", height: "60px" }}
+                    className="d-inline-flex align-items-center justify-content-center text-white rounded-circle mb-3 transition-smooth"
+                    style={{ width: "60px", height: "60px", backgroundColor: 'var(--color-success)' }}
                   >
                     <i className="bi bi-heart-pulse fs-4"></i>
                   </div>

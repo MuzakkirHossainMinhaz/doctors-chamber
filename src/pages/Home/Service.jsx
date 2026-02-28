@@ -42,7 +42,7 @@ const Service = ({ service }) => {
         <div className="d-flex justify-content-between align-items-start mb-3">
           <Card.Title className="h5 mb-0">{name}</Card.Title>
           <div className="d-flex align-items-center gap-2">
-            <span className="fw-bold text-primary">${price}</span>
+            <div className="fw-bold" style={{ color: 'var(--color-primary)' }}>${price}</div>
             {duration && (
               <span className="text-muted">
                 <i className="bi bi-clock me-1"></i>
@@ -56,15 +56,15 @@ const Service = ({ service }) => {
 
         <div className="d-flex gap-3 mb-4">
           <div className="d-flex align-items-center">
-            <i className="bi bi-check-circle text-success me-2"></i>
+            <i className="bi bi-check-circle me-2" style={{ color: 'var(--color-success)' }}></i>
             <span>Expert Doctors</span>
           </div>
           <div className="d-flex align-items-center">
-            <i className="bi bi-shield-check text-success me-2"></i>
+            <i className="bi bi-shield-check me-2" style={{ color: 'var(--color-success)' }}></i>
             <span>Safe & Secure</span>
           </div>
           <div className="d-flex align-items-center">
-            <i className="bi bi-award text-success me-2"></i>
+            <i className="bi bi-award me-2" style={{ color: 'var(--color-success)' }}></i>
             <span>Certified Care</span>
           </div>
         </div>

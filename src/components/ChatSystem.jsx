@@ -191,7 +191,7 @@ const ChatSystem = () => {
       <Row>
         <Col lg={8} className="mx-auto">
           <Card className="h-100">
-            <Card.Header className="bg-primary text-white">
+            <Card.Header className="text-white" style={{ backgroundColor: 'var(--color-primary)' }}>
               <div className="d-flex justify-content-between align-items-center">
                 <div className="chat-info">
                   <h5 className="mb-0">Chat Support</h5>
@@ -245,8 +245,11 @@ const ChatSystem = () => {
                             className={`d-flex mb-3 ${message.type === "admin" ? "justify-content-start" : "justify-content-end"}`}
                           >
                             <div
-                              className={`p-3 rounded-3 ${message.type === "admin" ? "bg-light" : "bg-primary text-white"}`}
-                              style={{ maxWidth: "70%" }}
+                              className={`p-3 rounded-3 ${message.type === "admin" ? "" : "text-white"}`}
+                              style={{ 
+                                maxWidth: "70%",
+                                backgroundColor: message.type === "admin" ? 'var(--color-gray-50)' : 'var(--color-primary)'
+                              }}
                             >
                               <div className="d-flex align-items-center mb-2">
                                 <strong>{message.senderName}</strong>
@@ -262,7 +265,7 @@ const ChatSystem = () => {
                     })}
                     {isTyping && (
                       <div className="d-flex justify-content-start mb-3">
-                        <div className="bg-light p-3 rounded-3">
+                        <div className="p-3 rounded-3" style={{ backgroundColor: 'var(--color-gray-50)' }}>
                           <div className="d-flex align-items-center">
                             <small className="text-muted">
                               Dr. Abdullah is typing

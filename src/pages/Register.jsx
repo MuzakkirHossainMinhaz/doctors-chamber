@@ -39,7 +39,18 @@ const Register = () => {
           <Card className="shadow-lg border-0">
             <Card.Body className="p-5">
               <div className="text-center mb-4">
-                <h2 className="fw-bold text-primary">Create Account</h2>
+                <div className="d-flex justify-content-center mb-3">
+                  <img
+                    src="/logo.png"
+                    alt="Doctor's Chamber Logo"
+                    height="60"
+                    width="60"
+                    className="rounded-3 shadow-sm"
+                  />
+                </div>
+                <h2 className="fw-bold" style={{ color: 'var(--color-secondary)' }}>
+                  Create Account
+                </h2>
                 <p className="text-muted">
                   Join Doctor's Chamber for better healthcare
                 </p>
@@ -122,7 +133,8 @@ const Register = () => {
                   Already have an account?{" "}
                   <Link
                     to="/signin"
-                    className="text-primary text-decoration-none fw-semibold"
+                    className="text-decoration-none fw-semibold"
+                    style={{ color: 'var(--color-primary)' }}
                   >
                     Sign In
                   </Link>

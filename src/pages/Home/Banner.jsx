@@ -62,7 +62,8 @@ const Banner = () => {
   return (
     <section
       id="home"
-      className="min-vh-100 position-relative overflow-hidden bg-primary"
+      className="min-vh-100 position-relative overflow-hidden"
+      style={{ backgroundColor: 'var(--color-primary)' }}
     >
       <div className="position-absolute top-0 start-0 w-100 h-100">
         <div className="position-absolute top-0 start-0 w-100 h-100 bg-white bg-opacity-10"></div>
@@ -73,7 +74,7 @@ const Banner = () => {
         <Row className="align-items-center min-vh-100">
           <Col lg={6} className={`${isAnimated ? "animate-fade-in-up" : ""}`}>
             <div className="d-inline-flex align-items-center bg-white bg-opacity-90 rounded-pill mb-4 px-3 py-2">
-              <span className="text-primary me-2">
+              <span className="me-2" style={{ color: 'var(--color-primary)' }}>
                 <i className="bi bi-hospital fs-5"></i>
               </span>
               <span className="fw-semibold">{slides[currentSlide].doctor}</span>
@@ -143,8 +144,14 @@ const Banner = () => {
               <div className="position-absolute top-50 start-50 translate-middle">
                 <div className="d-flex gap-3">
                   <div className="bg-white rounded-3 shadow-lg p-3 text-center">
-                    <i className="bi bi-heart-pulse text-danger fs-4"></i>
-                    <div className="small mt-1">Heart Health</div>
+                    <img
+                      src="/logo.png"
+                      alt="Doctor's Chamber Logo"
+                      height="24"
+                      width="24"
+                      className="mb-1"
+                    />
+                    <div className="small mt-1">Expert Care</div>
                   </div>
                   <div className="bg-white rounded-3 shadow-lg p-3 text-center">
                     <i className="bi bi-shield-check text-success fs-4"></i>

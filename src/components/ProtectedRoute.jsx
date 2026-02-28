@@ -30,8 +30,8 @@ const ProtectedRoute = ({
               <div className="text-center">
                 <div className="mb-4">
                   <div
-                    className="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle mb-3"
-                    style={{ width: "60px", height: "60px" }}
+                    className="d-inline-flex align-items-center justify-content-center text-white rounded-circle mb-3"
+                    style={{ width: "60px", height: "60px", backgroundColor: 'var(--color-primary)' }}
                   >
                     <i className="bi bi-hospital fs-4"></i>
                   </div>

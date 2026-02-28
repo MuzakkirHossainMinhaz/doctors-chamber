@@ -171,7 +171,7 @@ const VerificationGuard = ({
 
             <Row>
               <Col md="12">
-                <Card className="bg-light border-0">
+                <Card className="border-0" style={{ backgroundColor: 'var(--color-gray-50)' }}>
                   <Card.Body className="p-4">
                     <h5 className="mb-3">
                       <i className="bi bi-info-circle me-2"></i>

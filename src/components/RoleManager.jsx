@@ -337,8 +337,8 @@ const RoleManager = () => {
           {selectedUser && (
             <div className="text-center mb-4">
               <div
-                className="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle mb-3"
-                style={{ width: "80px", height: "80px" }}
+                className="d-inline-flex align-items-center justify-content-center text-white rounded-circle mb-3"
+                style={{ width: "80px", height: "80px", backgroundColor: 'var(--color-primary)' }}
               >
                 <img
                   src={

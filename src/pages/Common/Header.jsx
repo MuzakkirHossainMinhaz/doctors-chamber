@@ -83,7 +83,7 @@ const Header = () => {
       <Navbar className="bg-white shadow-sm">
         <Container>
           <div className="d-flex justify-content-center">
-            <div className="spinner-border text-primary" role="status">
+            <div className="spinner-border" style={{ color: 'var(--color-primary)' }} role="status">
               <span className="visually-hidden">Loading...</span>
             </div>
           </div>
@@ -104,15 +104,18 @@ const Header = () => {
           <Navbar.Brand
             as={Link}
             to="/"
-            className="d-flex align-items-center gap-3"
+            className="d-flex align-items-center gap-3 transition-smooth"
           >
-            <div
-              className="d-flex align-items-center justify-content-center bg-primary rounded-3 text-white"
-              style={{ width: "40px", height: "40px" }}
-            >
-              <i className="bi bi-hospital fs-4"></i>
-            </div>
-            <span className="fw-bold text-dark">Doctor's Chamber</span>
+            <img
+              src="/logo.png"
+              alt="Doctor's Chamber Logo"
+              height="40"
+              width="40"
+              className="rounded-3 shadow-sm"
+            />
+            <span className="fw-bold" style={{ color: 'var(--color-secondary)' }}>
+              Doctor's Chamber
+            </span>
           </Navbar.Brand>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="border-0">
@@ -124,7 +127,7 @@ const Header = () => {
               <Nav.Link
                 as={Link}
                 to="/"
-                className={`${isActivePath("/") ? "text-primary fw-semibold" : ""}`}
+                className={`${isActivePath("/") ? "active" : ""} transition-smooth`}
               >
                 <i className="bi bi-house me-2"></i>
                 Home
@@ -133,7 +136,7 @@ const Header = () => {
               <Nav.Link
                 as={Link}
                 to="/services"
-                className={`${isActivePath("/services") ? "text-primary fw-semibold" : ""}`}
+                className={`${isActivePath("/services") ? "active" : ""} transition-smooth`}
               >
                 <i className="bi bi-grid-3x3-gap me-2"></i>
                 Services
@@ -142,7 +145,7 @@ const Header = () => {
               <Nav.Link
                 as={Link}
                 to="/blogs"
-                className={`${isActivePath("/blogs") ? "text-primary fw-semibold" : ""}`}
+                className={`${isActivePath("/blogs") ? "active" : ""} transition-smooth`}
               >
                 <i className="bi bi-journal-text me-2"></i>
                 Blogs
@@ -151,7 +154,7 @@ const Header = () => {
               <Nav.Link
                 as={Link}
                 to="/contact"
-                className={`${isActivePath("/contact") ? "text-primary fw-semibold" : ""}`}
+                className={`${isActivePath("/contact") ? "active" : ""} transition-smooth`}
               >
                 <i className="bi bi-telephone me-2"></i>
                 Contact
@@ -162,7 +165,7 @@ const Header = () => {
                 <Nav.Link
                   as={Link}
                   to="/admin"
-                  className={`${isActivePath("/admin") ? "text-primary fw-semibold" : ""}`}
+                  className={`${isActivePath("/admin") ? "active" : ""} transition-smooth`}
                 >
                   <i className="bi bi-gear me-2"></i>
                   Admin
@@ -173,7 +176,7 @@ const Header = () => {
                 <Nav.Link
                   as={Link}
                   to="/doctor-dashboard"
-                  className={`${isActivePath("/doctor-dashboard") ? "text-primary fw-semibold" : ""}`}
+                  className={`${isActivePath("/doctor-dashboard") ? "active" : ""} transition-smooth`}
                 >
                   <i className="bi bi-speedometer2 me-2"></i>
                   Dashboard
@@ -212,7 +215,7 @@ const Header = () => {
                   id="user-dropdown"
                   align="end"
                 >
-                  <NavDropdown.Item className="dropdown-header bg-light p-3 border-bottom">
+                  <NavDropdown.Item className="dropdown-header p-3 border-bottom" style={{ backgroundColor: 'var(--color-gray-50)' }}>
                     <div className="d-flex align-items-center gap-3 p-2">
                       <div
                         className="rounded-circle overflow-hidden"

@@ -74,7 +74,7 @@ const BookingCalendar = ({
         </div>
 
         {selectedDate && (
-          <div className="bg-light rounded-3 p-3 mt-4">
+          <div className="rounded-3 p-3 mt-4" style={{ backgroundColor: 'var(--color-gray-50)' }}>
             <h6 className="mb-3">Available Time Slots</h6>
             <div className="d-flex flex-wrap gap-2">
               {timeSlots.map((slot) => (

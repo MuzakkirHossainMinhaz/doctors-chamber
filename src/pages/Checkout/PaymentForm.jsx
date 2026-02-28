@@ -85,7 +85,7 @@ const PaymentFormContent = ({ service, bookingData, onPaymentSuccess }) => {
         <h5 className="mb-0">Payment Information</h5>
       </Card.Header>
       <Card.Body>
-        <div className="bg-light rounded-3 p-3 mb-4">
+        <div className="rounded-3 p-3 mb-4" style={{ backgroundColor: 'var(--color-gray-50)' }}>
           <h6 className="mb-3">Booking Summary</h6>
           <div className="d-flex justify-content-between mb-2">
             <span>Service:</span>

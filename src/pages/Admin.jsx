@@ -242,7 +242,7 @@ const Admin = () => {
 
   return (
     <Container fluid className="p-4">
-      <div className="bg-primary text-white rounded-3 p-5 mb-4">
+      <div className="text-white rounded-3 p-5 mb-4" style={{ backgroundColor: 'var(--color-primary)' }}>
         <h1 className="display-5 fw-bold text-center">Admin Dashboard</h1>
         <p className="lead text-center">
           Manage your healthcare service platform
@@ -313,7 +313,7 @@ const Admin = () => {
               <Col md={3} className="mb-4">
                 <Card className="h-100 shadow-sm border-0 bg-white">
                   <Card.Body className="text-center p-4">
-                    <i className="bi bi-people display-4 text-primary"></i>
+                    <i className="bi bi-people display-4" style={{ color: 'var(--color-primary)' }}></i>
                     <h3 className="mt-3">{stats.totalUsers}</h3>
                     <p className="text-muted">Total Users</p>
                   </Card.Body>

@@ -35,18 +35,19 @@ const Services = () => {
   return (
     <section
       id="services"
-      className="py-5 bg-light position-relative overflow-hidden"
+      className="py-5 position-relative overflow-hidden"
+      style={{ backgroundColor: 'var(--color-gray-50)' }}
     >
       <Container>
         <div className="text-center mb-5">
           <div className="d-inline-flex align-items-center bg-white rounded-pill shadow-sm mb-4 px-4 py-2">
-            <span className="text-primary me-2">
+            <span className="me-2" style={{ color: 'var(--color-primary)' }}>
               <i className="bi bi-heart-pulse fs-4"></i>
             </span>
             <span className="fw-semibold">Our Services</span>
           </div>
 
-          <h1 className="display-5 fw-bold text-dark mb-3">
+          <h1 className="display-5 fw-bold mb-3" style={{ color: 'var(--color-secondary)' }}>
             Comprehensive Healthcare Services
           </h1>
           <p className="lead text-muted">
@@ -74,7 +75,7 @@ const Services = () => {
 
         {loading ? (
           <div className="text-center py-5">
-            <div className="spinner-border text-primary mb-3"></div>
+            <div className="spinner-border mb-3" style={{ color: 'var(--color-primary)' }}></div>
             <p>Loading services...</p>
           </div>
         ) : (

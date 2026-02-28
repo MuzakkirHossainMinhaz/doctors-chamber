@@ -208,7 +208,7 @@ const Checkout = () => {
 
   return (
     <Container className="my-5">
-      <div className="bg-light rounded-3 p-5 mb-5">
+      <div className="rounded-3 p-5 mb-5" style={{ backgroundColor: 'var(--color-gray-50)' }}>
         <h1 className="display-5 fw-bold text-center">Complete Your Booking</h1>
         <p className="lead text-muted text-center">
           Schedule your appointment in 3 simple steps
@@ -221,11 +221,12 @@ const Checkout = () => {
           <div className="bg-white rounded-3 p-4 mb-4 shadow-sm">
             <div className="d-flex justify-content-between align-items-center">
               <div
-                className={`text-center ${bookingStep >= 1 ? "text-primary" : "text-muted"}`}
+                className={`text-center ${bookingStep >= 1 ? "" : "text-muted"}`}
+                style={{ color: bookingStep >= 1 ? 'var(--color-primary)' : '' }}
               >
                 <div
-                  className="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-2"
-                  style={{ width: "40px", height: "40px" }}
+                  className="text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-2"
+                  style={{ width: "40px", height: "40px", backgroundColor: 'var(--color-primary)' }}
                 >
                   <strong>1</strong>
                 </div>
@@ -237,11 +238,12 @@ const Checkout = () => {
                 ></div>
               </div>
               <div
-                className={`text-center ${bookingStep >= 2 ? "text-primary" : "text-muted"}`}
+                className={`text-center ${bookingStep >= 2 ? "" : "text-muted"}`}
+                style={{ color: bookingStep >= 2 ? 'var(--color-primary)' : '' }}
               >
                 <div
-                  className="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-2"
-                  style={{ width: "40px", height: "40px" }}
+                  className="text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-2"
+                  style={{ width: "40px", height: "40px", backgroundColor: 'var(--color-primary)' }}
                 >
                   <strong>2</strong>
                 </div>
@@ -261,7 +263,7 @@ const Checkout = () => {
               </Col>
               <Col md={6}>
                 <Card className="h-100">
-                  <Card.Header className="bg-success text-white">
+                  <Card.Header className="text-white" style={{ backgroundColor: 'var(--color-success)' }}>
                     <h5 className="mb-0">Patient Information</h5>
                   </Card.Header>
                   <Card.Body>
@@ -315,7 +317,7 @@ const Checkout = () => {
                       </Form.Group>
 
                       {selectedDate && (
-                        <div className="bg-light rounded-3 p-3 mb-4">
+                        <div className="rounded-3 p-3 mb-4" style={{ backgroundColor: 'var(--color-gray-50)' }}>
                           <h6 className="mb-3">Select Time Slot</h6>
                           <div className="d-flex flex-wrap gap-2">
                             {[

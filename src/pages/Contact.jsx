@@ -72,8 +72,8 @@ const Contact = () => {
 
   return (
     <Container className="my-5">
-      <div className="bg-light rounded-3 p-5 mb-5">
-        <h1 className="display-4 fw-bold text-dark mb-3 text-center">
+      <div className="rounded-3 p-5 mb-5" style={{ backgroundColor: 'var(--color-gray-50)' }}>
+        <h1 className="display-4 fw-bold mb-3 text-center" style={{ color: 'var(--color-secondary)' }}>
           Contact Us
         </h1>
         <p className="lead text-muted text-center">
@@ -89,8 +89,8 @@ const Contact = () => {
               <div className="mb-4">
                 <div className="d-flex align-items-start mb-4">
                   <div
-                    className="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle me-3"
-                    style={{ width: "48px", height: "48px" }}
+                    className="d-inline-flex align-items-center justify-content-center text-white rounded-circle me-3 transition-smooth"
+                    style={{ width: "48px", height: "48px", backgroundColor: 'var(--color-primary)' }}
                   >
                     <i className="bi bi-geo-alt fs-4"></i>
                   </div>
@@ -106,8 +106,8 @@ const Contact = () => {
 
                 <div className="d-flex align-items-start mb-4">
                   <div
-                    className="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle me-3"
-                    style={{ width: "48px", height: "48px" }}
+                    className="d-inline-flex align-items-center justify-content-center text-white rounded-circle me-3 transition-smooth"
+                    style={{ width: "48px", height: "48px", backgroundColor: 'var(--color-primary)' }}
                   >
                     <i className="bi bi-telephone fs-4"></i>
                   </div>
@@ -123,8 +123,8 @@ const Contact = () => {
 
                 <div className="d-flex align-items-start mb-4">
                   <div
-                    className="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle me-3"
-                    style={{ width: "48px", height: "48px" }}
+                    className="d-inline-flex align-items-center justify-content-center text-white rounded-circle me-3 transition-smooth"
+                    style={{ width: "48px", height: "48px", backgroundColor: 'var(--color-primary)' }}
                   >
                     <i className="bi bi-envelope fs-4"></i>
                   </div>
@@ -140,8 +140,8 @@ const Contact = () => {
 
                 <div className="d-flex align-items-start">
                   <div
-                    className="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle me-3"
-                    style={{ width: "48px", height: "48px" }}
+                    className="d-inline-flex align-items-center justify-content-center text-white rounded-circle me-3 transition-smooth"
+                    style={{ width: "48px", height: "48px", backgroundColor: 'var(--color-primary)' }}
                   >
                     <i className="bi bi-clock fs-4"></i>
                   </div>
@@ -159,8 +159,8 @@ const Contact = () => {
               </div>
 
               {/* Emergency Contact */}
-              <Card className="mt-4 border-0 bg-danger text-white">
-                <Card.Body className="text-center p-4">
+              <Card className="mt-4 border-0 transition-smooth" style={{ backgroundColor: 'var(--color-danger)' }}>
+                <Card.Body className="text-center p-4 text-white">
                   <div
                     className="d-inline-flex align-items-center justify-content-center bg-white bg-opacity-25 rounded-circle mb-3"
                     style={{ width: "60px", height: "60px" }}
@@ -297,7 +297,7 @@ const Contact = () => {
           </Card>
 
           {/* Quick Links */}
-          <Card className="mt-4 border-0 bg-light">
+          <Card className="mt-4 border-0 rounded-3" style={{ backgroundColor: 'var(--color-gray-50)' }}>
             <Card.Body className="p-4">
               <h5 className="mb-3 text-center">Quick Links</h5>
               <Row className="g-3">

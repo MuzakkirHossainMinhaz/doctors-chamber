@@ -40,7 +40,18 @@ const Signin = () => {
           <Card className="shadow-lg border-0">
             <Card.Body className="p-5">
               <div className="text-center mb-4">
-                <h2 className="fw-bold text-primary">Welcome Back</h2>
+                <div className="d-flex justify-content-center mb-3">
+                  <img
+                    src="/logo.png"
+                    alt="Doctor's Chamber Logo"
+                    height="60"
+                    width="60"
+                    className="rounded-3 shadow-sm"
+                  />
+                </div>
+                <h2 className="fw-bold" style={{ color: 'var(--color-secondary)' }}>
+                  Welcome Back
+                </h2>
                 <p className="text-muted">
                   Sign in to your Doctor's Chamber account
                 </p>
@@ -87,7 +98,8 @@ const Signin = () => {
                   />
                   <Link
                     to="/forgot-password"
-                    className="text-primary text-decoration-none"
+                    className="text-decoration-none"
+                    style={{ color: 'var(--color-primary)' }}
                   >
                     Forgot password?
                   </Link>
@@ -125,7 +137,8 @@ const Signin = () => {
                   Don't have an account?{" "}
                   <Link
                     to="/register"
-                    className="text-primary text-decoration-none fw-semibold"
+                    className="text-decoration-none fw-semibold"
+                    style={{ color: 'var(--color-primary)' }}
                   >
                     Create Account
                   </Link>
