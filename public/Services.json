@@ -1,0 +1,44 @@
+[
+    {
+        "id" : 1,
+        "name" : "Medical and Health Check-ups",
+        "description" : "Your provider will collect basic health information such as weight, height and vital signs, including blood pressure, heart rate and temperature.",
+        "img" : "https://i.ibb.co/gPgV0xN/service1.png",
+        "price" : "12"
+    },
+    {
+        "id" : 2,
+        "name" : "Health and Nutrition Advice",
+        "description" : "Choose foods with healthy fats, limit foods high in saturated fat, and avoid foods with trans fat.",
+        "img" : "https://i.ibb.co/fn1ZGVp/service2.png",
+        "price" : "9"
+    },
+    {
+        "id" : 3,
+        "name" : "Surgery",
+        "description" : "Surgery, branch of medicine that is concerned with the treatment of injuries, diseases, and other disorders by manual and instrumental means.",
+        "img" : "https://i.ibb.co/CsTnqVn/service3.png",
+        "price" : "40"
+    },
+    {
+        "id" : 4,
+        "name" : "Emergency",
+        "description" : "An emergency is a situation that poses an immediate risk to health, life, property, or environment.",
+        "img" : "https://i.ibb.co/vsvjJDg/service4.png",
+        "price" : "10"
+    },
+    {
+        "id" : 5,
+        "name" : "Counselling",
+        "description" : "Counselling is a talking therapy that involves a trained therapist listening to you and helping you find ways to deal with emotional issues.",
+        "img" : "https://i.ibb.co/hRxM3Ry/service5.png",
+        "price" : "17"
+    },
+    {
+        "id" : 6,
+        "name" : "Diagnosis and treatment",
+        "description" : "A health history, physical exam, and tests, such as blood tests, imaging tests, and biopsies, may be used to help make a diagnosis.",
+        "img" : "https://i.ibb.co/PxcpM62/service6.png",
+        "price" : "25"
+    }
+]

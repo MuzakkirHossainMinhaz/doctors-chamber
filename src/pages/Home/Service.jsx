@@ -1,0 +1,94 @@
+import { Badge, Button, Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+
+const Service = ({ service }) => {
+  const { id, name, img, price, description, duration, category, icon } =
+    service;
+  const navigate = useNavigate();
+
+  const navigateToCheckout = (serviceId) => {
+    navigate(`/checkout/${serviceId}`);
+  };
+
+  const getCategoryColor = (category) => {
+    const colors = {
+      General: "primary",
+      Emergency: "danger",
+      Surgery: "warning",
+      Consultation: "info",
+      Diagnostic: "success",
+    };
+    return colors[category] || "secondary";
+  };
+
+  return (
+    <Card className="h-100 shadow-sm border-0 animate-fade-in-up">
+      <div className="position-relative overflow-hidden">
+        <Card.Img variant="top" src={img} className="h-100 object-fit-cover" />
+        <div className="position-absolute top-0 start-0 w-100 h-100 bg-gradient bg-opacity-50">
+          <div className="position-absolute top-50 start-50 translate-middle">
+            <i className={`bi ${icon || "bi-heart-pulse"} text-white fs-3`}></i>
+          </div>
+          <Badge
+            bg={getCategoryColor(category)}
+            className="position-absolute top-0 end-0 m-2"
+          >
+            {category}
+          </Badge>
+        </div>
+      </div>
+
+      <Card.Body className="p-4">
+        <div className="d-flex justify-content-between align-items-start mb-3">
+          <Card.Title className="h5 mb-0">{name}</Card.Title>
+          <div className="d-flex align-items-center gap-2">
+            <span className="fw-bold text-primary">${price}</span>
+            {duration && (
+              <span className="text-muted">
+                <i className="bi bi-clock me-1"></i>
+                {duration}
+              </span>
+            )}
+          </div>
+        </div>
+
+        <Card.Text className="text-muted mb-4">{description}</Card.Text>
+
+        <div className="d-flex gap-3 mb-4">
+          <div className="d-flex align-items-center">
+            <i className="bi bi-check-circle text-success me-2"></i>
+            <span>Expert Doctors</span>
+          </div>
+          <div className="d-flex align-items-center">
+            <i className="bi bi-shield-check text-success me-2"></i>
+            <span>Safe & Secure</span>
+          </div>
+          <div className="d-flex align-items-center">
+            <i className="bi bi-award text-success me-2"></i>
+            <span>Certified Care</span>
+          </div>
+        </div>
+      </Card.Body>
+
+      <Card.Footer className="bg-white border-0 p-3">
+        <div className="d-flex gap-2">
+          <Button
+            onClick={() => navigateToCheckout(id)}
+            variant="primary"
+            size="lg"
+            className="flex-fill"
+          >
+            <i className="bi bi-calendar-plus me-2"></i>
+            Book Now
+          </Button>
+          <Button variant="outline-primary" size="lg" className="flex-fill">
+            <i className="bi bi-info-circle me-2"></i>
+            Details
+          </Button>
+        </div>
+      </Card.Footer>
+    </Card>
+  );
+};
+
+export default Service;
