@@ -1,8 +1,36 @@
 {
   "name": "doctors-chamber",
   "version": "0.0.0",
+  "description": "Professional healthcare services platform with expert medical care and modern booking system",
   "private": true,
   "type": "module",
+  "homepage": "https://doctorschamber.com",
+  "keywords": [
+    "healthcare",
+    "medical services",
+    "doctor consultation",
+    "health check-up",
+    "nutrition advice",
+    "surgery",
+    "emergency care",
+    "counselling",
+    "diagnosis",
+    "medical appointment",
+    "healthcare platform",
+    "Dr. Abdullah"
+  ],
+  "author": {
+    "name": "Doctor's Chamber Team",
+    "email": "info@doctorschamber.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/doctors-chamber/platform"
+  },
+  "bugs": {
+    "url": "https://github.com/doctors-chamber/platform/issues"
+  },
   "dependencies": {
     "@firebase/messaging": "^0.12.23",
     "@stripe/react-stripe-js": "^5.6.0",
