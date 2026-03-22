@@ -1,202 +1,159 @@
-import { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "./Banner.css";
 
-const Banner = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAnimated, setIsAnimated] = useState(false);
+const Banner = ({ services = [] }) => {
+  const activeServiceCount = services.length;
+  const featuredCategories = [
+    ...new Set(services.map((service) => service.category).filter(Boolean)),
+  ].slice(0, 3);
 
-  const slides = [
+  const heroPillars = [
     {
-      title: "Protect Your Health",
-      subtitle: "and Take Care of Your Body",
-      description:
-        "Comprehensive healthcare services with modern medical expertise and compassionate care.",
-      doctor: "Prof. Dr. Md. Abdullah",
-      image: "https://i.ibb.co/y5M2GJN/banner.png",
-      cta: "Book Appointment",
-      ctaLink: "/checkout",
+      icon: "bi-shield-check",
+      title: "Verified access",
+      text: "Account-state checks and protected booking keep patient actions gated correctly.",
     },
     {
-      title: "Expert Medical Care",
-      subtitle: "When You Need It Most",
-      description:
-        "24/7 emergency services with specialized medical professionals ready to help you.",
-      doctor: "Available 24/7",
-      image: "https://i.ibb.co/6P6fX2C/medical-care.png",
-      cta: "Emergency Services",
-      ctaLink: "/contact",
+      icon: "bi-calendar2-check",
+      title: "Live scheduling",
+      text: "Service records drive booking availability instead of static frontend placeholders.",
     },
     {
-      title: "Personalized Treatment",
-      subtitle: "Tailored to Your Needs",
-      description:
-        "Custom healthcare plans designed specifically for your unique health requirements.",
-      doctor: "Personal Care",
-      image: "https://i.ibb.co/3s6TQ2L/personalized-care.png",
-      cta: "Get Consultation",
-      ctaLink: "/checkout",
+      icon: "bi-chat-dots",
+      title: "Patient engagement",
+      text: "Messaging, notifications, and follow-up flows stay connected to the same platform.",
     },
   ];
 
-  useEffect(() => {
-    setIsAnimated(true);
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-  };
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
   return (
-    <section
-      id="home"
-      className="min-vh-100 position-relative overflow-hidden"
-      style={{ backgroundColor: 'var(--color-primary)' }}
-    >
-      <div className="position-absolute top-0 start-0 w-100 h-100">
-        <div className="position-absolute top-0 start-0 w-100 h-100 bg-white bg-opacity-10"></div>
-        <div className="position-absolute top-0 start-0 w-100 h-100 bg-gradient bg-opacity-20"></div>
-      </div>
+    <section className="hero-shell position-relative overflow-hidden">
+      <div className="hero-orb hero-orb-coral"></div>
+      <div className="hero-orb hero-orb-blue"></div>
+      <div className="hero-grid"></div>
 
-      <Container className="position-relative z-2">
-        <Row className="align-items-center min-vh-100">
-          <Col lg={6} className={`${isAnimated ? "animate-fade-in-up" : ""}`}>
-            <div className="d-inline-flex align-items-center bg-white bg-opacity-90 rounded-pill mb-4 px-3 py-2">
-              <span className="me-2" style={{ color: 'var(--color-primary)' }}>
-                <i className="bi bi-hospital fs-5"></i>
-              </span>
-              <span className="fw-semibold">{slides[currentSlide].doctor}</span>
-            </div>
-
-            <h1 className="display-4 fw-bold text-white mb-3">
-              {slides[currentSlide].title}
-              <span className="d-block text-white-50 fs-5">
-                {slides[currentSlide].subtitle}
-              </span>
-            </h1>
-
-            <p className="text-white-75 fs-5 mb-4">
-              {slides[currentSlide].description}
-            </p>
-
-            <div className="d-flex gap-3 mb-5">
-              <Button
-                as={Link}
-                to={slides[currentSlide].ctaLink}
-                variant="primary"
-                size="lg"
-                className="rounded-pill"
-              >
-                <i className="bi bi-calendar-plus me-2"></i>
-                {slides[currentSlide].cta}
-              </Button>
-              <Button
-                as={Link}
-                to="/services"
-                variant="light"
-                size="lg"
-                className="rounded-pill"
-              >
-                <i className="bi bi-grid-3x3-gap me-2"></i>
-                Browse Services
-              </Button>
-            </div>
-
-            <div className="d-flex gap-4">
-              <div className="text-center">
-                <div className="display-6 fw-bold text-white">15+</div>
-                <div className="text-white-75">Years Experience</div>
-              </div>
-              <div className="text-center">
-                <div className="display-6 fw-bold text-white">5000+</div>
-                <div className="text-white-75">Happy Patients</div>
-              </div>
-              <div className="text-center">
-                <div className="display-6 fw-bold text-white">24/7</div>
-                <div className="text-white-75">Emergency Care</div>
-              </div>
-            </div>
-          </Col>
-
-          <Col lg={6} className={`${isAnimated ? "animate-fade-in" : ""}`}>
-            <div className="position-relative">
-              <div className="position-relative overflow-hidden rounded-4 shadow-lg">
-                <img
-                  src={slides[currentSlide].image}
-                  alt="Medical Care"
-                  className="img-fluid"
-                />
-                <div className="position-absolute top-0 start-0 w-100 h-100 bg-gradient bg-opacity-30 rounded-4"></div>
+      <Container className="position-relative hero-content">
+        <Row className="align-items-center g-5">
+          <Col lg={7}>
+            <div className="hero-copy">
+              <div className="hero-chip">
+                <i className="bi bi-heart-pulse-fill"></i>
+                <span>Modern care platform for booking, trust, and operations</span>
               </div>
 
-              <div className="position-absolute top-50 start-50 translate-middle">
-                <div className="d-flex gap-3">
-                  <div className="bg-white rounded-3 shadow-lg p-3 text-center">
-                    <img
-                      src="/logo.png"
-                      alt="Doctor's Chamber Logo"
-                      height="24"
-                      width="24"
-                      className="mb-1"
-                    />
-                    <div className="small mt-1">Expert Care</div>
-                  </div>
-                  <div className="bg-white rounded-3 shadow-lg p-3 text-center">
-                    <i className="bi bi-shield-check text-success fs-4"></i>
-                    <div className="small mt-1">Insurance</div>
-                  </div>
-                  <div className="bg-white rounded-3 shadow-lg p-3 text-center">
-                    <i className="bi bi-award text-warning fs-4"></i>
-                    <div className="small mt-1">Certified</div>
-                  </div>
+              <h1 className="hero-title">
+                Healthcare experience built with
+                <span> live services, clear trust signals, and faster patient flow.</span>
+              </h1>
+
+              <p className="hero-lead">
+                Doctor&apos;s Chamber is no longer framed as a rotating promo banner.
+                The homepage now leads with platform intent: discover care, book
+                verified services, and move patients into a structured operational workflow.
+              </p>
+
+              <div className="hero-actions">
+                <Button
+                  as={Link}
+                  to="/services"
+                  variant="primary"
+                  size="lg"
+                  className="rounded-pill px-4"
+                >
+                  <i className="bi bi-grid-3x3-gap me-2"></i>
+                  Browse Services
+                </Button>
+                <Button
+                  as={Link}
+                  to="/contact"
+                  variant="outline-primary"
+                  size="lg"
+                  className="rounded-pill px-4"
+                >
+                  <i className="bi bi-telephone me-2"></i>
+                  Contact Care Team
+                </Button>
+              </div>
+
+              <div className="hero-metrics">
+                <div className="hero-metric">
+                  <strong>{activeServiceCount || "0"}</strong>
+                  <span>Live services from Firestore</span>
+                </div>
+                <div className="hero-metric">
+                  <strong>3</strong>
+                  <span>Core patient workflow stages</span>
+                </div>
+                <div className="hero-metric">
+                  <strong>24/7</strong>
+                  <span>Digital access to requests and support</span>
                 </div>
               </div>
             </div>
           </Col>
-        </Row>
 
-        <div className="position-absolute bottom-0 start-50 translate-middle-x mb-4">
-          <div className="d-flex align-items-center gap-3">
-            <button
-              className="btn btn-light btn-sm rounded-circle"
-              onClick={prevSlide}
-              aria-label="Previous slide"
-            >
-              <i className="bi bi-chevron-left"></i>
-            </button>
+          <Col lg={5}>
+            <div className="hero-panel">
+              <div className="hero-panel-top">
+                <div>
+                  <p className="hero-panel-label">Platform focus</p>
+                  <h2>Patient-facing care, backed by staff workflows</h2>
+                </div>
+                <div className="hero-panel-badge">
+                  <i className="bi bi-hospital"></i>
+                </div>
+              </div>
 
-            <div className="d-flex gap-2">
-              {slides.map((_, index) => (
-                <button
-                  key={index}
-                  className={`btn btn-sm rounded-circle ${index === currentSlide ? "btn-primary" : "btn-outline-light"}`}
-                  onClick={() => goToSlide(index)}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
+              <div className="hero-category-row">
+                {featuredCategories.length > 0 ? (
+                  featuredCategories.map((category) => (
+                    <span key={category} className="hero-category-chip">
+                      {category}
+                    </span>
+                  ))
+                ) : (
+                  <span className="hero-category-chip">Service data loading</span>
+                )}
+              </div>
+
+              <div className="hero-track">
+                <div className="hero-track-node is-active">
+                  <span>1</span>
+                  <div>
+                    <strong>Discover</strong>
+                    <p>Explore active services and care categories.</p>
+                  </div>
+                </div>
+                <div className="hero-track-node is-active">
+                  <span>2</span>
+                  <div>
+                    <strong>Book</strong>
+                    <p>Select dates and Firestore-backed time slots.</p>
+                  </div>
+                </div>
+                <div className="hero-track-node">
+                  <span>3</span>
+                  <div>
+                    <strong>Follow through</strong>
+                    <p>Notifications, payments, and staff-side workflows continue the flow.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="hero-pillar-list">
+                {heroPillars.map((pillar) => (
+                  <div key={pillar.title} className="hero-pillar-card">
+                    <i className={`bi ${pillar.icon}`}></i>
+                    <div>
+                      <strong>{pillar.title}</strong>
+                      <p>{pillar.text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-
-            <button
-              className="btn btn-light btn-sm rounded-circle"
-              onClick={nextSlide}
-              aria-label="Next slide"
-            >
-              <i className="bi bi-chevron-right"></i>
-            </button>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </Container>
     </section>
   );

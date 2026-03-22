@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { db } from "../../firebase.init";
+import { fetchServicesFromFirestore } from "../../utils/serviceData";
 import Service from "./Service.jsx";
 
 const Services = () => {
@@ -15,32 +14,12 @@ const Services = () => {
 
     const loadServices = async () => {
       try {
-        const servicesQuery = query(
-          collection(db, "services"),
-          where("isActive", "==", true),
-          orderBy("createdAt", "desc"),
-        );
-        const snapshot = await getDocs(servicesQuery);
-        const firestoreServices = snapshot.docs.map((serviceDoc) => ({
-          id: serviceDoc.id,
-          ...serviceDoc.data(),
-        }));
-
-        if (firestoreServices.length > 0) {
-          setServices(firestoreServices);
-          setLoading(false);
-          return;
-        }
+        const firestoreServices = await fetchServicesFromFirestore({
+          activeOnly: true,
+        });
+        setServices(firestoreServices);
       } catch (error) {
         console.error("Error loading Firestore services:", error);
-      }
-
-      try {
-        const response = await fetch("Services.json");
-        const data = await response.json();
-        setServices(data);
-      } catch (error) {
-        console.error("Error loading fallback services:", error);
       } finally {
         setLoading(false);
       }
@@ -108,7 +87,7 @@ const Services = () => {
         ) : (
           <>
             <Row className="g-4">
-              {filteredServices.map((service, index) => (
+              {filteredServices.map((service) => (
                 <Col key={service.id} lg={4} md={6} className="mb-4">
                   <Service service={service} />
                 </Col>

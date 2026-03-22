@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Alert, Button, Card } from "react-bootstrap";
+import { Alert, Card } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -8,8 +7,6 @@ const BookingCalendar = ({
   selectedDate,
   unavailableDates = [],
 }) => {
-  const [highlightedDates, setHighlightedDates] = useState([]);
-
   const isDateDisabled = (date) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -31,15 +28,6 @@ const BookingCalendar = ({
       onDateSelect(date);
     }
   };
-
-  const timeSlots = [
-    "09:00 AM",
-    "10:00 AM",
-    "11:00 AM",
-    "02:00 PM",
-    "03:00 PM",
-    "04:00 PM",
-  ];
 
   return (
     <Card className="h-100">
@@ -75,19 +63,10 @@ const BookingCalendar = ({
 
         {selectedDate && (
           <div className="rounded-3 p-3 mt-4" style={{ backgroundColor: 'var(--color-gray-50)' }}>
-            <h6 className="mb-3">Available Time Slots</h6>
-            <div className="d-flex flex-wrap gap-2">
-              {timeSlots.map((slot) => (
-                <Button
-                  key={slot}
-                  variant="outline-success"
-                  size="sm"
-                  className="rounded-pill"
-                >
-                  {slot}
-                </Button>
-              ))}
-            </div>
+            <h6 className="mb-2">Availability</h6>
+            <p className="text-muted mb-0">
+              Available time slots are loaded from the selected service record.
+            </p>
           </div>
         )}
       </Card.Body>

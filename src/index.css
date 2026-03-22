@@ -1,42 +1,55 @@
-/* Doctor's Chamber Theme - Based on Logo Colors */
+/* Doctor's Chamber Theme - Derived from public/logo.png */
 :root {
   /* Primary Brand Colors */
-  --color-primary: #0066CC;
-  --color-primary-dark: #0052A3;
-  --color-primary-light: #3380D9;
+  --color-primary: #FF896F;
+  --color-primary-dark: #D96D56;
+  --color-primary-light: #FFB29F;
   
   /* Secondary Brand Colors */
-  --color-secondary: #003366;
-  --color-secondary-dark: #002647;
-  --color-secondary-light: #1A4D80;
+  --color-secondary: #1C85E8;
+  --color-secondary-dark: #166CC0;
+  --color-secondary-light: #56A4EE;
   
-  /* Accent Colors */
-  --color-accent: #00B4D8;
-  --color-accent-dark: #0091B3;
-  --color-accent-light: #33C3E0;
+  /* Accent / Neutralized Brand Colors */
+  --color-accent: #C8D0D8;
+  --color-accent-dark: #A6B1BB;
+  --color-accent-light: #EBF5FE;
   
   /* Neutral Colors */
   --color-white: #FFFFFF;
-  --color-gray-50: #F8F9FA;
-  --color-gray-100: #E9ECEF;
-  --color-gray-200: #DEE2E6;
-  --color-gray-300: #CED4DA;
-  --color-gray-400: #ADB5BD;
-  --color-gray-500: #6C757D;
-  --color-gray-600: #495057;
-  --color-gray-700: #343A40;
-  --color-gray-800: #212529;
-  --color-gray-900: #000000;
+  --color-gray-50: #F8FBFE;
+  --color-gray-100: #EBF5FE;
+  --color-gray-200: #DCE8F1;
+  --color-gray-300: #C8D0D8;
+  --color-gray-400: #A6B1BB;
+  --color-gray-500: #7A8794;
+  --color-gray-600: #5A6772;
+  --color-gray-700: #38424C;
+  --color-gray-800: #25303A;
+  --color-gray-900: #162028;
   
   /* Status Colors */
-  --color-success: #28A745;
-  --color-success-light: #71DD8A;
-  --color-warning: #FFC107;
-  --color-warning-light: #FFD08A;
-  --color-danger: #DC3545;
-  --color-danger-light: #F1B0B7;
-  --color-info: #17A2B8;
-  --color-info-light: #7CC7D4;
+  --color-success: #2C8E78;
+  --color-success-light: #D9F3EC;
+  --color-warning: #E28A2E;
+  --color-warning-light: #FCE8CF;
+  --color-danger: #C75B64;
+  --color-danger-light: #F8D9DE;
+  --color-info: #1C85E8;
+  --color-info-light: #DCEEFF;
+
+  /* Bootstrap theme bridge */
+  --bs-primary: var(--color-primary);
+  --bs-primary-rgb: 255, 137, 111;
+  --bs-secondary: var(--color-secondary);
+  --bs-secondary-rgb: 28, 133, 232;
+  --bs-link-color: var(--color-secondary);
+  --bs-link-hover-color: var(--color-secondary-dark);
+  --bs-body-color: var(--color-gray-700);
+  --bs-body-bg: var(--color-gray-50);
+  --bs-border-color: var(--color-gray-200);
+  --bs-card-bg: rgba(255, 255, 255, 0.92);
+  --bs-emphasis-color: var(--color-gray-900);
   
   /* Typography */
   --font-primary: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
@@ -80,12 +93,12 @@
   --radius-full: 9999px;
   
   /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 102, 204, 0.05);
-  --shadow-base: 0 1px 3px 0 rgba(0, 102, 204, 0.1), 0 1px 2px 0 rgba(0, 102, 204, 0.06);
-  --shadow-md: 0 4px 6px -1px rgba(0, 102, 204, 0.1), 0 2px 4px -1px rgba(0, 102, 204, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 102, 204, 0.1), 0 4px 6px -2px rgba(0, 102, 204, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 102, 204, 0.1), 0 10px 10px -5px rgba(0, 102, 204, 0.04);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 102, 204, 0.25);
+  --shadow-sm: 0 1px 2px 0 rgba(28, 133, 232, 0.08);
+  --shadow-base: 0 1px 3px 0 rgba(28, 133, 232, 0.14), 0 1px 2px 0 rgba(22, 108, 192, 0.08);
+  --shadow-md: 0 4px 6px -1px rgba(28, 133, 232, 0.14), 0 2px 4px -1px rgba(22, 108, 192, 0.08);
+  --shadow-lg: 0 10px 15px -3px rgba(28, 133, 232, 0.14), 0 4px 6px -2px rgba(22, 108, 192, 0.08);
+  --shadow-xl: 0 20px 25px -5px rgba(28, 133, 232, 0.14), 0 10px 10px -5px rgba(22, 108, 192, 0.06);
+  --shadow-2xl: 0 25px 50px -12px rgba(28, 133, 232, 0.3);
   
   /* Transitions */
   --transition-fast: 150ms ease-in-out;
@@ -108,7 +121,11 @@ body {
   font-size: var(--font-size-base);
   line-height: 1.6;
   color: var(--color-gray-700);
-  background-color: var(--color-white);
+  background:
+    radial-gradient(circle at top left, rgba(172, 211, 247, 0.35), transparent 32%),
+    radial-gradient(circle at top right, rgba(255, 137, 111, 0.16), transparent 28%),
+    linear-gradient(180deg, var(--color-gray-50) 0%, var(--color-white) 42%, var(--color-gray-100) 100%);
+  background-color: var(--color-gray-50);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -117,7 +134,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 1.2;
-  color: var(--color-secondary);
+  color: var(--color-gray-900);
   margin-bottom: var(--spacing-4);
 }
 
@@ -133,13 +150,13 @@ p {
 }
 
 a {
-  color: var(--color-primary);
+  color: var(--color-secondary);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
 a:hover {
-  color: var(--color-primary-dark);
+  color: var(--color-secondary-dark);
 }
 
 /* Code Blocks */
@@ -163,6 +180,7 @@ pre {
 .btn-primary {
   background-color: var(--color-primary) !important;
   border-color: var(--color-primary) !important;
+  color: var(--color-white) !important;
   transition: all var(--transition-base);
 }
 
@@ -174,14 +192,15 @@ pre {
 }
 
 .btn-outline-primary {
-  color: var(--color-primary) !important;
-  border-color: var(--color-primary) !important;
+  color: var(--color-secondary) !important;
+  border-color: var(--color-secondary) !important;
   transition: all var(--transition-base);
 }
 
 .btn-outline-primary:hover {
-  background-color: var(--color-primary) !important;
-  border-color: var(--color-primary) !important;
+  background-color: var(--color-secondary) !important;
+  border-color: var(--color-secondary) !important;
+  color: var(--color-white) !important;
   transform: translateY(-1px);
   box-shadow: var(--shadow-md);
 }
@@ -189,6 +208,8 @@ pre {
 /* Cards */
 .card {
   border: 1px solid var(--color-gray-200) !important;
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: blur(8px);
   box-shadow: var(--shadow-sm);
   transition: all var(--transition-base);
 }
@@ -200,18 +221,18 @@ pre {
 
 /* Forms */
 .form-control:focus {
-  border-color: var(--color-primary) !important;
-  box-shadow: 0 0 0 0.2rem rgba(0, 102, 204, 0.25) !important;
+  border-color: var(--color-secondary) !important;
+  box-shadow: 0 0 0 0.2rem rgba(28, 133, 232, 0.2) !important;
 }
 
 .form-select:focus {
-  border-color: var(--color-primary) !important;
-  box-shadow: 0 0 0 0.2rem rgba(0, 102, 204, 0.25) !important;
+  border-color: var(--color-secondary) !important;
+  box-shadow: 0 0 0 0.2rem rgba(28, 133, 232, 0.2) !important;
 }
 
 /* Navigation */
 .navbar-brand {
-  color: var(--color-secondary) !important;
+  color: var(--color-gray-900) !important;
   font-weight: 700;
   font-size: var(--font-size-xl);
 }
@@ -223,11 +244,11 @@ pre {
 }
 
 .nav-link:hover {
-  color: var(--color-primary) !important;
+  color: var(--color-secondary) !important;
 }
 
 .nav-link.active {
-  color: var(--color-primary) !important;
+  color: var(--color-secondary) !important;
   font-weight: 600;
 }
 
@@ -293,7 +314,7 @@ pre {
 
 /* Loading Spinner */
 .spinner-border {
-  border-color: var(--color-primary) !important;
+  border-color: var(--color-secondary) !important;
   border-right-color: transparent !important;
 }
 
@@ -315,7 +336,7 @@ pre {
 }
 
 .border-primary {
-  border-color: var(--color-primary) !important;
+  border-color: var(--color-secondary) !important;
 }
 
 .shadow-medical {
@@ -350,6 +371,6 @@ pre {
 .form-control:focus,
 .form-select:focus,
 .nav-link:focus {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-secondary);
   outline-offset: 2px;
 }

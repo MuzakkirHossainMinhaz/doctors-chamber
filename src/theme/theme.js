@@ -1,46 +1,46 @@
 // Doctor's Chamber Theme Configuration
-// Based on logo color analysis
+// Colors extracted from public/logo.png and adapted for accessible UI use
 
 export const theme = {
-  // Primary brand colors from logo
+  // Brand colors from logo
   colors: {
-    // Medical Blue - Primary brand color
-    primary: '#0066CC',
-    primaryDark: '#0052A3',
-    primaryLight: '#3380D9',
-    
-    // Dark Blue - Professional/Trust
-    secondary: '#003366',
-    secondaryDark: '#002647',
-    secondaryLight: '#1A4D80',
-    
-    // Light Blue/Aqua - Calming/Health
-    accent: '#00B4D8',
-    accentDark: '#0091B3',
-    accentLight: '#33C3E0',
-    
-    // Neutral colors
+    // Coral from the building wings / medical cross
+    primary: '#FF896F',
+    primaryDark: '#D96D56',
+    primaryLight: '#FFB29F',
+
+    // Blue from the doorway
+    secondary: '#1C85E8',
+    secondaryDark: '#166CC0',
+    secondaryLight: '#56A4EE',
+
+    // Structural neutrals from the logo body
+    accent: '#C8D0D8',
+    accentDark: '#A6B1BB',
+    accentLight: '#EBF5FE',
+
+    // Neutral colors tuned around the logo palette
     white: '#FFFFFF',
-    gray50: '#F8F9FA',
-    gray100: '#E9ECEF',
-    gray200: '#DEE2E6',
-    gray300: '#CED4DA',
-    gray400: '#ADB5BD',
-    gray500: '#6C757D',
-    gray600: '#495057',
-    gray700: '#343A40',
-    gray800: '#212529',
-    gray900: '#000000',
-    
-    // Status colors
-    success: '#28A745',
-    successLight: '#71DD8A',
-    warning: '#FFC107',
-    warningLight: '#FFD08A',
-    danger: '#DC3545',
-    dangerLight: '#F1B0B7',
-    info: '#17A2B8',
-    infoLight: '#7CC7D4',
+    gray50: '#F8FBFE',
+    gray100: '#EBF5FE',
+    gray200: '#DCE8F1',
+    gray300: '#C8D0D8',
+    gray400: '#A6B1BB',
+    gray500: '#7A8794',
+    gray600: '#5A6772',
+    gray700: '#38424C',
+    gray800: '#25303A',
+    gray900: '#162028',
+
+    // Semantic colors kept distinct, but harmonized to the brand palette
+    success: '#2C8E78',
+    successLight: '#D9F3EC',
+    warning: '#E28A2E',
+    warningLight: '#FCE8CF',
+    danger: '#C75B64',
+    dangerLight: '#F8D9DE',
+    info: '#1C85E8',
+    infoLight: '#DCEEFF',
   },
   
   // Typography
@@ -94,12 +94,12 @@ export const theme = {
   
   // Shadows
   shadows: {
-    sm: '0 1px 2px 0 rgba(0, 102, 204, 0.05)',
-    base: '0 1px 3px 0 rgba(0, 102, 204, 0.1), 0 1px 2px 0 rgba(0, 102, 204, 0.06)',
-    md: '0 4px 6px -1px rgba(0, 102, 204, 0.1), 0 2px 4px -1px rgba(0, 102, 204, 0.06)',
-    lg: '0 10px 15px -3px rgba(0, 102, 204, 0.1), 0 4px 6px -2px rgba(0, 102, 204, 0.05)',
-    xl: '0 20px 25px -5px rgba(0, 102, 204, 0.1), 0 10px 10px -5px rgba(0, 102, 204, 0.04)',
-    '2xl': '0 25px 50px -12px rgba(0, 102, 204, 0.25)',
+    sm: '0 1px 2px 0 rgba(28, 133, 232, 0.08)',
+    base: '0 1px 3px 0 rgba(28, 133, 232, 0.14), 0 1px 2px 0 rgba(22, 108, 192, 0.08)',
+    md: '0 4px 6px -1px rgba(28, 133, 232, 0.14), 0 2px 4px -1px rgba(22, 108, 192, 0.08)',
+    lg: '0 10px 15px -3px rgba(28, 133, 232, 0.14), 0 4px 6px -2px rgba(22, 108, 192, 0.08)',
+    xl: '0 20px 25px -5px rgba(28, 133, 232, 0.14), 0 10px 10px -5px rgba(22, 108, 192, 0.06)',
+    '2xl': '0 25px 50px -12px rgba(28, 133, 232, 0.3)',
   },
   
   // Breakpoints

@@ -52,6 +52,10 @@ const Admin = () => {
     price: "",
     description: "",
     category: "general",
+    duration: "",
+    image: "",
+    timeSlots: "",
+    isActive: true,
   });
 
   useEffect(() => {
@@ -133,6 +137,12 @@ const Admin = () => {
       const serviceData = {
         ...serviceForm,
         price: parseFloat(serviceForm.price),
+        duration: serviceForm.duration ? parseInt(serviceForm.duration, 10) : null,
+        image: serviceForm.image.trim(),
+        timeSlots: serviceForm.timeSlots
+          .split(",")
+          .map((slot) => slot.trim())
+          .filter(Boolean),
         doctorId: user.uid, // Associate service with the doctor
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -153,6 +163,10 @@ const Admin = () => {
         price: "",
         description: "",
         category: "general",
+        duration: "",
+        image: "",
+        timeSlots: "",
+        isActive: true,
       });
       fetchDashboardData();
     } catch (error) {
@@ -191,6 +205,12 @@ const Admin = () => {
       price: service.price,
       description: service.description,
       category: service.category || "general",
+      duration: service.duration || "",
+      image: service.image || service.img || "",
+      timeSlots: Array.isArray(service.timeSlots)
+        ? service.timeSlots.join(", ")
+        : "",
+      isActive: service.isActive !== false,
     });
     setShowServiceModal(true);
   };
@@ -415,6 +435,7 @@ const Admin = () => {
                       <th>Name</th>
                       <th>Price</th>
                       <th>Category</th>
+                      <th>Status</th>
                       <th>Description</th>
                       <th>Actions</th>
                     </tr>
@@ -425,6 +446,13 @@ const Admin = () => {
                         <td>{service.name}</td>
                         <td>${service.price}</td>
                         <td>{service.category}</td>
+                        <td>
+                          <Badge
+                            bg={service.isActive === false ? "secondary" : "success"}
+                          >
+                            {service.isActive === false ? "Inactive" : "Active"}
+                          </Badge>
+                        </td>
                         <td>{service.description}</td>
                         <td>
                           <Button
@@ -583,6 +611,28 @@ const Admin = () => {
                 </Form.Select>
               </Form.Group>
               <Form.Group className="mb-3">
+                <Form.Label>Duration (minutes)</Form.Label>
+                <Form.Control
+                  type="number"
+                  min="0"
+                  value={serviceForm.duration}
+                  onChange={(e) =>
+                    setServiceForm({ ...serviceForm, duration: e.target.value })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Image URL</Form.Label>
+                <Form.Control
+                  type="url"
+                  value={serviceForm.image}
+                  onChange={(e) =>
+                    setServiceForm({ ...serviceForm, image: e.target.value })
+                  }
+                  placeholder="https://..."
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
                 <Form.Label>Description</Form.Label>
                 <Form.Control
                   as="textarea"
@@ -595,6 +645,31 @@ const Admin = () => {
                     })
                   }
                   required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Time Slots</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={serviceForm.timeSlots}
+                  onChange={(e) =>
+                    setServiceForm({ ...serviceForm, timeSlots: e.target.value })
+                  }
+                  placeholder="09:00 AM, 10:00 AM, 11:00 AM"
+                />
+                <Form.Text className="text-muted">
+                  Comma-separated values saved in Firestore for checkout availability.
+                </Form.Text>
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Check
+                  type="switch"
+                  id="service-active"
+                  label="Service is active"
+                  checked={serviceForm.isActive}
+                  onChange={(e) =>
+                    setServiceForm({ ...serviceForm, isActive: e.target.checked })
+                  }
                 />
               </Form.Group>
               <div className="d-flex justify-content-end gap-2">

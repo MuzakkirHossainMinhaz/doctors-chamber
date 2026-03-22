@@ -14,6 +14,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { auth, db } from "../../firebase.init";
+import { normalizeService } from "../../utils/serviceData";
 import BookingCalendar from "./BookingCalendar";
 import PaymentForm from "./PaymentForm";
 
@@ -40,57 +41,27 @@ const Checkout = () => {
     const fetchService = async () => {
       try {
         const serviceDoc = await getDoc(doc(db, "services", id));
-        if (serviceDoc.exists()) {
-          setService({ id: serviceDoc.id, ...serviceDoc.data() });
+        if (!serviceDoc.exists()) {
+          toast.error("Service not found");
+          navigate("/home");
           return;
         }
 
-        const services = [
-          {
-            id: "1",
-            name: "Medical and Health Check-ups",
-            price: 12,
-            description: "Comprehensive health examination",
-          },
-          {
-            id: "2",
-            name: "Health and Nutrition Advice",
-            price: 9,
-            description: "Personalized nutrition guidance",
-          },
-          {
-            id: "3",
-            name: "Surgery",
-            price: 40,
-            description: "Surgical procedures and consultations",
-          },
-          {
-            id: "4",
-            name: "Emergency",
-            price: 10,
-            description: "Emergency medical services",
-          },
-          {
-            id: "5",
-            name: "Counselling",
-            price: 17,
-            description: "Mental health and counseling services",
-          },
-          {
-            id: "6",
-            name: "Diagnosis and Treatment",
-            price: 25,
-            description: "Medical diagnosis and treatment plans",
-          },
-        ];
+        const firestoreService = normalizeService({
+          id: serviceDoc.id,
+          ...serviceDoc.data(),
+        });
 
-        const foundService = services.find((s) => s.id === id);
-        setService(foundService);
-
-        if (!foundService) {
-          toast.error("Service not found");
-          navigate("/home");
-        }
+        setService(firestoreService);
+        setUnavailableDates(
+          firestoreService.unavailableDates
+            .map((value) => {
+              if (value instanceof Date) return value;
+              if (typeof value?.toDate === "function") return value.toDate();
+              return null;
+            })
+            .filter(Boolean),
+        );
       } catch (error) {
         toast.error("Failed to load service details");
         console.error(error);
@@ -218,6 +189,8 @@ const Checkout = () => {
       setBookingStep(2);
     }
   };
+
+  const availableTimeSlots = service?.timeSlots ?? [];
 
   if (loading) {
     return (
@@ -354,29 +327,28 @@ const Checkout = () => {
                       {selectedDate && (
                         <div className="rounded-3 p-3 mb-4" style={{ backgroundColor: 'var(--color-gray-50)' }}>
                           <h6 className="mb-3">Select Time Slot</h6>
-                          <div className="d-flex flex-wrap gap-2">
-                            {[
-                              "09:00 AM",
-                              "10:00 AM",
-                              "11:00 AM",
-                              "02:00 PM",
-                              "03:00 PM",
-                              "04:00 PM",
-                            ].map((time) => (
-                              <Button
-                                key={time}
-                                variant={
-                                  selectedTime === time
-                                    ? "primary"
-                                    : "outline-primary"
-                                }
-                                size="sm"
-                                onClick={() => handleTimeSelect(time)}
-                              >
-                                {time}
-                              </Button>
-                            ))}
-                          </div>
+                          {availableTimeSlots.length > 0 ? (
+                            <div className="d-flex flex-wrap gap-2">
+                              {availableTimeSlots.map((time) => (
+                                <Button
+                                  key={time}
+                                  variant={
+                                    selectedTime === time
+                                      ? "primary"
+                                      : "outline-primary"
+                                  }
+                                  size="sm"
+                                  onClick={() => handleTimeSelect(time)}
+                                >
+                                  {time}
+                                </Button>
+                              ))}
+                            </div>
+                          ) : (
+                            <Alert variant="warning" className="mb-0">
+                              No time slots are configured for this service yet.
+                            </Alert>
+                          )}
                         </div>
                       )}
 
@@ -384,7 +356,11 @@ const Checkout = () => {
                         variant="success"
                         className="w-100 rounded-pill"
                         onClick={proceedToPayment}
-                        disabled={!selectedDate || !selectedTime}
+                        disabled={
+                          !selectedDate ||
+                          !selectedTime ||
+                          availableTimeSlots.length === 0
+                        }
                       >
                         Proceed to Payment
                         <i className="bi bi-arrow-right ms-2"></i>

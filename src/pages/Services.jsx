@@ -1,4 +1,3 @@
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import {
   Alert,
@@ -14,7 +13,7 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import VerificationGuard from "../components/VerificationGuard";
-import { db } from "../firebase.init";
+import { fetchServicesFromFirestore } from "../utils/serviceData";
 
 const Services = () => {
   const [services, setServices] = useState([]);
@@ -34,16 +33,7 @@ const Services = () => {
   const fetchServices = async () => {
     setLoading(true);
     try {
-      const servicesQuery = query(
-        collection(db, "services"),
-        where("isActive", "==", true),
-        orderBy("createdAt", "desc"),
-      );
-      const servicesSnapshot = await getDocs(servicesQuery);
-      const servicesData = servicesSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+      const servicesData = await fetchServicesFromFirestore({ activeOnly: true });
       setServices(servicesData);
     } catch (error) {
       console.error("Error fetching services:", error);

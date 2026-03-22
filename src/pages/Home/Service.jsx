@@ -2,9 +2,10 @@ import { Badge, Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const Service = ({ service }) => {
-  const { id, name, img, price, description, duration, category, icon } =
+  const { id, name, img, image, price, description, duration, category, icon } =
     service;
   const navigate = useNavigate();
+  const displayImage = image || img;
 
   const navigateToCheckout = (serviceId) => {
     navigate(`/checkout/${serviceId}`);
@@ -24,7 +25,24 @@ const Service = ({ service }) => {
   return (
     <Card className="h-100 shadow-sm border-0 animate-fade-in-up">
       <div className="position-relative overflow-hidden">
-        <Card.Img variant="top" src={img} className="h-100 object-fit-cover" />
+        {displayImage ? (
+          <Card.Img
+            variant="top"
+            src={displayImage}
+            className="h-100 object-fit-cover"
+          />
+        ) : (
+          <div
+            className="d-flex align-items-center justify-content-center"
+            style={{
+              minHeight: "240px",
+              background:
+                "linear-gradient(135deg, var(--color-secondary-light), var(--color-accent-light))",
+            }}
+          >
+            <i className={`bi ${icon || "bi-heart-pulse"} text-white fs-1`}></i>
+          </div>
+        )}
         <div className="position-absolute top-0 start-0 w-100 h-100 bg-gradient bg-opacity-50">
           <div className="position-absolute top-50 start-50 translate-middle">
             <i className={`bi ${icon || "bi-heart-pulse"} text-white fs-3`}></i>
