@@ -1,0 +1,99 @@
+.site-footer {
+  position: relative;
+  margin-top: 5rem;
+  padding: 4rem 0 2rem;
+  color: rgba(255, 255, 255, 0.82);
+  background:
+    radial-gradient(circle at top left, rgba(255, 137, 111, 0.16), transparent 26%),
+    linear-gradient(180deg, #1a7fe0, #166cc0 58%, #1259a0);
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.site-footer .container {
+  position: relative;
+  z-index: 1;
+}
+
+.footer-brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(10px);
+}
+
+.footer-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--color-white);
+}
+
+.footer-cta small,
+.footer-list a,
+.site-footer small,
+.site-footer a,
+.site-footer p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.footer-heading {
+  margin-bottom: 1rem;
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+}
+
+.footer-list {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.footer-list a {
+  text-decoration: none;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.footer-list a:hover,
+.site-footer a:hover {
+  color: var(--color-white);
+  transform: translateX(2px);
+}
+
+.footer-info-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.footer-info-icon,
+.site-footer .d-flex > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.footer-divider {
+  margin: 2rem 0 1.5rem;
+  border-color: rgba(255, 255, 255, 0.12);
+}

@@ -7,6 +7,10 @@ const Banner = ({ services = [] }) => {
   const featuredCategories = [
     ...new Set(services.map((service) => service.category).filter(Boolean)),
   ].slice(0, 3);
+  const heroStatusLabel =
+    activeServiceCount > 0
+      ? `${activeServiceCount} live services synced from Firestore`
+      : "Platform-ready care discovery and booking";
 
   const heroPillars = [
     {
@@ -38,18 +42,18 @@ const Banner = ({ services = [] }) => {
             <div className="hero-copy">
               <div className="hero-chip">
                 <i className="bi bi-heart-pulse-fill"></i>
-                <span>Modern care platform for booking, trust, and operations</span>
+                <span>{heroStatusLabel}</span>
               </div>
 
               <h1 className="hero-title">
-                Healthcare experience built with
-                <span> live services, clear trust signals, and faster patient flow.</span>
+                Book care through a homepage that feels
+                <span> trustworthy, structured, and actually useful.</span>
               </h1>
 
               <p className="hero-lead">
-                Doctor&apos;s Chamber is no longer framed as a rotating promo banner.
-                The homepage now leads with platform intent: discover care, book
-                verified services, and move patients into a structured operational workflow.
+                The hero now behaves like a product surface, not a slideshow.
+                Patients can understand the flow immediately, see live service
+                coverage, and move into booking or support without visual noise.
               </p>
 
               <div className="hero-actions">

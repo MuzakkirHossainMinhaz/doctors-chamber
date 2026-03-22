@@ -10,15 +10,17 @@ import {
 import { useSignOut } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useNotifications } from "../../components/NotificationSystem";
+import { auth } from "../../firebase.init";
 import VerificationStatus from "../../components/VerificationStatus";
 import useAuthRole from "../../hooks/useAuthRole";
+import "./Header.css";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const [signOut] = useSignOut();
+  const [signOut] = useSignOut(auth);
   const {
     user,
     userRole,
@@ -28,7 +30,7 @@ const Header = () => {
     isPatient,
     canAccessAdminDashboard,
   } = useAuthRole();
-  const { notifications, unreadCount } = useNotifications();
+  const { unreadCount } = useNotifications();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -96,7 +98,7 @@ const Header = () => {
     <>
       <Navbar
         expand="lg"
-        className={`bg-white shadow-sm ${scrolled ? "sticky-top" : ""}`}
+        className={`site-navbar ${scrolled ? "is-scrolled" : ""}`}
         expanded={mobileMenuOpen}
         onToggle={(expanded) => setMobileMenuOpen(expanded)}
       >
@@ -106,28 +108,34 @@ const Header = () => {
             to="/"
             className="d-flex align-items-center gap-3 transition-smooth"
           >
-            <img
-              src="/logo.png"
-              alt="Doctor's Chamber Logo"
-              height="40"
-              width="40"
-              className="rounded-3 shadow-sm"
-            />
-            <span className="fw-bold" style={{ color: 'var(--color-secondary)' }}>
-              Doctor's Chamber
+            <span className="brand-mark shadow-sm">
+              <img
+                src="/logo.png"
+                alt="Doctor's Chamber Logo"
+                height="34"
+                width="34"
+              />
+            </span>
+            <span className="d-flex flex-column lh-sm">
+              <small className="text-uppercase text-muted" style={{ letterSpacing: "0.1em", fontSize: "0.74rem" }}>
+                Care Platform
+              </small>
+              <strong style={{ color: "var(--color-secondary)", fontSize: "1.08rem" }}>
+                Doctor&apos;s Chamber
+              </strong>
             </span>
           </Navbar.Brand>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="border-0">
-            <span className="navbar-toggler-icon border-0 bg-white p-2"></span>
+            <span className="navbar-toggler-icon"></span>
           </Navbar.Toggle>
 
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">
+            <Nav className="ms-auto align-items-lg-center gap-lg-1">
               <Nav.Link
                 as={Link}
                 to="/"
-                className={`${isActivePath("/") ? "active" : ""} transition-smooth`}
+                className={`site-nav-link ${isActivePath("/") ? "active" : ""}`}
               >
                 <i className="bi bi-house me-2"></i>
                 Home
@@ -136,7 +144,7 @@ const Header = () => {
               <Nav.Link
                 as={Link}
                 to="/services"
-                className={`${isActivePath("/services") ? "active" : ""} transition-smooth`}
+                className={`site-nav-link ${isActivePath("/services") ? "active" : ""}`}
               >
                 <i className="bi bi-grid-3x3-gap me-2"></i>
                 Services
@@ -145,7 +153,7 @@ const Header = () => {
               <Nav.Link
                 as={Link}
                 to="/blogs"
-                className={`${isActivePath("/blogs") ? "active" : ""} transition-smooth`}
+                className={`site-nav-link ${isActivePath("/blogs") ? "active" : ""}`}
               >
                 <i className="bi bi-journal-text me-2"></i>
                 Blogs
@@ -154,7 +162,7 @@ const Header = () => {
               <Nav.Link
                 as={Link}
                 to="/contact"
-                className={`${isActivePath("/contact") ? "active" : ""} transition-smooth`}
+                className={`site-nav-link ${isActivePath("/contact") ? "active" : ""}`}
               >
                 <i className="bi bi-telephone me-2"></i>
                 Contact
@@ -165,7 +173,7 @@ const Header = () => {
                 <Nav.Link
                   as={Link}
                   to="/admin"
-                  className={`${isActivePath("/admin") ? "active" : ""} transition-smooth`}
+                  className={`site-nav-link ${isActivePath("/admin") ? "active" : ""}`}
                 >
                   <i className="bi bi-gear me-2"></i>
                   Admin
@@ -176,45 +184,49 @@ const Header = () => {
                 <Nav.Link
                   as={Link}
                   to="/doctor-dashboard"
-                  className={`${isActivePath("/doctor-dashboard") ? "active" : ""} transition-smooth`}
+                  className={`site-nav-link ${isActivePath("/doctor-dashboard") ? "active" : ""}`}
                 >
                   <i className="bi bi-speedometer2 me-2"></i>
                   Dashboard
                 </Nav.Link>
               )}
 
-              {/* User Menu */}
-              {user ? (
-                <NavDropdown
-                  title={
-                    <div className="d-flex align-items-center">
-                      <div
-                        className="rounded-circle overflow-hidden"
-                        style={{ width: "32px", height: "32px" }}
-                      >
-                        <img
-                          src={
-                            user.photoURL ||
-                            `https://ui-avatars.com/api/?name=${user.displayName || "User"}&background=3b82f6&color=fff&size=32`
-                          }
-                          alt="User Avatar"
-                          className="img-fluid"
-                        />
+              <div className="navbar-actions ms-lg-3">
+                {!user && (
+                  <div className="navbar-notice rounded-pill px-3 py-2 fw-semibold">
+                    <i className="bi bi-shield-check"></i>
+                    <span>Verified booking and protected patient access</span>
+                  </div>
+                )}
+
+                {user ? (
+                  <NavDropdown
+                    title={
+                      <div className="user-trigger">
+                        <div className="user-avatar rounded-circle shadow-sm">
+                          <img
+                            src={
+                              user.photoURL ||
+                              `https://ui-avatars.com/api/?name=${user.displayName || "User"}&background=3b82f6&color=fff&size=40`
+                            }
+                            alt="User Avatar"
+                            className="img-fluid"
+                          />
+                        </div>
+                        <div className="ms-1">
+                          <span className="fw-semibold">
+                            {user.displayName || "User"}
+                          </span>
+                          <Badge bg={getRoleBadgeVariant()} className="ms-2">
+                            <i className={`bi ${getRoleIcon()} me-1`}></i>
+                            {userRole}
+                          </Badge>
+                        </div>
                       </div>
-                      <div className="ms-2">
-                        <span className="fw-semibold">
-                          {user.displayName || "User"}
-                        </span>
-                        <Badge bg={getRoleBadgeVariant()} className="ms-2">
-                          <i className={`bi ${getRoleIcon()} me-1`}></i>
-                          {userRole}
-                        </Badge>
-                      </div>
-                    </div>
-                  }
-                  id="user-dropdown"
-                  align="end"
-                >
+                    }
+                    id="user-dropdown"
+                    align="end"
+                  >
                   <NavDropdown.Item className="dropdown-header p-3 border-bottom" style={{ backgroundColor: 'var(--color-gray-50)' }}>
                     <div className="d-flex align-items-center gap-3 p-2">
                       <div
@@ -325,9 +337,9 @@ const Header = () => {
                     <i className="bi bi-box-arrow-right me-2"></i>
                     Sign Out
                   </NavDropdown.Item>
-                </NavDropdown>
-              ) : (
-                <div className="d-flex gap-2">
+                  </NavDropdown>
+                ) : (
+                  <div className="d-flex gap-2 flex-column flex-lg-row">
                   <Button
                     as={Link}
                     to="/signin"
@@ -346,8 +358,9 @@ const Header = () => {
                     <i className="bi bi-person-plus me-2"></i>
                     Register
                   </Button>
-                </div>
-              )}
+                  </div>
+                )}
+              </div>
             </Nav>
           </Navbar.Collapse>
         </Container>

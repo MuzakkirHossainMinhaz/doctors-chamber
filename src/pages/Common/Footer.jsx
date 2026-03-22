@@ -1,130 +1,170 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { fetchServicesFromFirestore } from "../../utils/serviceData";
+import "./Footer.css";
 
 const Footer = () => {
-  const today = new Date();
-  const year = today.getFullYear();
+  const [footerServices, setFooterServices] = useState([]);
+  const year = new Date().getFullYear();
+
+  useEffect(() => {
+    const loadFooterServices = async () => {
+      try {
+        const services = await fetchServicesFromFirestore({ activeOnly: true });
+        setFooterServices(services.slice(0, 4));
+      } catch (error) {
+        console.error("Error loading footer services:", error);
+      }
+    };
+
+    loadFooterServices();
+  }, []);
 
   return (
-    <footer className="py-5 mt-5" style={{ backgroundColor: 'var(--color-secondary)' }}>
+    <footer className="site-footer">
       <Container>
-        <Row>
-          <Col lg={4} md={6} className="mb-4 mb-lg-0">
-            <div className="d-flex align-items-center gap-3 mb-3">
-              <img
-                src="/logo.png"
-                alt="Doctor's Chamber Logo"
-                height="40"
-                width="40"
-                className="rounded-3 shadow-sm"
-              />
-              <h5 className="text-white mb-0 fw-bold">Doctor's Chamber</h5>
+        <Row className="g-4">
+          <Col lg={4} md={6}>
+            <div className="d-inline-flex align-items-center gap-3 mb-3">
+              <span className="footer-brand-mark rounded-4">
+                <img
+                  src="/logo.png"
+                  alt="Doctor's Chamber Logo"
+                  height="34"
+                  width="34"
+                />
+              </span>
+              <div className="lh-sm">
+                <span className="d-block text-uppercase" style={{ color: "rgba(255,255,255,0.68)", fontSize: "0.8rem", letterSpacing: "0.08em" }}>
+                  Care Platform
+                </span>
+                <strong className="d-block text-white" style={{ fontSize: "1.1rem" }}>
+                  Doctor&apos;s Chamber
+                </strong>
+              </div>
             </div>
-            <p className="text-white-75">
-              Providing comprehensive healthcare services with modern medical expertise and compassionate care for over 15 years.
+
+            <p className="mb-4" style={{ maxWidth: "24rem", color: "rgba(255,255,255,0.78)" }}>
+              A healthcare service platform for discovery, verified booking,
+              patient communication, and staff-side operational follow-through.
             </p>
-            <div className="d-flex gap-3 mt-3">
-              <a href="#" className="text-white-50 text-decoration-none transition-smooth">
+
+            <div className="footer-cta rounded-4">
+              <i className="bi bi-shield-check"></i>
+              <div>
+                <strong className="d-block text-white">Protected patient flows</strong>
+                <small>Email verification, role gating, and booking controls.</small>
+              </div>
+            </div>
+
+            <div className="d-flex gap-3 mt-4">
+              <a href="/" aria-label="Doctor's Chamber on Facebook">
                 <i className="bi bi-facebook fs-5"></i>
               </a>
-              <a href="#" className="text-white-50 text-decoration-none transition-smooth">
+              <a href="/" aria-label="Doctor's Chamber on Twitter">
                 <i className="bi bi-twitter fs-5"></i>
               </a>
-              <a href="#" className="text-white-50 text-decoration-none transition-smooth">
+              <a href="/" aria-label="Doctor's Chamber on LinkedIn">
                 <i className="bi bi-linkedin fs-5"></i>
               </a>
-              <a href="#" className="text-white-50 text-decoration-none transition-smooth">
+              <a href="/" aria-label="Doctor's Chamber on Instagram">
                 <i className="bi bi-instagram fs-5"></i>
               </a>
             </div>
           </Col>
 
-          <Col lg={2} md={6} className="mb-4 mb-lg-0">
-            <h6 className="text-white mb-3 fw-semibold">Quick Links</h6>
-            <ul className="list-unstyled">
-              <li className="mb-2">
-                <Link to="/about" className="text-white-75 text-decoration-none transition-smooth">
-                  About Us
-                </Link>
+          <Col lg={2} md={6}>
+            <h6 className="footer-heading text-white text-uppercase fw-bold">Quick Links</h6>
+            <ul className="footer-list list-unstyled">
+              <li>
+                <Link to="/about">About Us</Link>
               </li>
-              <li className="mb-2">
-                <Link to="/services" className="text-white-75 text-decoration-none transition-smooth">
-                  Services
-                </Link>
+              <li>
+                <Link to="/services">Services</Link>
               </li>
-              <li className="mb-2">
-                <Link to="/blogs" className="text-white-75 text-decoration-none transition-smooth">
-                  Blogs
-                </Link>
+              <li>
+                <Link to="/blogs">Blogs</Link>
               </li>
-              <li className="mb-2">
-                <Link to="/contact" className="text-white-75 text-decoration-none transition-smooth">
-                  Contact
-                </Link>
+              <li>
+                <Link to="/contact">Contact</Link>
               </li>
             </ul>
           </Col>
 
-          <Col lg={3} md={6} className="mb-4 mb-lg-0">
-            <h6 className="text-white mb-3 fw-semibold">Services</h6>
-            <ul className="list-unstyled">
-              <li className="mb-2">
-                      <Link to="/services" className="text-white-75 text-decoration-none transition-smooth">
-                  Medical Check-ups
-                </Link>
-              </li>
-              <li className="mb-2">
-                      <Link to="/services" className="text-white-75 text-decoration-none transition-smooth">
-                  Nutrition Advice
-                </Link>
-              </li>
-              <li className="mb-2">
-                      <Link to="/services" className="text-white-75 text-decoration-none transition-smooth">
-                  Emergency Care
-                </Link>
-              </li>
-              <li className="mb-2">
-                      <Link to="/services" className="text-white-75 text-decoration-none transition-smooth">
-                  Counselling
-                </Link>
-              </li>
+          <Col lg={3} md={6}>
+            <h6 className="footer-heading text-white text-uppercase fw-bold">Live Services</h6>
+            <ul className="footer-list list-unstyled">
+              {footerServices.length > 0 ? (
+                footerServices.map((service) => (
+                  <li key={service.id}>
+                    <Link to="/services">{service.name}</Link>
+                  </li>
+                ))
+              ) : (
+                <li>
+                  <Link to="/services">Browse available services</Link>
+                </li>
+              )}
             </ul>
           </Col>
 
-          <Col lg={3} md={6} className="mb-4 mb-lg-0">
-            <h6 className="text-white mb-3 fw-semibold">Contact Info</h6>
-            <div className="text-white-75">
-              <p className="mb-2">
-                <i className="bi bi-geo-alt me-2" style={{ color: 'var(--color-accent)' }}></i>
-                123 Medical Center, Healthcare City
-              </p>
-              <p className="mb-2">
-                <i className="bi bi-telephone me-2" style={{ color: 'var(--color-accent)' }}></i>
-                +1 (555) 123-4567
-              </p>
-              <p className="mb-2">
-                <i className="bi bi-envelope me-2" style={{ color: 'var(--color-accent)' }}></i>
-                info@doctorschamber.com
-              </p>
-              <p className="mb-0">
-                <i className="bi bi-clock me-2" style={{ color: 'var(--color-accent)' }}></i>
-                Mon-Fri: 9:00 AM - 5:00 PM
-              </p>
+          <Col lg={3} md={6}>
+            <h6 className="footer-heading text-white text-uppercase fw-bold">Contact Info</h6>
+            <div className="d-grid gap-3">
+              <div className="footer-info-item">
+                <span className="footer-info-icon rounded-circle">
+                  <i className="bi bi-geo-alt"></i>
+                </span>
+                <div>
+                  <strong className="d-block text-white">Visit</strong>
+                  <small>123 Medical Center, Healthcare City</small>
+                </div>
+              </div>
+
+              <div className="footer-info-item">
+                <span className="footer-info-icon rounded-circle">
+                  <i className="bi bi-telephone"></i>
+                </span>
+                <div>
+                  <strong className="d-block text-white">Call</strong>
+                  <small>+1 (555) 123-4567</small>
+                </div>
+              </div>
+
+              <div className="footer-info-item">
+                <span className="footer-info-icon rounded-circle">
+                  <i className="bi bi-envelope"></i>
+                </span>
+                <div>
+                  <strong className="d-block text-white">Email</strong>
+                  <small>info@doctorschamber.com</small>
+                </div>
+              </div>
+
+              <div className="footer-info-item">
+                <span className="footer-info-icon rounded-circle">
+                  <i className="bi bi-clock"></i>
+                </span>
+                <div>
+                  <strong className="d-block text-white">Hours</strong>
+                  <small>Mon-Fri: 9:00 AM - 5:00 PM</small>
+                </div>
+              </div>
             </div>
           </Col>
         </Row>
 
-        <hr className="border-white-25 my-4" />
+        <hr className="footer-divider" />
 
-        <Row>
-          <Col className="text-center">
-            <p className="text-white-50 mb-0">
-              © {year} Doctor's Chamber. All rights reserved. | 
-              <Link to="/privacy" className="text-white-50 text-decoration-none ms-1">Privacy Policy</Link> | 
-              <Link to="/terms" className="text-white-50 text-decoration-none ms-1">Terms of Service</Link>
-            </p>
-          </Col>
-        </Row>
+        <div className="d-flex flex-wrap justify-content-between gap-3">
+          <p className="mb-0">&copy; {year} Doctor&apos;s Chamber. All rights reserved.</p>
+          <div className="d-flex flex-wrap gap-3">
+            <Link to="/contact">Patient Support</Link>
+            <Link to="/services">Book a Service</Link>
+            <Link to="/blogs">Health Articles</Link>
+          </div>
+        </div>
       </Container>
     </footer>
   );
