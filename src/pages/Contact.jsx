@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { addDoc, collection } from "firebase/firestore";
 import {
   Alert,
   Button,
@@ -9,6 +10,9 @@ import {
   Row,
   Spinner,
 } from "react-bootstrap";
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
+import { db } from "../firebase.init";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -34,8 +38,12 @@ const Contact = () => {
     setLoading(true);
 
     try {
-      // Simulate form submission
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await addDoc(collection(db, "contactMessages"), {
+        ...formData,
+        status: "new",
+        source: "contact-page",
+        createdAt: new Date(),
+      });
       setSubmitted(true);
       setFormData({
         name: "",
@@ -44,8 +52,10 @@ const Contact = () => {
         subject: "",
         message: "",
       });
+      toast.success("Your message was submitted successfully.");
     } catch (error) {
       console.error("Error submitting form:", error);
+      toast.error("Failed to submit your message.");
     } finally {
       setLoading(false);
     }
@@ -303,6 +313,8 @@ const Contact = () => {
               <Row className="g-3">
                 <Col md={4} className="mb-3">
                   <Button
+                    as={Link}
+                    to="/services"
                     variant="outline-primary"
                     className="w-100 rounded-pill"
                   >
@@ -312,6 +324,8 @@ const Contact = () => {
                 </Col>
                 <Col md={4} className="mb-3">
                   <Button
+                    as={Link}
+                    to="/help"
                     variant="outline-primary"
                     className="w-100 rounded-pill"
                   >
@@ -321,6 +335,8 @@ const Contact = () => {
                 </Col>
                 <Col md={4} className="mb-3">
                   <Button
+                    as={Link}
+                    to="/chat"
                     variant="outline-primary"
                     className="w-100 rounded-pill"
                   >

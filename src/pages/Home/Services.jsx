@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { db } from "../../firebase.init";
 import Service from "./Service.jsx";
 
 const Services = () => {
@@ -10,16 +12,41 @@ const Services = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("Services.json")
-      .then((res) => res.json())
-      .then((data) => {
+
+    const loadServices = async () => {
+      try {
+        const servicesQuery = query(
+          collection(db, "services"),
+          where("isActive", "==", true),
+          orderBy("createdAt", "desc"),
+        );
+        const snapshot = await getDocs(servicesQuery);
+        const firestoreServices = snapshot.docs.map((serviceDoc) => ({
+          id: serviceDoc.id,
+          ...serviceDoc.data(),
+        }));
+
+        if (firestoreServices.length > 0) {
+          setServices(firestoreServices);
+          setLoading(false);
+          return;
+        }
+      } catch (error) {
+        console.error("Error loading Firestore services:", error);
+      }
+
+      try {
+        const response = await fetch("Services.json");
+        const data = await response.json();
         setServices(data);
+      } catch (error) {
+        console.error("Error loading fallback services:", error);
+      } finally {
         setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error loading services:", error);
-        setLoading(false);
-      });
+      }
+    };
+
+    loadServices();
   }, []);
 
   const categories = [
@@ -107,7 +134,7 @@ const Services = () => {
               <div className="d-flex justify-content-center gap-3">
                 <Button
                   as={Link}
-                  to="/checkout"
+                  to="/services"
                   variant="primary"
                   size="lg"
                   className="rounded-pill"

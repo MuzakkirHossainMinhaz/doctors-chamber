@@ -97,11 +97,11 @@ const Signin = () => {
                     className="text-muted"
                   />
                   <Link
-                    to="/forgot-password"
+                    to="/help"
                     className="text-decoration-none"
                     style={{ color: 'var(--color-primary)' }}
                   >
-                    Forgot password?
+                    Need help?
                   </Link>
                 </div>
 

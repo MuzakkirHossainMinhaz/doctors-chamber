@@ -283,7 +283,7 @@ const BlogDetail = () => {
         <Button
           variant="success"
           as={Link}
-          to="/checkout"
+          to="/services"
           className="rounded-pill"
         >
           <i className="bi bi-calendar-plus me-2"></i>

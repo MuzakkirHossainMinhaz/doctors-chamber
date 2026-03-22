@@ -1,11 +1,13 @@
 import {
   addDoc,
   collection,
+  limit,
   onSnapshot,
   orderBy,
   query,
+  where,
 } from "firebase/firestore";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Alert,
   Badge,
@@ -19,147 +21,111 @@ import {
 } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../firebase.init";
+import useAuthRole from "../hooks/useAuthRole";
 
 const ChatSystem = () => {
   const [user, loading] = useAuthState(auth);
+  const { isAdmin, isDoctor } = useAuthRole();
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
-  const [chatStatus, setChatStatus] = useState("offline");
+  const [selectedConversationId, setSelectedConversationId] = useState("");
   const messagesEndRef = useRef(null);
-  const typingTimeoutRef = useRef(null);
+
+  const isStaffUser = isAdmin() || isDoctor();
 
   useEffect(() => {
     if (!user) return;
 
-    const messagesQuery = query(
-      collection(db, "chatMessages"),
-      orderBy("createdAt", "asc"),
-      limit(100),
-    );
+    const chatQuery = isStaffUser
+      ? query(collection(db, "chatMessages"), orderBy("createdAt", "desc"), limit(200))
+      : query(
+          collection(db, "chatMessages"),
+          where("conversationId", "==", user.uid),
+          orderBy("createdAt", "asc"),
+          limit(200),
+        );
 
-    const unsubscribe = onSnapshot(messagesQuery, (snapshot) => {
-      const messagesData = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
+    const unsubscribe = onSnapshot(chatQuery, (snapshot) => {
+      const messagesData = snapshot.docs.map((messageDoc) => ({
+        id: messageDoc.id,
+        ...messageDoc.data(),
       }));
+
       setMessages(messagesData);
-      scrollToBottom();
+
+      if (isStaffUser && !selectedConversationId && messagesData.length > 0) {
+        setSelectedConversationId(messagesData[0].conversationId);
+      }
     });
 
-    // Simulate admin status
-    setChatStatus("online");
-
     return () => unsubscribe();
-  }, [user]);
+  }, [isStaffUser, selectedConversationId, user]);
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  }, [messages, selectedConversationId]);
 
-  const handleSendMessage = async (e) => {
-    e.preventDefault();
+  const conversations = useMemo(() => {
+    if (!isStaffUser) return [];
+
+    const grouped = new Map();
+    messages.forEach((message) => {
+      if (!grouped.has(message.conversationId)) {
+        grouped.set(message.conversationId, message);
+      }
+    });
+
+    return Array.from(grouped.values());
+  }, [isStaffUser, messages]);
+
+  const currentMessages = useMemo(() => {
+    if (!isStaffUser) return messages;
+
+    return messages
+      .filter((message) => message.conversationId === selectedConversationId)
+      .sort((a, b) => {
+        const first = a.createdAt?.toDate?.() || new Date(a.createdAt);
+        const second = b.createdAt?.toDate?.() || new Date(b.createdAt);
+        return first - second;
+      });
+  }, [isStaffUser, messages, selectedConversationId]);
+
+  const handleSendMessage = async (event) => {
+    event.preventDefault();
     if (!newMessage.trim()) return;
+
+    const conversationId = isStaffUser ? selectedConversationId : user.uid;
+    if (!conversationId) return;
 
     const messageData = {
       text: newMessage.trim(),
       senderId: user.uid,
-      senderName: user.displayName || "User",
+      senderName: user.displayName || user.email || "User",
       senderEmail: user.email,
-      type: "user",
+      senderRole: isStaffUser ? "staff" : "patient",
+      conversationId,
       createdAt: new Date(),
       read: false,
     };
 
-    try {
-      await addDoc(collection(db, "chatMessages"), messageData);
-      setNewMessage("");
-
-      // Simulate admin response
-      setTimeout(
-        () => {
-          simulateAdminResponse();
-        },
-        1000 + Math.random() * 2000,
-      );
-    } catch (error) {
-      console.error("Failed to send message:", error);
-    }
-  };
-
-  const simulateAdminResponse = async () => {
-    const responses = [
-      "Thank you for your message. How can I help you today?",
-      "I understand your concern. Let me assist you with that.",
-      "That's a great question! Let me provide you with more information.",
-      "I'm here to help. Could you please provide more details?",
-      "Thank you for reaching out. I'll do my best to assist you.",
-      "I appreciate your patience. Let me look into this for you.",
-    ];
-
-    const randomResponse =
-      responses[Math.floor(Math.random() * responses.length)];
-
-    const adminMessage = {
-      text: randomResponse,
-      senderId: "admin",
-      senderName: "Dr. Abdullah",
-      senderEmail: "admin@doctorschamber.com",
-      type: "admin",
-      createdAt: new Date(),
-      read: false,
-    };
-
-    try {
-      await addDoc(collection(db, "chatMessages"), adminMessage);
-    } catch (error) {
-      console.error("Failed to send admin response:", error);
-    }
-  };
-
-  const handleTyping = (e) => {
-    setNewMessage(e.target.value);
-
-    if (!isTyping) {
-      setIsTyping(true);
-    }
-
-    clearTimeout(typingTimeoutRef.current);
-    typingTimeoutRef.current = setTimeout(() => {
-      setIsTyping(false);
-    }, 1000);
+    await addDoc(collection(db, "chatMessages"), messageData);
+    setNewMessage("");
   };
 
   const formatTime = (timestamp) => {
     if (!timestamp) return "";
-    return timestamp.toDate
-      ? timestamp.toDate().toLocaleTimeString("en-US", {
-          hour: "2-digit",
-          minute: "2-digit",
-        })
-      : new Date(timestamp).toLocaleTimeString("en-US", {
-          hour: "2-digit",
-          minute: "2-digit",
-        });
+    return (timestamp.toDate ? timestamp.toDate() : new Date(timestamp)).toLocaleTimeString(
+      "en-US",
+      {
+        hour: "2-digit",
+        minute: "2-digit",
+      },
+    );
   };
 
   const formatDate = (timestamp) => {
     if (!timestamp) return "";
-    return timestamp.toDate
-      ? timestamp.toDate().toLocaleDateString()
-      : new Date(timestamp).toLocaleDateString();
-  };
-
-  const isToday = (timestamp) => {
-    const messageDate = timestamp.toDate
-      ? timestamp.toDate()
-      : new Date(timestamp);
-    const today = new Date();
-    return messageDate.toDateString() === today.toDateString();
+    return (timestamp.toDate ? timestamp.toDate() : new Date(timestamp)).toLocaleDateString();
   };
 
   if (loading) {
@@ -187,118 +153,102 @@ const ChatSystem = () => {
   }
 
   return (
-    <Container className="my-5">
-      <Row>
-        <Col lg={8} className="mx-auto">
+    <Container fluid className="my-5">
+      <Row className="g-4">
+        {isStaffUser && (
+          <Col lg={4}>
+            <Card className="h-100">
+              <Card.Header className="text-white" style={{ backgroundColor: "var(--color-primary)" }}>
+                <h5 className="mb-0">Support Inbox</h5>
+              </Card.Header>
+              <Card.Body style={{ maxHeight: "600px", overflowY: "auto" }}>
+                {conversations.length === 0 ? (
+                  <Alert variant="info" className="mb-0">
+                    No patient conversations yet.
+                  </Alert>
+                ) : (
+                  conversations.map((conversation) => (
+                    <button
+                      key={conversation.id}
+                      type="button"
+                      className={`w-100 text-start border rounded p-3 mb-3 bg-white ${
+                        selectedConversationId === conversation.conversationId ? "border-primary" : ""
+                      }`}
+                      onClick={() => setSelectedConversationId(conversation.conversationId)}
+                    >
+                      <div className="d-flex justify-content-between align-items-center">
+                        <strong>{conversation.senderName}</strong>
+                        <small className="text-muted">{formatDate(conversation.createdAt)}</small>
+                      </div>
+                      <div className="small text-muted">{conversation.senderEmail}</div>
+                      <div className="small mt-2">{conversation.text}</div>
+                    </button>
+                  ))
+                )}
+              </Card.Body>
+            </Card>
+          </Col>
+        )}
+
+        <Col lg={isStaffUser ? 8 : 10} className="mx-auto">
           <Card className="h-100">
-            <Card.Header className="text-white" style={{ backgroundColor: 'var(--color-primary)' }}>
+            <Card.Header className="text-white" style={{ backgroundColor: "var(--color-primary)" }}>
               <div className="d-flex justify-content-between align-items-center">
-                <div className="chat-info">
-                  <h5 className="mb-0">Chat Support</h5>
-                  <div className="d-flex align-items-center">
-                    <div
-                      className={`bg-${chatStatus === "online" ? "success" : "secondary"} rounded-circle me-2`}
-                      style={{ width: "10px", height: "10px" }}
-                    ></div>
-                    <small className="ms-2">
-                      {chatStatus === "online"
-                        ? "Dr. Abdullah is online"
-                        : "Support is offline"}
-                    </small>
-                  </div>
+                <div>
+                  <h5 className="mb-0">
+                    {isStaffUser ? "Conversation Workspace" : "Chat Support"}
+                  </h5>
+                  <small>
+                    {isStaffUser
+                      ? "Reply to patient conversations from the clinic inbox."
+                      : "Send real support messages to the clinic team."}
+                  </small>
                 </div>
-                <Badge bg="success" className="availability-badge">
-                  <i className="bi bi-shield-check me-1"></i>
-                  Secure Chat
-                </Badge>
+                <Badge bg="success">{isStaffUser ? "Staff Mode" : "Patient Support"}</Badge>
               </div>
             </Card.Header>
 
             <Card.Body className="p-4">
-              <div
-                className="messages-container"
-                style={{ height: "400px", overflowY: "auto" }}
-              >
-                {messages.length === 0 ? (
+              <div style={{ height: "420px", overflowY: "auto" }}>
+                {currentMessages.length === 0 ? (
                   <div className="text-center text-muted py-5">
                     <i className="bi bi-chat-dots display-4 mb-3"></i>
-                    <p>No messages yet. Start a conversation!</p>
+                    <p>
+                      {isStaffUser
+                        ? "Select a conversation from the inbox."
+                        : "No messages yet. Start a conversation with the clinic."}
+                    </p>
                   </div>
                 ) : (
-                  <>
-                    {messages.map((message, index) => {
-                      const showDate =
-                        index === 0 ||
-                        !isToday(message.createdAt) ||
-                        !isToday(messages[index - 1]?.createdAt) ||
-                        formatDate(message.createdAt) !==
-                          formatDate(messages[index - 1]?.createdAt);
-
-                      return (
-                        <React.Fragment key={message.id}>
-                          {showDate && (
-                            <div className="text-center text-muted my-3">
-                              <small>{formatDate(message.createdAt)}</small>
-                            </div>
-                          )}
-                          <div
-                            className={`d-flex mb-3 ${message.type === "admin" ? "justify-content-start" : "justify-content-end"}`}
-                          >
-                            <div
-                              className={`p-3 rounded-3 ${message.type === "admin" ? "" : "text-white"}`}
-                              style={{ 
-                                maxWidth: "70%",
-                                backgroundColor: message.type === "admin" ? 'var(--color-gray-50)' : 'var(--color-primary)'
-                              }}
-                            >
-                              <div className="d-flex align-items-center mb-2">
-                                <strong>{message.senderName}</strong>
-                                <small className="ms-auto text-muted">
-                                  {formatTime(message.createdAt)}
-                                </small>
-                              </div>
-                              <div>{message.text}</div>
-                            </div>
-                          </div>
-                        </React.Fragment>
-                      );
-                    })}
-                    {isTyping && (
-                      <div className="d-flex justify-content-start mb-3">
-                        <div className="p-3 rounded-3" style={{ backgroundColor: 'var(--color-gray-50)' }}>
-                          <div className="d-flex align-items-center">
-                            <small className="text-muted">
-                              Dr. Abdullah is typing
+                  currentMessages.map((message) => {
+                    const isOwnMessage = message.senderId === user.uid;
+                    return (
+                      <div
+                        key={message.id}
+                        className={`d-flex mb-3 ${isOwnMessage ? "justify-content-end" : "justify-content-start"}`}
+                      >
+                        <div
+                          className={`p-3 rounded-3 ${isOwnMessage ? "text-white" : ""}`}
+                          style={{
+                            maxWidth: "70%",
+                            backgroundColor: isOwnMessage
+                              ? "var(--color-primary)"
+                              : "var(--color-gray-50)",
+                          }}
+                        >
+                          <div className="d-flex align-items-center mb-2">
+                            <strong>{message.senderName}</strong>
+                            <small className="ms-auto text-muted">
+                              {formatTime(message.createdAt)}
                             </small>
-                            <div className="ms-2">
-                              <span
-                                className="d-inline-block bg-secondary rounded-circle"
-                                style={{
-                                  width: "4px",
-                                  height: "4px",
-                                  margin: "0 1px",
-                                }}
-                              ></span>
-                              <span
-                                className="d-inline-block bg-secondary rounded-circle"
-                                style={{
-                                  width: "4px",
-                                  height: "4px",
-                                  margin: "0 1px",
-                                }}
-                              ></span>
-                              <span
-                                className="d-inline-block bg-secondary rounded-circle"
-                                style={{ width: "4px", height: "4px" }}
-                              ></span>
-                            </div>
                           </div>
+                          <div>{message.text}</div>
                         </div>
                       </div>
-                    )}
-                    <div ref={messagesEndRef} />
-                  </>
+                    );
+                  })
                 )}
+                <div ref={messagesEndRef} />
               </div>
             </Card.Body>
 
@@ -309,13 +259,14 @@ const ChatSystem = () => {
                     type="text"
                     placeholder="Type your message..."
                     value={newMessage}
-                    onChange={handleTyping}
+                    onChange={(event) => setNewMessage(event.target.value)}
                     className="flex-grow-1"
+                    disabled={isStaffUser && !selectedConversationId}
                   />
                   <Button
                     variant="success"
                     type="submit"
-                    disabled={!newMessage.trim()}
+                    disabled={!newMessage.trim() || (isStaffUser && !selectedConversationId)}
                   >
                     <i className="bi bi-send"></i>
                   </Button>

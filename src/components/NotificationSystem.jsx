@@ -230,7 +230,7 @@ const NotificationToast = ({ notifications }) => {
             </strong>
             {currentNotification?.type === "booking" && (
               <div className="mt-2">
-                <Button variant="outline-light" size="sm" href="/appointments">
+                <Button variant="outline-light" size="sm" href="/my-bookings">
                   <i className="bi bi-calendar-week me-1"></i>
                   View Appointments
                 </Button>
@@ -246,7 +246,7 @@ const NotificationToast = ({ notifications }) => {
             )}
             {currentNotification?.type === "appointment" && (
               <div className="mt-2">
-                <Button variant="outline-light" size="sm" href="/appointments">
+                <Button variant="outline-light" size="sm" href="/my-bookings">
                   <i className="bi bi-clock-history me-1"></i>
                   View Schedule
                 </Button>

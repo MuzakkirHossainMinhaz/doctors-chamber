@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import ChatSystem from "../../components/ChatSystem";
+import ChatSystem from "../components/ChatSystem";
 
 const Chat = () => {
   return (

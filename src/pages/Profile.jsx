@@ -3,9 +3,11 @@ import {
   addDoc,
   collection,
   doc,
+  getDoc,
   getDocs,
   orderBy,
   query,
+  setDoc,
   updateDoc,
   where,
 } from "firebase/firestore";
@@ -25,7 +27,7 @@ import {
 } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
-import VerificationGuard from "../../components/VerificationGuard/VerificationGuard";
+import VerificationGuard from "../components/VerificationGuard";
 import { auth, db } from "../firebase.init";
 import useAuthRole from "../hooks/useAuthRole";
 
@@ -75,13 +77,10 @@ const Profile = () => {
       setBookings(bookingsData);
 
       // Fetch user profile
-      const profileQuery = query(
-        collection(db, "users"),
-        where("uid", "==", user.uid),
-      );
-      const profileSnapshot = await getDocs(profileQuery);
+      const profileRef = doc(db, "users", user.uid);
+      const profileSnapshot = await getDoc(profileRef);
 
-      if (profileSnapshot.empty) {
+      if (!profileSnapshot.exists()) {
         // Create user profile if it doesn't exist
         const newProfile = {
           uid: user.uid,
@@ -97,10 +96,11 @@ const Profile = () => {
           createdAt: new Date(),
           updatedAt: new Date(),
         };
+        await setDoc(profileRef, newProfile, { merge: true });
         setUserProfile(newProfile);
         setEditForm(newProfile);
       } else {
-        const profileData = profileSnapshot.docs[0].data();
+        const profileData = profileSnapshot.data();
         setUserProfile(profileData);
         setEditForm(profileData);
         if (profileData.preferences) {
@@ -130,20 +130,7 @@ const Profile = () => {
         updatedAt: new Date(),
       };
 
-      const profileQuery = query(
-        collection(db, "users"),
-        where("uid", "==", user.uid),
-      );
-      const profileSnapshot = await getDocs(profileQuery);
-
-      if (profileSnapshot.empty) {
-        await addDoc(collection(db, "users"), updatedProfile);
-      } else {
-        await updateDoc(
-          doc(db, "users", profileSnapshot.docs[0].id),
-          updatedProfile,
-        );
-      }
+      await setDoc(doc(db, "users", user.uid), updatedProfile, { merge: true });
 
       setUserProfile(updatedProfile);
       setShowEditModal(false);

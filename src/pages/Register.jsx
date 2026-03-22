@@ -7,9 +7,12 @@ import {
   Form,
   Row,
 } from "react-bootstrap";
+import { updateProfile } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import toast from "react-hot-toast";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
-import auth from "../firebase.init";
+import auth, { db } from "../firebase.init";
 import SocialLink from "./Signin/SocialLink";
 
 const Register = () => {
@@ -25,7 +28,24 @@ const Register = () => {
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    createUserWithEmailAndPassword(email, password);
+    const result = await createUserWithEmailAndPassword(email, password);
+    if (result?.user) {
+      await updateProfile(result.user, { displayName: name });
+      await setDoc(
+        doc(db, "users", result.user.uid),
+        {
+          uid: result.user.uid,
+          email,
+          displayName: name,
+          role: "patient",
+          accountStatus: "pending_verification",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        { merge: true },
+      );
+      toast.success("Account created. Please verify your email.");
+    }
   };
 
   if (user) {

@@ -4,9 +4,10 @@ import {
   useSignInWithGithub,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
+import { doc, setDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
-import auth from "../../firebase.init.js";
+import auth, { db } from "../../firebase.init.js";
 
 const SocialLink = () => {
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
@@ -23,6 +24,20 @@ const SocialLink = () => {
   const handleSocialSignIn = async (signInMethod, providerName) => {
     try {
       const result = await signInMethod();
+      if (result?.user) {
+        await setDoc(
+          doc(db, "users", result.user.uid),
+          {
+            uid: result.user.uid,
+            email: result.user.email,
+            displayName: result.user.displayName || result.user.email,
+            role: "patient",
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          },
+          { merge: true },
+        );
+      }
       toast.success(`Successfully signed in with ${providerName}!`);
       navigate(from, { replace: true });
     } catch (error) {

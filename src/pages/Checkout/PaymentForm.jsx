@@ -1,13 +1,26 @@
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { Elements, CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import { useMemo, useState } from "react";
 import { Alert, Button, Card, Form, Spinner } from "react-bootstrap";
 
-const PaymentFormContent = ({ service, bookingData, onPaymentSuccess }) => {
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || "");
+
+const PaymentFormContent = ({
+  service,
+  selectedDate,
+  selectedTime,
+  bookingData,
+  onPaymentSuccess,
+}) => {
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState(false);
-  const [succeeded, setSucceeded] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
+
+  const bookingSummaryDate = useMemo(
+    () => (selectedDate ? new Date(selectedDate).toLocaleDateString() : "Not selected"),
+    [selectedDate],
+  );
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -15,6 +28,7 @@ const PaymentFormContent = ({ service, bookingData, onPaymentSuccess }) => {
     setError(null);
 
     if (!stripe || !elements) {
+      setError("Stripe has not finished loading.");
       setProcessing(false);
       return;
     }
@@ -22,7 +36,7 @@ const PaymentFormContent = ({ service, bookingData, onPaymentSuccess }) => {
     const cardElement = elements.getElement(CardElement);
 
     try {
-      const { error, paymentMethod } = await stripe.createPaymentMethod({
+      const { error: stripeError, paymentMethod } = await stripe.createPaymentMethod({
         type: "card",
         card: cardElement,
         billing_details: {
@@ -31,30 +45,25 @@ const PaymentFormContent = ({ service, bookingData, onPaymentSuccess }) => {
         },
       });
 
-      if (error) {
-        setError(error.message);
+      if (stripeError) {
+        setError(stripeError.message);
         setProcessing(false);
         return;
       }
 
-      // Simulate payment processing for demo
-      setTimeout(() => {
-        setSucceeded(true);
-        setProcessing(false);
-        onPaymentSuccess({
-          paymentMethodId: paymentMethod.id,
-          amount: service.price,
-          service: service,
-          bookingData: bookingData,
-        });
-      }, 2000);
-    } catch (err) {
+      await onPaymentSuccess({
+        paymentMethodId: paymentMethod.id,
+        paymentMethodType: paymentMethod.type,
+        amount: service.price,
+      });
+    } catch (submissionError) {
       setError("An unexpected error occurred. Please try again.");
+    } finally {
       setProcessing(false);
     }
   };
 
-  const CARD_ELEMENT_OPTIONS = {
+  const cardOptions = {
     style: {
       base: {
         fontSize: "16px",
@@ -69,23 +78,16 @@ const PaymentFormContent = ({ service, bookingData, onPaymentSuccess }) => {
     },
   };
 
-  if (succeeded) {
-    return (
-      <Alert variant="success" className="text-center">
-        <i className="bi bi-check-circle-fill me-2"></i>
-        <h5>Payment Successful!</h5>
-        <p>Your booking has been confirmed.</p>
-      </Alert>
-    );
-  }
-
   return (
     <Card className="h-100">
       <Card.Header className="bg-success text-white">
         <h5 className="mb-0">Payment Information</h5>
       </Card.Header>
       <Card.Body>
-        <div className="rounded-3 p-3 mb-4" style={{ backgroundColor: 'var(--color-gray-50)' }}>
+        <div
+          className="rounded-3 p-3 mb-4"
+          style={{ backgroundColor: "var(--color-gray-50)" }}
+        >
           <h6 className="mb-3">Booking Summary</h6>
           <div className="d-flex justify-content-between mb-2">
             <span>Service:</span>
@@ -93,11 +95,11 @@ const PaymentFormContent = ({ service, bookingData, onPaymentSuccess }) => {
           </div>
           <div className="d-flex justify-content-between mb-2">
             <span>Date:</span>
-            <strong>{bookingData.date?.toLocaleDateString()}</strong>
+            <strong>{bookingSummaryDate}</strong>
           </div>
           <div className="d-flex justify-content-between mb-2">
             <span>Time:</span>
-            <strong>{bookingData.time}</strong>
+            <strong>{selectedTime || "Not selected"}</strong>
           </div>
           <hr />
           <div className="d-flex justify-content-between">
@@ -110,7 +112,7 @@ const PaymentFormContent = ({ service, bookingData, onPaymentSuccess }) => {
           <Form.Group className="mb-4">
             <Form.Label>Card Details</Form.Label>
             <div className="border rounded-3 p-3 bg-white">
-              <CardElement options={CARD_ELEMENT_OPTIONS} />
+              <CardElement options={cardOptions} />
             </div>
           </Form.Group>
 
@@ -141,30 +143,29 @@ const PaymentFormContent = ({ service, bookingData, onPaymentSuccess }) => {
             ) : (
               <>
                 <i className="bi bi-lock me-2"></i>
-                Pay ${service?.price}
+                Save Payment Method and Confirm Booking
               </>
             )}
           </Button>
         </Form>
-
-        <div className="text-center mt-4">
-          <small className="text-muted">
-            <i className="bi bi-shield-check me-1"></i>
-            Your payment information is secure and encrypted
-          </small>
-        </div>
       </Card.Body>
     </Card>
   );
 };
 
-const PaymentForm = ({ service, bookingData, onPaymentSuccess }) => {
+const PaymentForm = (props) => {
+  if (!import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY) {
+    return (
+      <Alert variant="warning">
+        Stripe is not configured. Add `VITE_STRIPE_PUBLISHABLE_KEY` to enable card entry.
+      </Alert>
+    );
+  }
+
   return (
-    <PaymentFormContent
-      service={service}
-      bookingData={bookingData}
-      onPaymentSuccess={onPaymentSuccess}
-    />
+    <Elements stripe={stripePromise}>
+      <PaymentFormContent {...props} />
+    </Elements>
   );
 };
 

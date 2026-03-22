@@ -1,5 +1,5 @@
 import { sendEmailVerification } from "firebase/auth";
-import { doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
+import { doc, getDoc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
@@ -70,7 +70,7 @@ const useEmailVerification = () => {
         }
       } else {
         // New user, set default status
-        await updateDoc(
+        await setDoc(
           doc(db, "users", user.uid),
           {
             accountStatus: ACCOUNT_STATUS.PENDING_VERIFICATION,
@@ -98,7 +98,7 @@ const useEmailVerification = () => {
       await sendEmailVerification(user);
 
       // Update last verification email sent time
-      await updateDoc(
+      await setDoc(
         doc(db, "users", user.uid),
         {
           lastVerificationEmailSent: serverTimestamp(),
@@ -128,7 +128,7 @@ const useEmailVerification = () => {
 
       if (isVerified && accountStatus === ACCOUNT_STATUS.PENDING_VERIFICATION) {
         // Update account status to verified
-        await updateDoc(
+        await setDoc(
           doc(db, "users", user.uid),
           {
             accountStatus: ACCOUNT_STATUS.VERIFIED,
@@ -210,7 +210,7 @@ const useEmailVerification = () => {
     if (!user) return false;
 
     try {
-      await updateDoc(
+      await setDoc(
         doc(db, "users", user.uid),
         {
           accountStatus: newStatus,

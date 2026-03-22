@@ -1,4 +1,4 @@
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../firebase.init";
@@ -36,7 +36,7 @@ const useAuthRole = () => {
           const defaultRole = ROLES.PATIENT;
 
           // Store default role in Firestore
-          await updateDoc(
+          await setDoc(
             doc(db, "users", user.uid),
             {
               role: defaultRole,
@@ -104,7 +104,7 @@ const useAuthRole = () => {
     }
 
     try {
-      await updateDoc(
+      await setDoc(
         doc(db, "users", targetUserId),
         {
           role: newRole,

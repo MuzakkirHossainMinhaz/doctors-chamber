@@ -1,4 +1,4 @@
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import {
     Alert,
@@ -39,7 +39,12 @@ const Checkout = () => {
   useEffect(() => {
     const fetchService = async () => {
       try {
-        // For demo, using static data. In production, fetch from Firestore
+        const serviceDoc = await getDoc(doc(db, "services", id));
+        if (serviceDoc.exists()) {
+          setService({ id: serviceDoc.id, ...serviceDoc.data() });
+          return;
+        }
+
         const services = [
           {
             id: "1",
@@ -147,6 +152,19 @@ const Checkout = () => {
 
   const handlePaymentSuccess = async (paymentData) => {
     try {
+      const paymentRecord = {
+        userId: user.uid,
+        serviceId: service.id,
+        serviceName: service.name,
+        amount: paymentData.amount,
+        paymentMethodId: paymentData.paymentMethodId,
+        paymentMethodType: paymentData.paymentMethodType,
+        status: "completed",
+        createdAt: new Date(),
+      };
+
+      const paymentRef = await addDoc(collection(db, "payments"), paymentRecord);
+
       const booking = {
         userId: user.uid,
         serviceId: service.id,
@@ -159,11 +177,28 @@ const Checkout = () => {
         time: selectedTime,
         notes: bookingData.notes,
         paymentMethodId: paymentData.paymentMethodId,
+        paymentId: paymentRef.id,
         status: "confirmed",
         createdAt: new Date(),
       };
 
       await addDoc(collection(db, "bookings"), booking);
+
+      await addDoc(collection(db, "notifications"), {
+        userId: user.uid,
+        type: "booking",
+        message: `Your ${service.name} appointment has been confirmed.`,
+        createdAt: new Date(),
+        read: false,
+      });
+
+      await addDoc(collection(db, "notifications"), {
+        userId: user.uid,
+        type: "payment",
+        message: `Payment recorded for ${service.name}.`,
+        createdAt: new Date(),
+        read: false,
+      });
 
       setBookingConfirmed(true);
       toast.success("Booking confirmed successfully!");

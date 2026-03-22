@@ -298,12 +298,20 @@ const Header = () => {
 
                   <NavDropdown.Divider />
 
-                  <NavDropdown.Item className="dropdown-item text-decoration-none">
+                  <NavDropdown.Item
+                    as={Link}
+                    to="/settings"
+                    className="dropdown-item text-decoration-none"
+                  >
                     <i className="bi bi-gear me-2"></i>
                     Settings
                   </NavDropdown.Item>
 
-                  <NavDropdown.Item className="dropdown-item text-decoration-none">
+                  <NavDropdown.Item
+                    as={Link}
+                    to="/help"
+                    className="dropdown-item text-decoration-none"
+                  >
                     <i className="bi bi-question-circle me-2"></i>
                     Help & Support
                   </NavDropdown.Item>

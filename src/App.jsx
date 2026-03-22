@@ -23,6 +23,12 @@ const Profile = lazy(() => import("./pages/Profile.jsx"));
 const Chat = lazy(() => import("./pages/Chat.jsx"));
 const Services = lazy(() => import("./pages/Services.jsx"));
 const Contact = lazy(() => import("./pages/Contact.jsx"));
+const MyBookings = lazy(() => import("./pages/MyBookings.jsx"));
+const DoctorDashboard = lazy(() => import("./pages/DoctorDashboard.jsx"));
+const Analytics = lazy(() => import("./pages/Analytics.jsx"));
+const Billing = lazy(() => import("./pages/Billing.jsx"));
+const Settings = lazy(() => import("./pages/Settings.jsx"));
+const Help = lazy(() => import("./pages/Help.jsx"));
 
 function App() {
   return (
@@ -68,10 +74,16 @@ function App() {
                   path="/my-bookings"
                   element={
                     <ProtectedRoute requiredRole="patient">
-                      <div className="container my-5">
-                        <h2>My Bookings</h2>
-                        <p>Your booking history will appear here.</p>
-                      </div>
+                      <MyBookings />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/appointments"
+                  element={
+                    <ProtectedRoute requiredRole="patient">
+                      <MyBookings />
                     </ProtectedRoute>
                   }
                 />
@@ -99,10 +111,7 @@ function App() {
                   path="/doctor-dashboard"
                   element={
                     <ProtectedRoute requiredRole="doctor">
-                      <div className="container my-5">
-                        <h2>Doctor Dashboard</h2>
-                        <p>Doctor-specific dashboard will appear here.</p>
-                      </div>
+                      <DoctorDashboard />
                     </ProtectedRoute>
                   }
                 />
@@ -111,10 +120,34 @@ function App() {
                   path="/analytics"
                   element={
                     <ProtectedRoute requiredRoles={["admin", "doctor"]}>
-                      <div className="container my-5">
-                        <h2>Analytics Dashboard</h2>
-                        <p>Analytics and reports will appear here.</p>
-                      </div>
+                      <Analytics />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/billing"
+                  element={
+                    <ProtectedRoute>
+                      <Billing />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/settings"
+                  element={
+                    <ProtectedRoute>
+                      <Settings />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/help"
+                  element={
+                    <ProtectedRoute>
+                      <Help />
                     </ProtectedRoute>
                   }
                 />

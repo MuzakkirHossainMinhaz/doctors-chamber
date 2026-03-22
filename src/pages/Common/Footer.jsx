@@ -69,22 +69,22 @@ const Footer = () => {
             <h6 className="text-white mb-3 fw-semibold">Services</h6>
             <ul className="list-unstyled">
               <li className="mb-2">
-                <Link to="/checkout" className="text-white-75 text-decoration-none transition-smooth">
+                      <Link to="/services" className="text-white-75 text-decoration-none transition-smooth">
                   Medical Check-ups
                 </Link>
               </li>
               <li className="mb-2">
-                <Link to="/checkout" className="text-white-75 text-decoration-none transition-smooth">
+                      <Link to="/services" className="text-white-75 text-decoration-none transition-smooth">
                   Nutrition Advice
                 </Link>
               </li>
               <li className="mb-2">
-                <Link to="/checkout" className="text-white-75 text-decoration-none transition-smooth">
+                      <Link to="/services" className="text-white-75 text-decoration-none transition-smooth">
                   Emergency Care
                 </Link>
               </li>
               <li className="mb-2">
-                <Link to="/checkout" className="text-white-75 text-decoration-none transition-smooth">
+                      <Link to="/services" className="text-white-75 text-decoration-none transition-smooth">
                   Counselling
                 </Link>
               </li>

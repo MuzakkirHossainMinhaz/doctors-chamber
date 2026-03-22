@@ -24,7 +24,7 @@ import {
   Table,
 } from "react-bootstrap";
 import toast from "react-hot-toast";
-import RoleManager from "../../components/RoleManager/RoleManager";
+import RoleManager from "../components/RoleManager";
 import { db } from "../firebase.init";
 import useAuthRole from "../hooks/useAuthRole";
 
@@ -57,7 +57,7 @@ const Admin = () => {
   useEffect(() => {
     if (!user || !canAccessAdminDashboard()) return;
 
-    if (!isAdmin) {
+    if (!isAdmin()) {
       toast.error("Access denied. Admin privileges required.");
       return;
     }
@@ -520,68 +520,13 @@ const Admin = () => {
             </Card>
           )}
 
-          {/* Roles Tab */}
-          {activeTab === "roles" && canManageUsers() && <RoleManager />}
-
           {/* Users Tab */}
           {activeTab === "users" && canManageUsers() && (
-            <Card>
-              <Card.Header>
-                <h5 className="mb-0">User Management</h5>
-              </Card.Header>
-              <Card.Body>
-                <Table striped hover responsive>
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Role</th>
-                      <th>Phone</th>
-                      <th>Total Bookings</th>
-                      <th>Total Spent</th>
-                      <th>Joined</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {users.map((user) => {
-                      const userBookings = bookings.filter(
-                        (b) => b.userId === user.id,
-                      );
-                      const totalSpent = userBookings.reduce(
-                        (sum, b) => sum + (b.servicePrice || 0),
-                        0,
-                      );
-                      return (
-                        <tr key={user.id}>
-                          <td>{user.displayName || "N/A"}</td>
-                          <td>{user.email}</td>
-                          <td>
-                            <Badge
-                              bg={
-                                user.role === "admin"
-                                  ? "danger"
-                                  : user.role === "doctor"
-                                    ? "primary"
-                                    : "secondary"
-                              }
-                            >
-                              {user.role || "patient"}
-                            </Badge>
-                          </td>
-                          <td>{user.phone || "N/A"}</td>
-                          <td>{userBookings.length}</td>
-                          <td>${totalSpent}</td>
-                          <td>
-                            {user.createdAt?.toDate?.()?.toLocaleDateString() ||
-                              "N/A"}
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </Table>
-              </Card.Body>
-            </Card>
+            <RoleManager
+              users={users}
+              bookings={bookings}
+              onRefresh={fetchDashboardData}
+            />
           )}
         </>
       )}
