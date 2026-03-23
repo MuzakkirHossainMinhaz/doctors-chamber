@@ -27,6 +27,7 @@ import {
 } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
+import AppIcon from "../components/AppIcon";
 import VerificationGuard from "../components/VerificationGuard";
 import { auth, db } from "../firebase.init";
 import useAuthRole from "../hooks/useAuthRole";
@@ -227,7 +228,7 @@ const Profile = () => {
               <Card className="h-100 border-0 shadow-sm">
                 <Card.Body className="text-center">
                   <div className="mb-3" style={{ color: 'var(--color-primary)' }}>
-                    <i className="bi bi-calendar-check fs-2"></i>
+                    <AppIcon name="bi-calendar-check" className="fs-2" />
                   </div>
                   <h3 className="h4 mb-2">{bookings.length}</h3>
                   <p className="text-muted mb-0">Total Bookings</p>
@@ -238,7 +239,7 @@ const Profile = () => {
               <Card className="h-100 border-0 shadow-sm">
                 <Card.Body className="text-center">
                   <div className="text-info mb-3">
-                    <i className="bi bi-clock-history fs-2"></i>
+                    <AppIcon name="bi-clock-history" className="fs-2" />
                   </div>
                   <h3 className="h4 mb-2">{getUpcomingAppointments()}</h3>
                   <p className="text-muted mb-0">Upcoming</p>
@@ -249,7 +250,7 @@ const Profile = () => {
               <Card className="h-100 border-0 shadow-sm">
                 <Card.Body className="text-center">
                   <div className="text-success mb-3">
-                    <i className="bi bi-currency-dollar fs-2"></i>
+                    <AppIcon name="bi-currency-dollar" className="fs-2" />
                   </div>
                   <h3 className="h4 mb-2">${getTotalSpent()}</h3>
                   <p className="text-muted mb-0">Total Spent</p>
@@ -260,7 +261,7 @@ const Profile = () => {
               <Card className="h-100 border-0 shadow-sm">
                 <Card.Body className="text-center">
                   <div className="text-warning mb-3">
-                    <i className="bi bi-person-badge fs-2"></i>
+                    <AppIcon name="bi-person-badge" className="fs-2" />
                   </div>
                   <h3 className="h4 mb-2">{calculateProfileCompletion()}%</h3>
                   <p className="text-muted mb-0">Profile Complete</p>
@@ -295,7 +296,7 @@ const Profile = () => {
                       className="w-100"
                       onClick={() => setActiveTab("overview")}
                     >
-                      <i className="bi bi-person me-2"></i>
+                      <AppIcon name="bi-person" className="me-2" />
                       Overview
                     </Button>
                     <Button
@@ -304,7 +305,7 @@ const Profile = () => {
                       className="w-100"
                       onClick={() => setActiveTab("appointments")}
                     >
-                      <i className="bi bi-calendar me-2"></i>
+                      <AppIcon name="bi-calendar" className="me-2" />
                       Appointments
                     </Button>
                     <Button
@@ -313,7 +314,7 @@ const Profile = () => {
                       className="w-100"
                       onClick={() => setActiveTab("settings")}
                     >
-                      <i className="bi bi-gear me-2"></i>
+                      <AppIcon name="bi-gear" className="me-2" />
                       Settings
                     </Button>
                   </div>
@@ -323,11 +324,11 @@ const Profile = () => {
                   <h6 className="mb-3">Account Status</h6>
                   <div className="d-flex align-items-center gap-2">
                     <Badge bg="success" className="rounded-pill">
-                      <i className="bi bi-check-circle me-1"></i>
+                      <AppIcon name="bi-check-circle" className="me-1" />
                       Active
                     </Badge>
                     <Badge bg="primary" className="rounded-pill">
-                      <i className="bi bi-shield-check me-1"></i>
+                      <AppIcon name="bi-shield-check" className="me-1" />
                       {userRole}
                     </Badge>
                   </div>
@@ -350,7 +351,7 @@ const Profile = () => {
                       size="sm"
                       onClick={() => setShowEditModal(true)}
                     >
-                      <i className="bi bi-pencil me-2"></i>
+                      <AppIcon name="bi-pencil" className="me-2" />
                       Edit Profile
                     </Button>
                   </VerificationGuard>
@@ -464,7 +465,7 @@ const Profile = () => {
                     <h6 className="mb-4">Recent Appointments</h6>
                     {bookings.length === 0 ? (
                       <Alert variant="info" className="text-center">
-                        <i className="bi bi-calendar-x me-2"></i>
+                        <AppIcon name="bi-calendar-x" className="me-2" />
                         No appointments found. Book your first appointment!
                       </Alert>
                     ) : (

@@ -1,5 +1,6 @@
 import { Badge, Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import AppIcon from "../../components/AppIcon";
 
 const Service = ({ service }) => {
   const { id, name, img, image, price, description, duration, category, icon } =
@@ -40,12 +41,18 @@ const Service = ({ service }) => {
                 "linear-gradient(135deg, var(--color-secondary-light), var(--color-accent-light))",
             }}
           >
-            <i className={`bi ${icon || "bi-heart-pulse"} text-white fs-1`}></i>
+            <AppIcon
+              name={icon || "bi-heart-pulse"}
+              className="text-white fs-1"
+            />
           </div>
         )}
         <div className="position-absolute top-0 start-0 w-100 h-100 bg-gradient bg-opacity-50">
           <div className="position-absolute top-50 start-50 translate-middle">
-            <i className={`bi ${icon || "bi-heart-pulse"} text-white fs-3`}></i>
+            <AppIcon
+              name={icon || "bi-heart-pulse"}
+              className="text-white fs-3"
+            />
           </div>
           <Badge
             bg={getCategoryColor(category)}
@@ -63,7 +70,7 @@ const Service = ({ service }) => {
             <div className="fw-bold" style={{ color: 'var(--color-primary)' }}>${price}</div>
             {duration && (
               <span className="text-muted">
-                <i className="bi bi-clock me-1"></i>
+                <AppIcon name="bi-clock" className="me-1" />
                 {duration}
               </span>
             )}
@@ -74,15 +81,27 @@ const Service = ({ service }) => {
 
         <div className="d-flex gap-3 mb-4">
           <div className="d-flex align-items-center">
-            <i className="bi bi-check-circle me-2" style={{ color: 'var(--color-success)' }}></i>
+            <AppIcon
+              name="bi-check-circle"
+              className="me-2"
+              style={{ color: "var(--color-success)" }}
+            />
             <span>Expert Doctors</span>
           </div>
           <div className="d-flex align-items-center">
-            <i className="bi bi-shield-check me-2" style={{ color: 'var(--color-success)' }}></i>
+            <AppIcon
+              name="bi-shield-check"
+              className="me-2"
+              style={{ color: "var(--color-success)" }}
+            />
             <span>Safe & Secure</span>
           </div>
           <div className="d-flex align-items-center">
-            <i className="bi bi-award me-2" style={{ color: 'var(--color-success)' }}></i>
+            <AppIcon
+              name="bi-award"
+              className="me-2"
+              style={{ color: "var(--color-success)" }}
+            />
             <span>Certified Care</span>
           </div>
         </div>
@@ -96,11 +115,11 @@ const Service = ({ service }) => {
             size="lg"
             className="flex-fill"
           >
-            <i className="bi bi-calendar-plus me-2"></i>
+            <AppIcon name="bi-calendar-plus" className="me-2" />
             Book Now
           </Button>
           <Button variant="outline-primary" size="lg" className="flex-fill">
-            <i className="bi bi-info-circle me-2"></i>
+            <AppIcon name="bi-info-circle" className="me-2" />
             Details
           </Button>
         </div>

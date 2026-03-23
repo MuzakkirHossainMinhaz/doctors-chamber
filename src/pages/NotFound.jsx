@@ -1,5 +1,6 @@
 import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import AppIcon from "../components/AppIcon";
 
 const NotFound = () => {
   return (
@@ -35,7 +36,7 @@ const NotFound = () => {
               variant="primary"
               className="rounded-pill px-4"
             >
-              <i className="bi bi-house me-2"></i>
+              <AppIcon name="bi-house" className="me-2" />
               Go Home
             </Button>
             <Button
@@ -44,7 +45,7 @@ const NotFound = () => {
               variant="outline-primary"
               className="rounded-pill px-4"
             >
-              <i className="bi bi-telephone me-2"></i>
+              <AppIcon name="bi-telephone" className="me-2" />
               Contact Support
             </Button>
           </div>

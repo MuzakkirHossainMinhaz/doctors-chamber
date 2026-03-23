@@ -1,10 +1,13 @@
 .site-footer {
   position: relative;
-  margin-top: 5rem;
   padding: 4rem 0 2rem;
   color: rgba(255, 255, 255, 0.82);
   background:
-    radial-gradient(circle at top left, rgba(255, 137, 111, 0.16), transparent 26%),
+    radial-gradient(
+      circle at top left,
+      rgba(255, 137, 111, 0.16),
+      transparent 26%
+    ),
     linear-gradient(180deg, #1a7fe0, #166cc0 58%, #1259a0);
 }
 
@@ -65,7 +68,9 @@
 
 .footer-list a {
   text-decoration: none;
-  transition: color var(--transition-fast), transform var(--transition-fast);
+  transition:
+    color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .footer-list a:hover,

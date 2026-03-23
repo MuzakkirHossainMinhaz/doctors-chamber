@@ -1,5 +1,6 @@
 import { Alert, Card } from "react-bootstrap";
 import DatePicker from "react-datepicker";
+import AppIcon from "../../components/AppIcon";
 import "react-datepicker/dist/react-datepicker.css";
 
 const BookingCalendar = ({
@@ -36,7 +37,7 @@ const BookingCalendar = ({
       </Card.Header>
       <Card.Body>
         <Alert variant="info" className="mb-4">
-          <i className="bi bi-info-circle me-2"></i>
+          <AppIcon name="bi-info-circle" className="me-2" />
           Available on weekdays only. Weekends are closed.
         </Alert>
 

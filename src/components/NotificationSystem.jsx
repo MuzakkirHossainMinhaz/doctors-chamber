@@ -12,6 +12,7 @@ import {
 import { createContext, useContext, useEffect, useState } from "react";
 import { Button, Toast, ToastContainer } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
+import AppIcon from "./AppIcon";
 import { auth, db } from "../firebase.init";
 
 const NotificationContext = createContext();
@@ -200,7 +201,7 @@ const NotificationToast = ({ notifications }) => {
   };
 
   return (
-    <ToastContainer position="top-end" className="p-3">
+    <ToastContainer position="top-end">
       <Toast
         show={show}
         onClose={() => setShow(false)}
@@ -210,9 +211,10 @@ const NotificationToast = ({ notifications }) => {
       >
         <Toast.Header className="d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center">
-            <i
-              className={`bi ${getNotificationIcon(currentNotification?.type)} me-2`}
-            ></i>
+            <AppIcon
+              name={getNotificationIcon(currentNotification?.type)}
+              className="me-2"
+            />
             <strong className="me-auto">
               {getNotificationTitle(currentNotification?.type) ||
                 currentNotification?.title}
@@ -231,7 +233,7 @@ const NotificationToast = ({ notifications }) => {
             {currentNotification?.type === "booking" && (
               <div className="mt-2">
                 <Button variant="outline-light" size="sm" href="/my-bookings">
-                  <i className="bi bi-calendar-week me-1"></i>
+                  <AppIcon name="bi-calendar-week" className="me-1" />
                   View Appointments
                 </Button>
               </div>
@@ -239,7 +241,7 @@ const NotificationToast = ({ notifications }) => {
             {currentNotification?.type === "payment" && (
               <div className="mt-2">
                 <Button variant="outline-light" size="sm" href="/billing">
-                  <i className="bi bi-receipt me-1"></i>
+                  <AppIcon name="bi-receipt" className="me-1" />
                   View Billing
                 </Button>
               </div>
@@ -247,7 +249,7 @@ const NotificationToast = ({ notifications }) => {
             {currentNotification?.type === "appointment" && (
               <div className="mt-2">
                 <Button variant="outline-light" size="sm" href="/my-bookings">
-                  <i className="bi bi-clock-history me-1"></i>
+                  <AppIcon name="bi-clock-history" className="me-1" />
                   View Schedule
                 </Button>
               </div>

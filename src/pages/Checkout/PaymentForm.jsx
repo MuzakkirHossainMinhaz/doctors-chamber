@@ -2,6 +2,7 @@ import { Elements, CardElement, useElements, useStripe } from "@stripe/react-str
 import { loadStripe } from "@stripe/stripe-js";
 import { useMemo, useState } from "react";
 import { Alert, Button, Card, Form, Spinner } from "react-bootstrap";
+import AppIcon from "../../components/AppIcon";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || "");
 
@@ -118,7 +119,7 @@ const PaymentFormContent = ({
 
           {error && (
             <Alert variant="danger" className="mb-3">
-              <i className="bi bi-exclamation-triangle me-2"></i>
+              <AppIcon name="bi-exclamation-triangle" className="me-2" />
               {error}
             </Alert>
           )}
@@ -142,7 +143,7 @@ const PaymentFormContent = ({
               </>
             ) : (
               <>
-                <i className="bi bi-lock me-2"></i>
+                <AppIcon name="bi-lock" className="me-2" />
                 Save Payment Method and Confirm Booking
               </>
             )}

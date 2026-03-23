@@ -1,5 +1,6 @@
 import { Alert, Button, Col, Container, Row, Spinner } from "react-bootstrap";
 import { Navigate, useLocation } from "react-router-dom";
+import AppIcon from "./AppIcon";
 import useAuthRole from "../hooks/useAuthRole";
 
 const ProtectedRoute = ({
@@ -30,10 +31,10 @@ const ProtectedRoute = ({
               <div className="text-center">
                 <div className="mb-4">
                   <div
-                    className="d-inline-flex align-items-center justify-content-center text-white rounded-circle mb-3"
-                    style={{ width: "60px", height: "60px", backgroundColor: 'var(--color-primary)' }}
+                  className="d-inline-flex align-items-center justify-content-center text-white rounded-circle mb-3"
+                  style={{ width: "60px", height: "60px", backgroundColor: 'var(--color-primary)' }}
                   >
-                    <i className="bi bi-hospital fs-4"></i>
+                    <AppIcon name="bi-hospital" className="fs-4" />
                   </div>
                   <h4 className="mb-3">Doctor's Chamber</h4>
                   <p className="text-muted">
@@ -71,7 +72,7 @@ const ProtectedRoute = ({
       <Container className="my-5">
         <Alert variant="danger" className="text-center">
           <Alert.Heading>
-            <i className="bi bi-shield-exclamation me-2"></i>
+            <AppIcon name="bi-shield-exclamation" className="me-2" />
             Access Denied - Doctor's Chamber
           </Alert.Heading>
           <p className="mb-3">
@@ -94,11 +95,11 @@ const ProtectedRoute = ({
           </p>
           <div className="d-flex justify-content-center gap-2 mt-3">
             <Button variant="outline-primary" href="/home">
-              <i className="bi bi-house me-2"></i>
+              <AppIcon name="bi-house" className="me-2" />
               Return Home
             </Button>
             <Button variant="outline-secondary" href="/signin">
-              <i className="bi bi-box-arrow-in-right me-2"></i>
+              <AppIcon name="bi-box-arrow-in-right" className="me-2" />
               Sign In Again
             </Button>
           </div>

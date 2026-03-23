@@ -19,6 +19,7 @@ import {
   Spinner,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import AppIcon from "../../components/AppIcon";
 import { db } from "../../firebase.init";
 
 const BlogList = () => {
@@ -244,7 +245,7 @@ const BlogList = () => {
       {/* No Blogs Found */}
       {filteredBlogs.length === 0 && !loading && (
         <Alert variant="info" className="text-center">
-          <i className="bi bi-journal-text me-2"></i>
+          <AppIcon name="bi-journal-text" className="me-2" />
           No blogs found matching your criteria.
           <div className="mt-3">
             <Button variant="outline-primary" onClick={clearFilters}>

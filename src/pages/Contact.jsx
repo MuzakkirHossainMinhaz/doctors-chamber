@@ -12,6 +12,7 @@ import {
 } from "react-bootstrap";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import AppIcon from "../components/AppIcon";
 import { db } from "../firebase.init";
 
 const Contact = () => {
@@ -66,7 +67,7 @@ const Contact = () => {
       <Container className="my-5">
         <Alert variant="success" className="text-center">
           <Alert.Heading>
-            <i className="bi bi-check-circle me-2"></i>
+            <AppIcon name="bi-check-circle" className="me-2" />
             Message Sent Successfully!
           </Alert.Heading>
           <p>
@@ -102,7 +103,7 @@ const Contact = () => {
                     className="d-inline-flex align-items-center justify-content-center text-white rounded-circle me-3 transition-smooth"
                     style={{ width: "48px", height: "48px", backgroundColor: 'var(--color-primary)' }}
                   >
-                    <i className="bi bi-geo-alt fs-4"></i>
+                    <AppIcon name="bi-geo-alt" className="fs-4" />
                   </div>
                   <div>
                     <h5 className="mb-2">Address</h5>
@@ -119,7 +120,7 @@ const Contact = () => {
                     className="d-inline-flex align-items-center justify-content-center text-white rounded-circle me-3 transition-smooth"
                     style={{ width: "48px", height: "48px", backgroundColor: 'var(--color-primary)' }}
                   >
-                    <i className="bi bi-telephone fs-4"></i>
+                    <AppIcon name="bi-telephone" className="fs-4" />
                   </div>
                   <div>
                     <h5 className="mb-2">Phone</h5>
@@ -136,7 +137,7 @@ const Contact = () => {
                     className="d-inline-flex align-items-center justify-content-center text-white rounded-circle me-3 transition-smooth"
                     style={{ width: "48px", height: "48px", backgroundColor: 'var(--color-primary)' }}
                   >
-                    <i className="bi bi-envelope fs-4"></i>
+                    <AppIcon name="bi-envelope" className="fs-4" />
                   </div>
                   <div>
                     <h5 className="mb-2">Email</h5>
@@ -153,7 +154,7 @@ const Contact = () => {
                     className="d-inline-flex align-items-center justify-content-center text-white rounded-circle me-3 transition-smooth"
                     style={{ width: "48px", height: "48px", backgroundColor: 'var(--color-primary)' }}
                   >
-                    <i className="bi bi-clock fs-4"></i>
+                    <AppIcon name="bi-clock" className="fs-4" />
                   </div>
                   <div>
                     <h5 className="mb-2">Hours</h5>
@@ -175,14 +176,14 @@ const Contact = () => {
                     className="d-inline-flex align-items-center justify-content-center bg-white bg-opacity-25 rounded-circle mb-3"
                     style={{ width: "60px", height: "60px" }}
                   >
-                    <i className="bi bi-telephone-fill fs-3"></i>
+                    <AppIcon name="bi-telephone-fill" className="fs-3" />
                   </div>
                   <h5 className="mb-2">Emergency?</h5>
                   <p className="mb-3">
                     For medical emergencies, call us immediately
                   </p>
                   <Button variant="light" size="lg" className="rounded-pill">
-                    <i className="bi bi-telephone-fill me-2"></i>
+                    <AppIcon name="bi-telephone-fill" className="me-2" />
                     Call (555) 911-HELP
                   </Button>
                 </Card.Body>
@@ -296,7 +297,7 @@ const Contact = () => {
                       </>
                     ) : (
                       <>
-                        <i className="bi bi-send me-2"></i>
+                        <AppIcon name="bi-send" className="me-2" />
                         Send Message
                       </>
                     )}
@@ -318,7 +319,7 @@ const Contact = () => {
                     variant="outline-primary"
                     className="w-100 rounded-pill"
                   >
-                    <i className="bi bi-calendar-plus me-2"></i>
+                    <AppIcon name="bi-calendar-plus" className="me-2" />
                     Book Appointment
                   </Button>
                 </Col>
@@ -329,7 +330,7 @@ const Contact = () => {
                     variant="outline-primary"
                     className="w-100 rounded-pill"
                   >
-                    <i className="bi bi-question-circle me-2"></i>
+                    <AppIcon name="bi-question-circle" className="me-2" />
                     FAQ
                   </Button>
                 </Col>
@@ -340,7 +341,7 @@ const Contact = () => {
                     variant="outline-primary"
                     className="w-100 rounded-pill"
                   >
-                    <i className="bi bi-chat-dots me-2"></i>
+                    <AppIcon name="bi-chat-dots" className="me-2" />
                     Live Chat
                   </Button>
                 </Col>

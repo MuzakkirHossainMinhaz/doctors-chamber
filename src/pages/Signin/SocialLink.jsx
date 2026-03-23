@@ -7,6 +7,7 @@ import {
 import { doc, setDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
+import AppIcon from "../../components/AppIcon";
 import auth, { db } from "../../firebase.init.js";
 
 const SocialLink = () => {
@@ -59,7 +60,7 @@ const SocialLink = () => {
         className="w-100 d-flex align-items-center justify-content-center gap-2"
         disabled={googleLoading}
       >
-        <i className="bi bi-google fs-5"></i>
+        <AppIcon name="bi-google" className="fs-5" />
         <span>{googleLoading ? "Signing in..." : "Continue with Google"}</span>
       </Button>
 
@@ -69,7 +70,7 @@ const SocialLink = () => {
         className="w-100 d-flex align-items-center justify-content-center gap-2"
         disabled={facebookLoading}
       >
-        <i className="bi bi-facebook fs-5"></i>
+        <AppIcon name="bi-facebook" className="fs-5" />
         <span>
           {facebookLoading ? "Signing in..." : "Continue with Facebook"}
         </span>
@@ -81,7 +82,7 @@ const SocialLink = () => {
         className="w-100 d-flex align-items-center justify-content-center gap-2"
         disabled={githubLoading}
       >
-        <i className="bi bi-github fs-5"></i>
+        <AppIcon name="bi-github" className="fs-5" />
         <span>{githubLoading ? "Signing in..." : "Continue with GitHub"}</span>
       </Button>
 
@@ -90,7 +91,7 @@ const SocialLink = () => {
           variant="danger"
           className="d-flex align-items-center gap-2 mt-3"
         >
-          <i className="bi bi-exclamation-triangle"></i>
+          <AppIcon name="bi-exclamation-triangle" />
           {googleError?.message ||
             facebookError?.message ||
             githubError?.message}

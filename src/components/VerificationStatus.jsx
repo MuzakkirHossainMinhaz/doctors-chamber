@@ -1,4 +1,5 @@
-import { Alert, Badge, Card, Col, Container, Row } from "react-bootstrap";
+import { Alert, Badge, Card, Col, Container, Row, Spinner } from "react-bootstrap";
+import AppIcon from "./AppIcon";
 import useEmailVerification from "../hooks/useEmailVerification";
 
 const VerificationStatus = ({ showFullAlert = false, compact = false }) => {
@@ -14,7 +15,7 @@ const VerificationStatus = ({ showFullAlert = false, compact = false }) => {
   if (loading) {
     return compact ? (
       <Badge bg="secondary" className="verification-status-badge rounded-pill">
-        <i className="bi bi-hourglass-split me-1"></i>
+        <AppIcon name="bi-hourglass-split" className="me-1" />
         Checking...
       </Badge>
     ) : (
@@ -67,7 +68,7 @@ const VerificationStatus = ({ showFullAlert = false, compact = false }) => {
           <Row className="align-items-center">
             <Col md="auto">
               <div className="d-flex align-items-center">
-                <i className={`bi ${getStatusIcon()} me-3 fs-4`}></i>
+                <AppIcon name={getStatusIcon()} className="me-3 fs-4" />
                 <div>
                   <h4 className="mb-2">Account Status: {getStatusText()}</h4>
                   <p className="mb-0">{getVerificationMessage()}</p>
@@ -86,7 +87,7 @@ const VerificationStatus = ({ showFullAlert = false, compact = false }) => {
         bg={getVerificationBadgeVariant()}
         className="verification-status-badge rounded-pill me-2"
       >
-        <i className={`bi ${getStatusIcon()} me-1`}></i>
+        <AppIcon name={getStatusIcon()} className="me-1" />
         {getStatusText()}
       </Badge>
     );
@@ -104,7 +105,10 @@ const VerificationStatus = ({ showFullAlert = false, compact = false }) => {
                     bg={getVerificationBadgeVariant()}
                     className="verification-status-badge rounded-pill p-3"
                   >
-                    <i className={`bi ${getStatusIcon()} me-2 fs-4`}></i>
+                    <AppIcon
+                      name={getStatusIcon()}
+                      className="me-2 fs-4"
+                    />
                     <span className="fs-5">{getStatusText()}</span>
                   </Badge>
                 </div>
@@ -116,7 +120,7 @@ const VerificationStatus = ({ showFullAlert = false, compact = false }) => {
                 {isPendingVerification() && (
                   <Alert variant="warning" className="mt-3">
                     <div className="d-flex align-items-center">
-                      <i className="bi bi-clock me-2"></i>
+                      <AppIcon name="bi-clock" className="me-2" />
                       <span>
                         {Math.floor(timeRemaining || 0)} hours remaining to
                         complete verification

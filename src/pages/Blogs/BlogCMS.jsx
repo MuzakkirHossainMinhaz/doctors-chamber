@@ -23,6 +23,7 @@ import {
 } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
+import AppIcon from "../../components/AppIcon";
 import { auth, db } from "../../firebase.init";
 
 const BlogCMS = () => {
@@ -195,7 +196,7 @@ const BlogCMS = () => {
     return (
       <Container className="my-5">
         <Alert variant="danger" className="text-center">
-          <i className="bi bi-shield-exclamation me-2"></i>
+          <AppIcon name="bi-shield-exclamation" className="me-2" />
           <h4>Access Denied</h4>
           <p>You don't have permission to access the blog management system.</p>
         </Alert>
@@ -214,7 +215,7 @@ const BlogCMS = () => {
         </p>
         <div className="text-center">
           <Button variant="light" onClick={() => setShowModal(true)}>
-            <i className="bi bi-plus-circle me-2"></i>
+            <AppIcon name="bi-plus-circle" className="me-2" />
             Create New Blog
           </Button>
         </div>
@@ -234,7 +235,7 @@ const BlogCMS = () => {
                 </div>
               ) : blogs.length === 0 ? (
                 <Alert variant="info" className="text-center">
-                  <i className="bi bi-journal-text me-2"></i>
+                  <AppIcon name="bi-journal-text" className="me-2" />
                   No blogs found. Create your first blog!
                 </Alert>
               ) : (
@@ -269,14 +270,14 @@ const BlogCMS = () => {
                                   size="sm"
                                   onClick={() => handleEditBlog(blog)}
                                 >
-                                  <i className="bi bi-pencil"></i>
+                                  <AppIcon name="bi-pencil" />
                                 </Button>
                                 <Button
                                   variant="outline-danger"
                                   size="sm"
                                   onClick={() => handleDeleteBlog(blog.id)}
                                 >
-                                  <i className="bi bi-trash"></i>
+                                  <AppIcon name="bi-trash" />
                                 </Button>
                               </div>
                             </div>

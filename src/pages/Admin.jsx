@@ -24,6 +24,7 @@ import {
   Table,
 } from "react-bootstrap";
 import toast from "react-hot-toast";
+import AppIcon from "../components/AppIcon";
 import RoleManager from "../components/RoleManager";
 import { db } from "../firebase.init";
 import useAuthRole from "../hooks/useAuthRole";
@@ -247,7 +248,7 @@ const Admin = () => {
     return (
       <Container className="my-5">
         <Alert variant="danger" className="text-center">
-          <i className="bi bi-shield-exclamation me-2"></i>
+          <AppIcon name="bi-shield-exclamation" className="me-2" />
           <h4>Access Denied</h4>
           <p>You don't have permission to access the admin dashboard.</p>
           <p className="mb-0">
@@ -282,7 +283,7 @@ const Admin = () => {
           onClick={() => setActiveTab("dashboard")}
           className="rounded-pill"
         >
-          <i className="bi bi-speedometer2 me-2"></i>
+          <AppIcon name="bi-speedometer2" className="me-2" />
           Dashboard
         </Button>
 
@@ -292,7 +293,7 @@ const Admin = () => {
             onClick={() => setActiveTab("services")}
             className="rounded-pill"
           >
-            <i className="bi bi-grid-3x3-gap me-2"></i>
+            <AppIcon name="bi-grid-3x3-gap" className="me-2" />
             Services
           </Button>
         )}
@@ -303,7 +304,7 @@ const Admin = () => {
             onClick={() => setActiveTab("bookings")}
             className="rounded-pill"
           >
-            <i className="bi bi-calendar-check me-2"></i>
+            <AppIcon name="bi-calendar-check" className="me-2" />
             Bookings
           </Button>
         )}
@@ -314,7 +315,7 @@ const Admin = () => {
             onClick={() => setActiveTab("users")}
             className="rounded-pill"
           >
-            <i className="bi bi-people me-2"></i>
+            <AppIcon name="bi-people" className="me-2" />
             Users
           </Button>
         )}
@@ -333,7 +334,11 @@ const Admin = () => {
               <Col md={3} className="mb-4">
                 <Card className="h-100 shadow-sm border-0 bg-white">
                   <Card.Body className="text-center p-4">
-                    <i className="bi bi-people display-4" style={{ color: 'var(--color-primary)' }}></i>
+                    <AppIcon
+                      name="bi-people"
+                      className="display-4"
+                      style={{ color: "var(--color-primary)" }}
+                    />
                     <h3 className="mt-3">{stats.totalUsers}</h3>
                     <p className="text-muted">Total Users</p>
                   </Card.Body>
@@ -342,7 +347,10 @@ const Admin = () => {
               <Col md={3} className="mb-4">
                 <Card className="h-100 shadow-sm border-0 bg-white">
                   <Card.Body className="text-center p-4">
-                    <i className="bi bi-calendar-check display-4 text-success"></i>
+                    <AppIcon
+                      name="bi-calendar-check"
+                      className="display-4 text-success"
+                    />
                     <h3 className="mt-3">{stats.totalBookings}</h3>
                     <p className="text-muted">Total Bookings</p>
                   </Card.Body>
@@ -351,7 +359,10 @@ const Admin = () => {
               <Col md={3} className="mb-4">
                 <Card className="h-100 shadow-sm border-0 bg-white">
                   <Card.Body className="text-center p-4">
-                    <i className="bi bi-currency-dollar display-4 text-warning"></i>
+                    <AppIcon
+                      name="bi-currency-dollar"
+                      className="display-4 text-warning"
+                    />
                     <h3 className="mt-3">${stats.totalRevenue}</h3>
                     <p className="text-muted">Total Revenue</p>
                   </Card.Body>
@@ -360,7 +371,10 @@ const Admin = () => {
               <Col md={3} className="mb-4">
                 <Card className="h-100 shadow-sm border-0 bg-white">
                   <Card.Body className="text-center p-4">
-                    <i className="bi bi-grid-3x3-gap display-4 text-info"></i>
+                    <AppIcon
+                      name="bi-grid-3x3-gap"
+                      className="display-4 text-info"
+                    />
                     <h3 className="mt-3">{stats.totalServices}</h3>
                     <p className="text-muted">Services</p>
                   </Card.Body>
@@ -424,7 +438,7 @@ const Admin = () => {
                   variant="primary"
                   onClick={() => setShowServiceModal(true)}
                 >
-                  <i className="bi bi-plus-circle me-2"></i>
+                  <AppIcon name="bi-plus-circle" className="me-2" />
                   Add Service
                 </Button>
               </Card.Header>
@@ -461,14 +475,14 @@ const Admin = () => {
                             className="me-2"
                             onClick={() => handleEditService(service)}
                           >
-                            <i className="bi bi-pencil"></i>
+                            <AppIcon name="bi-pencil" />
                           </Button>
                           <Button
                             variant="outline-danger"
                             size="sm"
                             onClick={() => handleDeleteService(service.id)}
                           >
-                            <i className="bi bi-trash"></i>
+                            <AppIcon name="bi-trash" />
                           </Button>
                         </td>
                       </tr>

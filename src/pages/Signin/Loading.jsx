@@ -1,4 +1,5 @@
 import { Col, Container, Row, Spinner } from "react-bootstrap";
+import AppIcon from "../../components/AppIcon";
 
 const Loading = () => {
   return (
@@ -12,7 +13,7 @@ const Loading = () => {
               </Spinner>
             </div>
             <div className="text-muted">
-              <i className="bi bi-hospital me-2"></i>
+              <AppIcon name="bi-hospital" className="me-2" />
               Doctor's Chamber
             </div>
             <small className="text-muted d-block mt-2">

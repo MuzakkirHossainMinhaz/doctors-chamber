@@ -25,7 +25,11 @@
   height: 2.85rem;
   padding: 0.35rem;
   border-radius: 1rem;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(235, 245, 254, 0.9));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(235, 245, 254, 0.9)
+  );
 }
 
 .site-nav-link {
@@ -44,9 +48,9 @@
 }
 
 .site-navbar .navbar-toggler {
-  padding: 0.45rem 0.7rem;
+  padding: 1.15rem 0.7rem;
   border: 1px solid rgba(28, 133, 232, 0.14) !important;
-  border-radius: 0.9rem;
+  border-radius: 0.75rem;
   box-shadow: none !important;
 }
 
@@ -89,7 +93,7 @@
 }
 
 .navbar-notice {
-  display: inline-flex;
+  display: none;
   align-items: center;
   gap: 0.5rem;
   background: rgba(255, 137, 111, 0.12);

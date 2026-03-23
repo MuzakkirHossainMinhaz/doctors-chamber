@@ -20,6 +20,7 @@ import {
   Spinner,
 } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
+import AppIcon from "../../components/AppIcon";
 import { db } from "../../firebase.init";
 
 const BlogDetail = () => {
@@ -112,7 +113,7 @@ const BlogDetail = () => {
     return (
       <Container className="my-5">
         <Alert variant="danger" className="text-center">
-          <i className="bi bi-exclamation-triangle me-2"></i>
+          <AppIcon name="bi-exclamation-triangle" className="me-2" />
           <h4>Blog Not Found</h4>
           <p>The blog you're looking for doesn't exist or has been removed.</p>
           <Button variant="success" as={Link} to="/blogs">
@@ -128,7 +129,7 @@ const BlogDetail = () => {
       <div className="rounded-3 p-4 mb-4" style={{ backgroundColor: 'var(--color-gray-50)' }}>
         <div className="d-flex align-items-center gap-3">
           <Link to="/blogs" className="text-decoration-none" style={{ color: 'var(--color-primary)' }}>
-            <i className="bi bi-house-door me-2"></i>
+            <AppIcon name="bi-house-door" className="me-2" />
             Blogs
           </Link>
           <span className="text-muted">/</span>
@@ -153,7 +154,7 @@ const BlogDetail = () => {
               className="text-white rounded-circle"
               style={{ width: "60px", height: "60px", backgroundColor: 'var(--color-primary)' }}
             >
-              <i className="bi bi-person fs-3"></i>
+              <AppIcon name="bi-person" className="fs-3" />
             </div>
             <div className="ms-3">
               <h6 className="mb-1">{blog.author?.name}</h6>
@@ -196,7 +197,7 @@ const BlogDetail = () => {
                   className="text-white rounded-circle mx-auto"
                   style={{ width: "80px", height: "80px", backgroundColor: 'var(--color-primary)' }}
                 >
-                  <i className="bi bi-person fs-1"></i>
+                  <AppIcon name="bi-person" className="fs-1" />
                 </div>
                 <h6 className="mt-2">{blog.author?.name}</h6>
                 <p className="text-muted">
@@ -277,7 +278,7 @@ const BlogDetail = () => {
           to="/blogs"
           className="me-3"
         >
-          <i className="bi bi-arrow-left me-2"></i>
+          <AppIcon name="bi-arrow-left" className="me-2" />
           Back to Blogs
         </Button>
         <Button
@@ -286,7 +287,7 @@ const BlogDetail = () => {
           to="/services"
           className="rounded-pill"
         >
-          <i className="bi bi-calendar-plus me-2"></i>
+          <AppIcon name="bi-calendar-plus" className="me-2" />
           Book Appointment
         </Button>
       </div>

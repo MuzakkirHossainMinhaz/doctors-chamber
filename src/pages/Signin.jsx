@@ -9,6 +9,7 @@ import {
 } from "react-bootstrap";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import AppIcon from "../components/AppIcon";
 import auth from "../firebase.init";
 import SocialLink from "./Signin/SocialLink";
 
@@ -59,7 +60,7 @@ const Signin = () => {
 
               {error && (
                 <Alert variant="danger" className="mb-4">
-                  <i className="bi bi-exclamation-triangle me-2"></i>
+                  <AppIcon name="bi-exclamation-triangle" className="me-2" />
                   {error.message}
                 </Alert>
               )}
@@ -119,7 +120,7 @@ const Signin = () => {
                     </>
                   ) : (
                     <>
-                      <i className="bi bi-box-arrow-in-right me-2"></i>
+                      <AppIcon name="bi-box-arrow-in-right" className="me-2" />
                       Sign In
                     </>
                   )}

@@ -9,6 +9,7 @@ import {
   Row,
   Spinner,
 } from "react-bootstrap";
+import AppIcon from "./AppIcon";
 import useEmailVerification from "../hooks/useEmailVerification";
 
 const VerificationGuard = ({
@@ -61,7 +62,10 @@ const VerificationGuard = ({
             <Row className="align-items-center mb-3">
               <Col md="auto">
                 <div className="d-flex align-items-center">
-                  <i className="bi bi-exclamation-triangle-fill me-3 fs-4"></i>
+                  <AppIcon
+                    name="bi-exclamation-triangle-fill"
+                    className="me-3 fs-4"
+                  />
                   <div>
                     <h4 className="mb-2">Email Verification Required</h4>
                     <Badge
@@ -104,7 +108,7 @@ const VerificationGuard = ({
                       </>
                     ) : (
                       <>
-                        <i className="bi bi-envelope me-2"></i>
+                        <AppIcon name="bi-envelope" className="me-2" />
                         Resend Verification Email
                       </>
                     )}
@@ -116,7 +120,7 @@ const VerificationGuard = ({
                     disabled={verificationLoading}
                     className="rounded-pill"
                   >
-                    <i className="bi bi-check-circle me-2"></i>
+                    <AppIcon name="bi-check-circle" className="me-2" />
                     I've Verified My Email
                   </Button>
                 </div>
@@ -128,7 +132,7 @@ const VerificationGuard = ({
                 <Col md="12">
                   <Alert variant="info" className="mt-3">
                     <div className="d-flex align-items-center">
-                      <i className="bi bi-clock me-2"></i>
+                      <AppIcon name="bi-clock" className="me-2" />
                       <span>
                         Time remaining: {Math.floor(timeRemaining)} hours to
                         complete verification
@@ -150,7 +154,10 @@ const VerificationGuard = ({
             <Row className="align-items-center mb-3">
               <Col md="auto">
                 <div className="d-flex align-items-center">
-                  <i className="bi bi-shield-exclamation me-3 fs-4"></i>
+                  <AppIcon
+                    name="bi-shield-exclamation"
+                    className="me-3 fs-4"
+                  />
                   <div>
                     <h4 className="mb-2">Account Suspended</h4>
                     <Badge bg="danger" className="ms-auto rounded-pill">
@@ -175,7 +182,7 @@ const VerificationGuard = ({
                 <Card className="border-0" style={{ backgroundColor: 'var(--color-gray-50)' }}>
                   <Card.Body className="p-4">
                     <h5 className="mb-3">
-                      <i className="bi bi-info-circle me-2"></i>
+                      <AppIcon name="bi-info-circle" className="me-2" />
                       To resolve this issue:
                     </h5>
                     <ol className="mb-0 ps-3">
@@ -192,7 +199,7 @@ const VerificationGuard = ({
               <Col md="12">
                 <div className="text-center mt-3">
                   <Button variant="outline-danger" className="rounded-pill">
-                    <i className="bi bi-envelope me-2"></i>
+                    <AppIcon name="bi-envelope" className="me-2" />
                     Contact Support
                   </Button>
                 </div>
@@ -210,7 +217,7 @@ const VerificationGuard = ({
             <Row className="align-items-center mb-3">
               <Col md="auto">
                 <div className="d-flex align-items-center">
-                  <i className="bi bi-lock me-3 fs-4"></i>
+                  <AppIcon name="bi-lock" className="me-3 fs-4" />
                   <div>
                     <h4 className="mb-2">Account Suspended</h4>
                     <Badge bg="dark" className="ms-auto rounded-pill">
@@ -234,7 +241,7 @@ const VerificationGuard = ({
               <Col md="12">
                 <div className="text-center mt-3">
                   <Button variant="outline-secondary" className="rounded-pill">
-                    <i className="bi bi-envelope me-2"></i>
+                    <AppIcon name="bi-envelope" className="me-2" />
                     Contact Support
                   </Button>
                 </div>
@@ -251,7 +258,7 @@ const VerificationGuard = ({
           <Row className="align-items-center">
             <Col md="auto">
               <div className="d-flex align-items-center">
-                <i className="bi bi-info-circle me-3 fs-4"></i>
+                <AppIcon name="bi-info-circle" className="me-3 fs-4" />
                 <div>
                   <h4 className="mb-2">Account Verification Required</h4>
                   <span>Account verification required to {action}.</span>
@@ -287,7 +294,7 @@ const VerificationGuard = ({
     >
       <Modal.Header className="verification-modal-header">
         <Modal.Title>
-          <i className="bi bi-shield-check me-2"></i>
+          <AppIcon name="bi-shield-check" className="me-2" />
           Account Verification Required
         </Modal.Title>
       </Modal.Header>

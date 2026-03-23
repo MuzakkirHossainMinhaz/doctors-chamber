@@ -12,6 +12,7 @@ import { doc, setDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
+import AppIcon from "../components/AppIcon";
 import auth, { db } from "../firebase.init";
 import SocialLink from "./Signin/SocialLink";
 
@@ -78,7 +79,7 @@ const Register = () => {
 
               {error && (
                 <Alert variant="danger" className="mb-4">
-                  <i className="bi bi-exclamation-triangle me-2"></i>
+                  <AppIcon name="bi-exclamation-triangle" className="me-2" />
                   {error.message}
                 </Alert>
               )}
@@ -135,7 +136,7 @@ const Register = () => {
                     </>
                   ) : (
                     <>
-                      <i className="bi bi-person-plus me-2"></i>
+                      <AppIcon name="bi-person-plus" className="me-2" />
                       Create Account
                     </>
                   )}

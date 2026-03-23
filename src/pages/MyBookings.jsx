@@ -23,6 +23,7 @@ import {
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import AppIcon from "../components/AppIcon";
 import { auth, db } from "../firebase.init";
 
 const MyBookings = () => {
@@ -183,7 +184,7 @@ const MyBookings = () => {
 
       {bookings.length === 0 ? (
         <Alert variant="info" className="text-center">
-          <i className="bi bi-calendar-x me-2"></i>
+          <AppIcon name="bi-calendar-x" className="me-2" />
           You have no bookings yet.
           <div className="mt-3">
             <Button as={Link} to="/services" variant="primary">

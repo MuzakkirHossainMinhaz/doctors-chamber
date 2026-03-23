@@ -20,6 +20,7 @@ import {
   Spinner,
 } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
+import AppIcon from "./AppIcon";
 import { auth, db } from "../firebase.init";
 import useAuthRole from "../hooks/useAuthRole";
 
@@ -141,7 +142,7 @@ const ChatSystem = () => {
     return (
       <Container className="my-5">
         <Alert variant="info" className="text-center">
-          <i className="bi bi-chat-dots me-2"></i>
+          <AppIcon name="bi-chat-dots" className="me-2" />
           <h4>Chat Support</h4>
           <p>Please sign in to access our chat support system.</p>
           <Button variant="success" href="/signin">
@@ -212,7 +213,7 @@ const ChatSystem = () => {
               <div style={{ height: "420px", overflowY: "auto" }}>
                 {currentMessages.length === 0 ? (
                   <div className="text-center text-muted py-5">
-                    <i className="bi bi-chat-dots display-4 mb-3"></i>
+                    <AppIcon name="bi-chat-dots" className="display-4 mb-3" />
                     <p>
                       {isStaffUser
                         ? "Select a conversation from the inbox."
@@ -268,7 +269,7 @@ const ChatSystem = () => {
                     type="submit"
                     disabled={!newMessage.trim() || (isStaffUser && !selectedConversationId)}
                   >
-                    <i className="bi bi-send"></i>
+                    <AppIcon name="bi-send" />
                   </Button>
                 </div>
               </Form>

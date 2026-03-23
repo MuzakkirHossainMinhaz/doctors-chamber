@@ -1,42 +1,42 @@
 /* Doctor's Chamber Theme - Derived from public/logo.png */
 :root {
   /* Primary Brand Colors */
-  --color-primary: #FF896F;
-  --color-primary-dark: #D96D56;
-  --color-primary-light: #FFB29F;
-  
+  --color-primary: #ff896f;
+  --color-primary-dark: #d96d56;
+  --color-primary-light: #ffb29f;
+
   /* Secondary Brand Colors */
-  --color-secondary: #1C85E8;
-  --color-secondary-dark: #166CC0;
-  --color-secondary-light: #56A4EE;
-  
+  --color-secondary: #1c85e8;
+  --color-secondary-dark: #166cc0;
+  --color-secondary-light: #56a4ee;
+
   /* Accent / Neutralized Brand Colors */
-  --color-accent: #C8D0D8;
-  --color-accent-dark: #A6B1BB;
-  --color-accent-light: #EBF5FE;
-  
+  --color-accent: #c8d0d8;
+  --color-accent-dark: #a6b1bb;
+  --color-accent-light: #ebf5fe;
+
   /* Neutral Colors */
-  --color-white: #FFFFFF;
-  --color-gray-50: #F8FBFE;
-  --color-gray-100: #EBF5FE;
-  --color-gray-200: #DCE8F1;
-  --color-gray-300: #C8D0D8;
-  --color-gray-400: #A6B1BB;
-  --color-gray-500: #7A8794;
-  --color-gray-600: #5A6772;
-  --color-gray-700: #38424C;
-  --color-gray-800: #25303A;
+  --color-white: #ffffff;
+  --color-gray-50: #f8fbfe;
+  --color-gray-100: #ebf5fe;
+  --color-gray-200: #dce8f1;
+  --color-gray-300: #c8d0d8;
+  --color-gray-400: #a6b1bb;
+  --color-gray-500: #7a8794;
+  --color-gray-600: #5a6772;
+  --color-gray-700: #38424c;
+  --color-gray-800: #25303a;
   --color-gray-900: #162028;
-  
+
   /* Status Colors */
-  --color-success: #2C8E78;
-  --color-success-light: #D9F3EC;
-  --color-warning: #E28A2E;
-  --color-warning-light: #FCE8CF;
-  --color-danger: #C75B64;
-  --color-danger-light: #F8D9DE;
-  --color-info: #1C85E8;
-  --color-info-light: #DCEEFF;
+  --color-success: #2c8e78;
+  --color-success-light: #d9f3ec;
+  --color-warning: #e28a2e;
+  --color-warning-light: #fce8cf;
+  --color-danger: #c75b64;
+  --color-danger-light: #f8d9de;
+  --color-info: #1c85e8;
+  --color-info-light: #dceeff;
 
   /* Bootstrap theme bridge */
   --bs-primary: var(--color-primary);
@@ -50,12 +50,12 @@
   --bs-border-color: var(--color-gray-200);
   --bs-card-bg: rgba(255, 255, 255, 0.92);
   --bs-emphasis-color: var(--color-gray-900);
-  
+
   /* Typography */
   --font-primary: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
   --font-secondary: "Georgia", "Times New Roman", serif;
   --font-mono: "Fira Code", "Monaco", "Consolas", monospace;
-  
+
   /* Font Sizes */
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
@@ -66,7 +66,7 @@
   --font-size-3xl: 1.875rem;
   --font-size-4xl: 2.25rem;
   --font-size-5xl: 3rem;
-  
+
   /* Spacing */
   --spacing-0: 0;
   --spacing-1: 0.25rem;
@@ -81,7 +81,7 @@
   --spacing-16: 4rem;
   --spacing-20: 5rem;
   --spacing-24: 6rem;
-  
+
   /* Border Radius */
   --radius-none: 0;
   --radius-sm: 0.25rem;
@@ -91,15 +91,22 @@
   --radius-xl: 1rem;
   --radius-2xl: 1.5rem;
   --radius-full: 9999px;
-  
+
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(28, 133, 232, 0.08);
-  --shadow-base: 0 1px 3px 0 rgba(28, 133, 232, 0.14), 0 1px 2px 0 rgba(22, 108, 192, 0.08);
-  --shadow-md: 0 4px 6px -1px rgba(28, 133, 232, 0.14), 0 2px 4px -1px rgba(22, 108, 192, 0.08);
-  --shadow-lg: 0 10px 15px -3px rgba(28, 133, 232, 0.14), 0 4px 6px -2px rgba(22, 108, 192, 0.08);
-  --shadow-xl: 0 20px 25px -5px rgba(28, 133, 232, 0.14), 0 10px 10px -5px rgba(22, 108, 192, 0.06);
+  --shadow-base:
+    0 1px 3px 0 rgba(28, 133, 232, 0.14), 0 1px 2px 0 rgba(22, 108, 192, 0.08);
+  --shadow-md:
+    0 4px 6px -1px rgba(28, 133, 232, 0.14),
+    0 2px 4px -1px rgba(22, 108, 192, 0.08);
+  --shadow-lg:
+    0 10px 15px -3px rgba(28, 133, 232, 0.14),
+    0 4px 6px -2px rgba(22, 108, 192, 0.08);
+  --shadow-xl:
+    0 20px 25px -5px rgba(28, 133, 232, 0.14),
+    0 10px 10px -5px rgba(22, 108, 192, 0.06);
   --shadow-2xl: 0 25px 50px -12px rgba(28, 133, 232, 0.3);
-  
+
   /* Transitions */
   --transition-fast: 150ms ease-in-out;
   --transition-base: 250ms ease-in-out;
@@ -122,28 +129,58 @@ body {
   line-height: 1.6;
   color: var(--color-gray-700);
   background:
-    radial-gradient(circle at top left, rgba(172, 211, 247, 0.35), transparent 32%),
-    radial-gradient(circle at top right, rgba(255, 137, 111, 0.16), transparent 28%),
-    linear-gradient(180deg, var(--color-gray-50) 0%, var(--color-white) 42%, var(--color-gray-100) 100%);
+    radial-gradient(
+      circle at top left,
+      rgba(172, 211, 247, 0.35),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at top right,
+      rgba(255, 137, 111, 0.16),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      var(--color-gray-50) 0%,
+      var(--color-white) 42%,
+      var(--color-gray-100) 100%
+    );
   background-color: var(--color-gray-50);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 600;
   line-height: 1.2;
   color: var(--color-gray-900);
   margin-bottom: var(--spacing-4);
 }
 
-h1 { font-size: var(--font-size-4xl); }
-h2 { font-size: var(--font-size-3xl); }
-h3 { font-size: var(--font-size-2xl); }
-h4 { font-size: var(--font-size-xl); }
-h5 { font-size: var(--font-size-lg); }
-h6 { font-size: var(--font-size-base); }
+h1 {
+  font-size: var(--font-size-4xl);
+}
+h2 {
+  font-size: var(--font-size-3xl);
+}
+h3 {
+  font-size: var(--font-size-2xl);
+}
+h4 {
+  font-size: var(--font-size-xl);
+}
+h5 {
+  font-size: var(--font-size-lg);
+}
+h6 {
+  font-size: var(--font-size-base);
+}
 
 p {
   margin-bottom: var(--spacing-4);
@@ -349,12 +386,24 @@ pre {
 
 /* Responsive Typography */
 @media (max-width: 768px) {
-  h1 { font-size: var(--font-size-3xl); }
-  h2 { font-size: var(--font-size-2xl); }
-  h3 { font-size: var(--font-size-xl); }
-  h4 { font-size: var(--font-size-lg); }
-  h5 { font-size: var(--font-size-base); }
-  h6 { font-size: var(--font-size-sm); }
+  h1 {
+    font-size: var(--font-size-3xl);
+  }
+  h2 {
+    font-size: var(--font-size-2xl);
+  }
+  h3 {
+    font-size: var(--font-size-xl);
+  }
+  h4 {
+    font-size: var(--font-size-lg);
+  }
+  h5 {
+    font-size: var(--font-size-base);
+  }
+  h6 {
+    font-size: var(--font-size-sm);
+  }
 }
 
 /* Accessibility */

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import AppIcon from "../../components/AppIcon";
 import { fetchServicesFromFirestore } from "../../utils/serviceData";
 import Service from "./Service.jsx";
 import "./Services.css";
@@ -52,7 +53,7 @@ const Services = () => {
         <div className="text-center mb-5 mx-auto" style={{ maxWidth: "44rem" }}>
           <div className="d-inline-flex align-items-center bg-white rounded-pill shadow-sm mb-4 px-4 py-2">
             <span className="me-2" style={{ color: 'var(--color-primary)' }}>
-              <i className="bi bi-heart-pulse fs-4"></i>
+              <AppIcon name="bi-heart-pulse" className="fs-4" />
             </span>
             <span className="fw-semibold">Our Services</span>
           </div>
@@ -100,7 +101,10 @@ const Services = () => {
 
             {filteredServices.length === 0 && (
               <div className="services-empty-state text-center mx-auto">
-                <i className={`bi ${loadFailed ? "bi-wifi-off" : "bi-inbox"} fs-1 mb-3`}></i>
+                <AppIcon
+                  name={loadFailed ? "bi-wifi-off" : "bi-inbox"}
+                  className="fs-1 mb-3"
+                />
                 <h3>{loadFailed ? "We could not load live services" : "No services found yet"}</h3>
                 <p className="text-muted mb-0">
                   {loadFailed
@@ -114,7 +118,7 @@ const Services = () => {
                     variant="primary"
                     className="rounded-pill"
                   >
-                    <i className="bi bi-telephone me-2"></i>
+                    <AppIcon name="bi-telephone" className="me-2" />
                     Contact Care Team
                   </Button>
                   <Button
@@ -123,7 +127,7 @@ const Services = () => {
                     variant="outline-primary"
                     className="rounded-pill"
                   >
-                    <i className="bi bi-box-arrow-in-right me-2"></i>
+                    <AppIcon name="bi-box-arrow-in-right" className="me-2" />
                     Sign In
                   </Button>
                 </div>
@@ -133,11 +137,11 @@ const Services = () => {
             <div className="services-cta text-center rounded-4">
               <div className="d-flex flex-wrap justify-content-center gap-3 mb-3">
                 <span className="services-cta-badge rounded-pill">
-                  <i className="bi bi-database-check"></i>
+                  <AppIcon name="bi-database-check" />
                   Live Firestore-backed services
                 </span>
                 <span className="services-cta-badge rounded-pill">
-                  <i className="bi bi-person-check"></i>
+                  <AppIcon name="bi-person-check" />
                   Verified booking flow
                 </span>
               </div>
@@ -156,7 +160,7 @@ const Services = () => {
                   size="lg"
                   className="rounded-pill"
                 >
-                  <i className="bi bi-calendar-plus me-2"></i>
+                  <AppIcon name="bi-calendar-plus" className="me-2" />
                   Book Appointment
                 </Button>
                 <Button
@@ -166,7 +170,7 @@ const Services = () => {
                   size="lg"
                   className="rounded-pill"
                 >
-                  <i className="bi bi-telephone me-2"></i>
+                  <AppIcon name="bi-telephone" className="me-2" />
                   Contact Us
                 </Button>
               </div>

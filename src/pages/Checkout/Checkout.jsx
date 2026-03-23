@@ -13,6 +13,7 @@ import {
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
+import AppIcon from "../../components/AppIcon";
 import { auth, db } from "../../firebase.init";
 import { normalizeService } from "../../utils/serviceData";
 import BookingCalendar from "./BookingCalendar";
@@ -205,7 +206,10 @@ const Checkout = () => {
     return (
       <Container className="my-5">
         <Alert variant="success" className="text-center">
-          <i className="bi bi-check-circle-fill display-1 mb-3"></i>
+          <AppIcon
+            name="bi-check-circle-fill"
+            className="display-1 mb-3"
+          />
           <h3>Booking Confirmed!</h3>
           <p>Your appointment has been successfully booked.</p>
           <p>You will be redirected to your profile shortly...</p>
@@ -363,7 +367,7 @@ const Checkout = () => {
                         }
                       >
                         Proceed to Payment
-                        <i className="bi bi-arrow-right ms-2"></i>
+                        <AppIcon name="bi-arrow-right" className="ms-2" />
                       </Button>
                     </Form>
                   </Card.Body>

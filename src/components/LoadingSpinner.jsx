@@ -1,4 +1,5 @@
 import { Col, Container, Row, Spinner } from "react-bootstrap";
+import AppIcon from "./AppIcon";
 
 const LoadingSpinner = ({
   message = "Loading Doctor's Chamber services...",
@@ -37,7 +38,7 @@ const LoadingSpinner = ({
             <p className="mt-3 text-muted">{message}</p>
             <div className="mt-3">
               <small className="text-muted">
-                <i className="bi bi-info-circle me-1"></i>
+                <AppIcon name="bi-info-circle" className="me-1" />
                 Please wait while we prepare your healthcare experience
               </small>
             </div>

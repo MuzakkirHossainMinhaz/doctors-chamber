@@ -1,5 +1,6 @@
 import { Badge, Button, Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import AppIcon from "../components/AppIcon";
 
 const About = () => {
   return (
@@ -30,7 +31,7 @@ const About = () => {
                 className="d-inline-flex align-items-center justify-content-center text-white rounded-circle mb-3 transition-smooth"
                 style={{ width: "60px", height: "60px", backgroundColor: 'var(--color-primary)' }}
               >
-                <i className="bi bi-heart-pulse fs-3"></i>
+                <AppIcon name="bi-heart-pulse" className="fs-3" />
               </div>
               <Card.Title className="h5">Our Mission</Card.Title>
               <Card.Text className="text-muted">
@@ -50,7 +51,7 @@ const About = () => {
                 className="d-inline-flex align-items-center justify-content-center text-white rounded-circle mb-3 transition-smooth"
                 style={{ width: "60px", height: "60px", backgroundColor: 'var(--color-accent)' }}
               >
-                <i className="bi bi-shield-check fs-3"></i>
+                <AppIcon name="bi-shield-check" className="fs-3" />
               </div>
               <Card.Title className="h5">Our Vision</Card.Title>
               <Card.Text className="text-muted">
@@ -69,7 +70,7 @@ const About = () => {
                 className="d-inline-flex align-items-center justify-content-center text-white rounded-circle mb-3 transition-smooth"
                 style={{ width: "60px", height: "60px", backgroundColor: 'var(--color-warning)' }}
               >
-                <i className="bi bi-award fs-3"></i>
+                <AppIcon name="bi-award" className="fs-3" />
               </div>
               <Card.Title className="h5">Our Values</Card.Title>
               <Card.Text className="text-muted">
@@ -97,7 +98,7 @@ const About = () => {
               <Row className="g-4 text-start">
                 <Col md={6} className="mb-3">
                   <h5 className="fw-semibold" style={{ color: 'var(--color-primary)' }}>
-                    <i className="bi bi-check-circle me-2"></i>
+                    <AppIcon name="bi-check-circle" className="me-2" />
                     Expert Medical Professionals
                   </h5>
                   <p className="text-muted">
@@ -107,7 +108,7 @@ const About = () => {
                 </Col>
                 <Col md={6} className="mb-3">
                   <h5 className="fw-semibold" style={{ color: 'var(--color-success)' }}>
-                    <i className="bi bi-calendar-check me-2"></i>
+                    <AppIcon name="bi-calendar-check" className="me-2" />
                     Easy Appointment Booking
                   </h5>
                   <p className="text-muted">
@@ -117,7 +118,7 @@ const About = () => {
                 </Col>
                 <Col md={6} className="mb-3">
                   <h5 className="fw-semibold" style={{ color: 'var(--color-accent)' }}>
-                    <i className="bi bi-credit-card me-2"></i>
+                    <AppIcon name="bi-credit-card" className="me-2" />
                     Secure Payment Processing
                   </h5>
                   <p className="text-muted">
@@ -127,7 +128,7 @@ const About = () => {
                 </Col>
                 <Col md={6} className="mb-3">
                   <h5 className="fw-semibold" style={{ color: 'var(--color-warning)' }}>
-                    <i className="bi bi-chat-dots me-2"></i>
+                    <AppIcon name="bi-chat-dots" className="me-2" />
                     Real-time Communication
                   </h5>
                   <p className="text-muted">
@@ -145,7 +146,7 @@ const About = () => {
                   size="lg"
                   className="rounded-pill me-3"
                 >
-                  <i className="bi bi-grid-3x3-gap me-2"></i>
+                  <AppIcon name="bi-grid-3x3-gap" className="me-2" />
                   Explore Our Services
                 </Button>
                 <Button
@@ -155,7 +156,7 @@ const About = () => {
                   size="lg"
                   className="rounded-pill"
                 >
-                  <i className="bi bi-telephone me-2"></i>
+                  <AppIcon name="bi-telephone" className="me-2" />
                   Contact Us
                 </Button>
               </div>
@@ -181,7 +182,7 @@ const About = () => {
                   size="lg"
                   className="rounded-pill"
                 >
-                  <i className="bi bi-person-plus me-2"></i>
+                  <AppIcon name="bi-person-plus" className="me-2" />
                   Create Account
                 </Button>
                 <Button
@@ -191,7 +192,7 @@ const About = () => {
                   size="lg"
                   className="rounded-pill"
                 >
-                  <i className="bi bi-box-arrow-in-right me-2"></i>
+                  <AppIcon name="bi-box-arrow-in-right" className="me-2" />
                   Sign In
                 </Button>
               </div>

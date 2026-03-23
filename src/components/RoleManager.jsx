@@ -12,6 +12,7 @@ import {
   Table,
 } from "react-bootstrap";
 import toast from "react-hot-toast";
+import AppIcon from "./AppIcon";
 import { db } from "../firebase.init";
 import useAuthRole from "../hooks/useAuthRole";
 
@@ -108,7 +109,7 @@ const RoleManager = ({ users: initialUsers = [], bookings = [], onRefresh = null
       <Container className="my-5">
         <Alert variant="danger" className="text-center">
           <Alert.Heading>
-            <i className="bi bi-shield-exclamation me-2"></i>
+            <AppIcon name="bi-shield-exclamation" className="me-2" />
             Access Denied
           </Alert.Heading>
           <p className="mb-0">
@@ -131,7 +132,7 @@ const RoleManager = ({ users: initialUsers = [], bookings = [], onRefresh = null
         <div className="d-flex justify-content-between align-items-center">
           <div>
             <h3 className="mb-0">
-              <i className="bi bi-people-gear me-2"></i>
+              <AppIcon name="bi-people-gear" className="me-2" />
               User Role Management
             </h3>
             <p className="text-muted mb-0 mt-2">
@@ -139,7 +140,7 @@ const RoleManager = ({ users: initialUsers = [], bookings = [], onRefresh = null
             </p>
           </div>
           <Button variant="outline-primary" size="sm" onClick={fetchUsers}>
-            <i className="bi bi-arrow-clockwise me-2"></i>
+            <AppIcon name="bi-arrow-clockwise" className="me-2" />
             Refresh
           </Button>
         </div>
@@ -148,7 +149,7 @@ const RoleManager = ({ users: initialUsers = [], bookings = [], onRefresh = null
         <div className="mb-4">
           <div className="d-flex align-items-center justify-content-between mb-3">
             <h5 className="mb-0">
-              <i className="bi bi-search me-2"></i>
+              <AppIcon name="bi-search" className="me-2" />
               Search Users
             </h5>
             <Badge bg="info" className="rounded-pill">

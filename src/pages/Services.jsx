@@ -12,6 +12,7 @@ import {
   Spinner,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import AppIcon from "../components/AppIcon";
 import VerificationGuard from "../components/VerificationGuard";
 import { fetchServicesFromFirestore } from "../utils/serviceData";
 
@@ -102,7 +103,7 @@ const Services = () => {
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <InputGroup.Text>
-                  <i className="bi bi-search"></i>
+                  <AppIcon name="bi-search" />
                 </InputGroup.Text>
               </InputGroup>
             </Col>
@@ -125,7 +126,7 @@ const Services = () => {
       {/* Services Grid */}
       {filteredServices.length === 0 ? (
         <Alert variant="info" className="text-center">
-          <i className="bi bi-inbox me-2"></i>
+          <AppIcon name="bi-inbox" className="me-2" />
           {services.length === 0
             ? "No services available at the moment."
             : "No services found matching your criteria."}
@@ -157,11 +158,11 @@ const Services = () => {
                   </Card.Text>
                   <div className="d-flex justify-content-between align-items-center mb-3">
                     <div className="text-muted">
-                      <i className="bi bi-clock me-1"></i>
+                      <AppIcon name="bi-clock" className="me-1" />
                       {service.duration || "30"} mins
                     </div>
                     <div className="text-success fw-semibold">
-                      <i className="bi bi-currency-dollar me-1"></i>$
+                      <AppIcon name="bi-currency-dollar" className="me-1" />$
                       {service.price || "50"}
                     </div>
                   </div>
@@ -176,7 +177,7 @@ const Services = () => {
                         variant="primary"
                         className="w-100"
                       >
-                        <i className="bi bi-calendar-plus me-2"></i>
+                        <AppIcon name="bi-calendar-plus" className="me-2" />
                         Book Appointment
                       </Button>
                     </VerificationGuard>
@@ -200,7 +201,7 @@ const Services = () => {
                     className="d-inline-flex align-items-center justify-content-center text-white rounded-circle mb-3 transition-smooth"
                     style={{ width: "60px", height: "60px", backgroundColor: 'var(--color-primary)' }}
                   >
-                    <i className="bi bi-shield-check fs-4"></i>
+                    <AppIcon name="bi-shield-check" className="fs-4" />
                   </div>
                   <h5 className="mb-3">Expert Care</h5>
                   <p className="text-muted">
@@ -216,7 +217,7 @@ const Services = () => {
                     className="d-inline-flex align-items-center justify-content-center text-white rounded-circle mb-3 transition-smooth"
                     style={{ width: "60px", height: "60px", backgroundColor: 'var(--color-accent)' }}
                   >
-                    <i className="bi bi-clock-history fs-4"></i>
+                    <AppIcon name="bi-clock-history" className="fs-4" />
                   </div>
                   <h5 className="mb-3">Flexible Scheduling</h5>
                   <p className="text-muted">
@@ -233,7 +234,7 @@ const Services = () => {
                     className="d-inline-flex align-items-center justify-content-center text-white rounded-circle mb-3 transition-smooth"
                     style={{ width: "60px", height: "60px", backgroundColor: 'var(--color-success)' }}
                   >
-                    <i className="bi bi-heart-pulse fs-4"></i>
+                    <AppIcon name="bi-heart-pulse" className="fs-4" />
                   </div>
                   <h5 className="mb-3">Personalized Care</h5>
                   <p className="text-muted">

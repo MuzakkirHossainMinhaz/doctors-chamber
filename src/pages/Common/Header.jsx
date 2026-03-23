@@ -9,9 +9,10 @@ import {
 } from "react-bootstrap";
 import { useSignOut } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import AppIcon from "../../components/AppIcon";
 import { useNotifications } from "../../components/NotificationSystem";
-import { auth } from "../../firebase.init";
 import VerificationStatus from "../../components/VerificationStatus";
+import { auth } from "../../firebase.init";
 import useAuthRole from "../../hooks/useAuthRole";
 import "./Header.css";
 
@@ -85,7 +86,11 @@ const Header = () => {
       <Navbar className="bg-white shadow-sm">
         <Container>
           <div className="d-flex justify-content-center">
-            <div className="spinner-border" style={{ color: 'var(--color-primary)' }} role="status">
+            <div
+              className="spinner-border"
+              style={{ color: "var(--color-primary)" }}
+              role="status"
+            >
               <span className="visually-hidden">Loading...</span>
             </div>
           </div>
@@ -117,10 +122,15 @@ const Header = () => {
               />
             </span>
             <span className="d-flex flex-column lh-sm">
-              <small className="text-uppercase text-muted" style={{ letterSpacing: "0.1em", fontSize: "0.74rem" }}>
+              <small
+                className="text-uppercase text-muted"
+                style={{ letterSpacing: "0.1em", fontSize: "0.74rem" }}
+              >
                 Care Platform
               </small>
-              <strong style={{ color: "var(--color-secondary)", fontSize: "1.08rem" }}>
+              <strong
+                style={{ color: "var(--color-secondary)", fontSize: "1.08rem" }}
+              >
                 Doctor&apos;s Chamber
               </strong>
             </span>
@@ -137,7 +147,6 @@ const Header = () => {
                 to="/"
                 className={`site-nav-link ${isActivePath("/") ? "active" : ""}`}
               >
-                <i className="bi bi-house me-2"></i>
                 Home
               </Nav.Link>
 
@@ -146,7 +155,6 @@ const Header = () => {
                 to="/services"
                 className={`site-nav-link ${isActivePath("/services") ? "active" : ""}`}
               >
-                <i className="bi bi-grid-3x3-gap me-2"></i>
                 Services
               </Nav.Link>
 
@@ -155,7 +163,6 @@ const Header = () => {
                 to="/blogs"
                 className={`site-nav-link ${isActivePath("/blogs") ? "active" : ""}`}
               >
-                <i className="bi bi-journal-text me-2"></i>
                 Blogs
               </Nav.Link>
 
@@ -164,7 +171,6 @@ const Header = () => {
                 to="/contact"
                 className={`site-nav-link ${isActivePath("/contact") ? "active" : ""}`}
               >
-                <i className="bi bi-telephone me-2"></i>
                 Contact
               </Nav.Link>
 
@@ -175,7 +181,6 @@ const Header = () => {
                   to="/admin"
                   className={`site-nav-link ${isActivePath("/admin") ? "active" : ""}`}
                 >
-                  <i className="bi bi-gear me-2"></i>
                   Admin
                 </Nav.Link>
               )}
@@ -186,7 +191,6 @@ const Header = () => {
                   to="/doctor-dashboard"
                   className={`site-nav-link ${isActivePath("/doctor-dashboard") ? "active" : ""}`}
                 >
-                  <i className="bi bi-speedometer2 me-2"></i>
                   Dashboard
                 </Nav.Link>
               )}
@@ -194,7 +198,6 @@ const Header = () => {
               <div className="navbar-actions ms-lg-3">
                 {!user && (
                   <div className="navbar-notice rounded-pill px-3 py-2 fw-semibold">
-                    <i className="bi bi-shield-check"></i>
                     <span>Verified booking and protected patient access</span>
                   </div>
                 )}
@@ -218,7 +221,7 @@ const Header = () => {
                             {user.displayName || "User"}
                           </span>
                           <Badge bg={getRoleBadgeVariant()} className="ms-2">
-                            <i className={`bi ${getRoleIcon()} me-1`}></i>
+                            <AppIcon name={getRoleIcon()} className="me-1" />
                             {userRole}
                           </Badge>
                         </div>
@@ -227,137 +230,140 @@ const Header = () => {
                     id="user-dropdown"
                     align="end"
                   >
-                  <NavDropdown.Item className="dropdown-header p-3 border-bottom" style={{ backgroundColor: 'var(--color-gray-50)' }}>
-                    <div className="d-flex align-items-center gap-3 p-2">
-                      <div
-                        className="rounded-circle overflow-hidden"
-                        style={{ width: "40px", height: "40px" }}
+                    <NavDropdown.Item
+                      className="dropdown-header p-3 border-bottom"
+                      style={{ backgroundColor: "var(--color-gray-50)" }}
+                    >
+                      <div className="d-flex align-items-center gap-3 p-2">
+                        <div
+                          className="rounded-circle overflow-hidden"
+                          style={{ width: "40px", height: "40px" }}
+                        >
+                          <img
+                            src={
+                              user.photoURL ||
+                              `https://ui-avatars.com/api/?name=${user.displayName || "User"}&background=3b82f6&color=fff&size=40`
+                            }
+                            alt="User Avatar"
+                            className="img-fluid"
+                          />
+                        </div>
+                        <div>
+                          <div className="fw-semibold">
+                            {user.displayName || "User"}
+                          </div>
+                          <div className="text-muted small">{user.email}</div>
+                          <div className="d-flex align-items-center gap-2 mt-2">
+                            <Badge
+                              bg={getRoleBadgeVariant()}
+                              className="rounded-pill"
+                            >
+                              <AppIcon name={getRoleIcon()} className="me-1" />
+                              {userRole}
+                            </Badge>
+                            <VerificationStatus compact={true} />
+                          </div>
+                        </div>
+                      </div>
+                    </NavDropdown.Item>
+
+                    <NavDropdown.Divider />
+
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/profile"
+                      className="dropdown-item text-decoration-none"
+                    >
+                      <AppIcon name="bi-person" className="me-2" />
+                      My Profile
+                    </NavDropdown.Item>
+
+                    {isPatient() && (
+                      <NavDropdown.Item
+                        as={Link}
+                        to="/my-bookings"
+                        className="dropdown-item text-decoration-none"
                       >
-                        <img
-                          src={
-                            user.photoURL ||
-                            `https://ui-avatars.com/api/?name=${user.displayName || "User"}&background=3b82f6&color=fff&size=40`
-                          }
-                          alt="User Avatar"
-                          className="img-fluid"
-                        />
-                      </div>
-                      <div>
-                        <div className="fw-semibold">
-                          {user.displayName || "User"}
-                        </div>
-                        <div className="text-muted small">{user.email}</div>
-                        <div className="d-flex align-items-center gap-2 mt-2">
-                          <Badge
-                            bg={getRoleBadgeVariant()}
-                            className="rounded-pill"
-                          >
-                            <i className={`bi ${getRoleIcon()} me-1`}></i>
-                            {userRole}
-                          </Badge>
-                          <VerificationStatus compact={true} />
-                        </div>
-                      </div>
-                    </div>
-                  </NavDropdown.Item>
-
-                  <NavDropdown.Divider />
-
-                  <NavDropdown.Item
-                    as={Link}
-                    to="/profile"
-                    className="dropdown-item text-decoration-none"
-                  >
-                    <i className="bi bi-person me-2"></i>
-                    My Profile
-                  </NavDropdown.Item>
-
-                  {isPatient() && (
-                    <NavDropdown.Item
-                      as={Link}
-                      to="/my-bookings"
-                      className="dropdown-item text-decoration-none"
-                    >
-                      <i className="bi bi-calendar-check me-2"></i>
-                      My Bookings
-                    </NavDropdown.Item>
-                  )}
-
-                  <NavDropdown.Item
-                    as={Link}
-                    to="/chat"
-                    className="dropdown-item text-decoration-none"
-                  >
-                    <i className="bi bi-chat-dots me-2"></i>
-                    Messages
-                    {unreadCount > 0 && (
-                      <Badge bg="danger" className="ms-2">
-                        {unreadCount}
-                      </Badge>
+                        <AppIcon name="bi-calendar-check" className="me-2" />
+                        My Bookings
+                      </NavDropdown.Item>
                     )}
-                  </NavDropdown.Item>
 
-                  {(isAdmin() || isDoctor()) && (
                     <NavDropdown.Item
                       as={Link}
-                      to="/analytics"
+                      to="/chat"
                       className="dropdown-item text-decoration-none"
                     >
-                      <i className="bi bi-graph-up me-2"></i>
-                      Analytics
+                      <AppIcon name="bi-chat-dots" className="me-2" />
+                      Messages
+                      {unreadCount > 0 && (
+                        <Badge bg="danger" className="ms-2">
+                          {unreadCount}
+                        </Badge>
+                      )}
                     </NavDropdown.Item>
-                  )}
 
-                  <NavDropdown.Divider />
+                    {(isAdmin() || isDoctor()) && (
+                      <NavDropdown.Item
+                        as={Link}
+                        to="/analytics"
+                        className="dropdown-item text-decoration-none"
+                      >
+                          <AppIcon name="bi-graph-up" className="me-2" />
+                          Analytics
+                      </NavDropdown.Item>
+                    )}
 
-                  <NavDropdown.Item
-                    as={Link}
-                    to="/settings"
-                    className="dropdown-item text-decoration-none"
-                  >
-                    <i className="bi bi-gear me-2"></i>
-                    Settings
-                  </NavDropdown.Item>
+                    <NavDropdown.Divider />
 
-                  <NavDropdown.Item
-                    as={Link}
-                    to="/help"
-                    className="dropdown-item text-decoration-none"
-                  >
-                    <i className="bi bi-question-circle me-2"></i>
-                    Help & Support
-                  </NavDropdown.Item>
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/settings"
+                      className="dropdown-item text-decoration-none"
+                    >
+                      <AppIcon name="bi-gear" className="me-2" />
+                      Settings
+                    </NavDropdown.Item>
 
-                  <NavDropdown.Divider />
+                    <NavDropdown.Item
+                      as={Link}
+                      to="/help"
+                      className="dropdown-item text-decoration-none"
+                    >
+                      <AppIcon name="bi-question-circle" className="me-2" />
+                      Help & Support
+                    </NavDropdown.Item>
 
-                  <NavDropdown.Item
-                    onClick={handleSignOut}
-                    className="dropdown-item text-danger"
-                  >
-                    <i className="bi bi-box-arrow-right me-2"></i>
-                    Sign Out
-                  </NavDropdown.Item>
+                    <NavDropdown.Divider />
+
+                    <NavDropdown.Item
+                      onClick={handleSignOut}
+                      className="dropdown-item text-danger"
+                    >
+                      <AppIcon name="bi-box-arrow-right" className="me-2" />
+                      Sign Out
+                    </NavDropdown.Item>
                   </NavDropdown>
                 ) : (
                   <div className="d-flex gap-2 flex-column flex-lg-row">
-                  <Button
-                    as={Link}
-                    to="/signin"
-                    variant="outline-primary"
-                    className="rounded-pill"
-                  >
-                    <i className="bi bi-box-arrow-in-right me-2"></i>
-                    Sign In
-                  </Button>
-                  <Button
-                    as={Link}
-                    to="/register"
-                    variant="primary"
-                    className="rounded-pill"
-                  >
-                    <i className="bi bi-person-plus me-2"></i>
-                    Register
-                  </Button>
+                    <Button
+                      as={Link}
+                      to="/signin"
+                      variant="outline-primary"
+                      className="rounded-pill"
+                    >
+                      <AppIcon name="bi-box-arrow-in-right" className="me-2" />
+                      Sign In
+                    </Button>
+                    <Button
+                      as={Link}
+                      to="/register"
+                      variant="primary"
+                      className="rounded-pill"
+                    >
+                      <AppIcon name="bi-person-plus" className="me-2" />
+                      Register
+                    </Button>
                   </div>
                 )}
               </div>

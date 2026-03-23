@@ -1,5 +1,6 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import AppIcon from "../../components/AppIcon";
 import "./Banner.css";
 
 const Banner = ({ services = [] }) => {
@@ -41,7 +42,7 @@ const Banner = ({ services = [] }) => {
           <Col lg={7}>
             <div className="hero-copy">
               <div className="hero-chip">
-                <i className="bi bi-heart-pulse-fill"></i>
+                <AppIcon name="bi-heart-pulse-fill" />
                 <span>{heroStatusLabel}</span>
               </div>
 
@@ -64,7 +65,7 @@ const Banner = ({ services = [] }) => {
                   size="lg"
                   className="rounded-pill px-4"
                 >
-                  <i className="bi bi-grid-3x3-gap me-2"></i>
+                  <AppIcon name="bi-grid-3x3-gap" className="me-2" />
                   Browse Services
                 </Button>
                 <Button
@@ -74,7 +75,7 @@ const Banner = ({ services = [] }) => {
                   size="lg"
                   className="rounded-pill px-4"
                 >
-                  <i className="bi bi-telephone me-2"></i>
+                  <AppIcon name="bi-telephone" className="me-2" />
                   Contact Care Team
                 </Button>
               </div>
@@ -104,7 +105,7 @@ const Banner = ({ services = [] }) => {
                   <h2>Patient-facing care, backed by staff workflows</h2>
                 </div>
                 <div className="hero-panel-badge">
-                  <i className="bi bi-hospital"></i>
+                  <AppIcon name="bi-hospital" />
                 </div>
               </div>
 
@@ -147,7 +148,7 @@ const Banner = ({ services = [] }) => {
               <div className="hero-pillar-list">
                 {heroPillars.map((pillar) => (
                   <div key={pillar.title} className="hero-pillar-card">
-                    <i className={`bi ${pillar.icon}`}></i>
+                    <AppIcon name={pillar.icon} />
                     <div>
                       <strong>{pillar.title}</strong>
                       <p>{pillar.text}</p>
